@@ -16,7 +16,7 @@
         public DateTime? ApproveDate { get; set; }
         public string? ApproveStatus { get; set; } //change to Enum
         public string TaskStatus { get; set; }
-        public List<Task>? DependsOn { get; set; }
+        public List<Task>? DependsOn { get; set; } //may replace with dependency table
         public List<Task>? SuccessorTasks { get; set; }
         public bool IsCompleted { get; set; }
         public bool RequiresApproval { get; set; }
