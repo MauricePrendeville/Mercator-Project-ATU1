@@ -1,6 +1,6 @@
 ﻿namespace VendorProcessManagerV1.Models
 {
-    public class Task
+    public class ProcessTask
     {
         public Guid Id { get; set; }
         public Guid TaskId { get; set; }
