@@ -1,0 +1,20 @@
+﻿using System.Runtime.InteropServices;
+
+namespace VendorProcessManagerV1.Models
+{
+    public class ProcessTemplateTask
+    {
+        public Guid Id { get; set; }
+        public Guid TemplateID { get; set; }
+        public Guid TaskId { get; set; }               
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public Guid ApproverId { get; set; }
+        public string ApproverTeam { get; set; }
+        public bool ApprovalRequired { get; set; }
+        public int SortOrder { get; set; }
+        public string DefaultOwnerRole {  get; set; }
+        public List<Task>? DependsOn { get; set; }
+        public List<Task>? SuccessorTasks { get; set; }
+    }
+}

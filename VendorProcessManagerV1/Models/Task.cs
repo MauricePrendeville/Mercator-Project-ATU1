@@ -15,6 +15,7 @@
         public Guid? Approver {  get; set; }
         public DateTime? ApproveDate { get; set; }
         public string? ApproveStatus { get; set; } //change to Enum
+        public string TaskStatus { get; set; }
         public List<Task>? DependsOn { get; set; }
         public List<Task>? SuccessorTasks { get; set; }
         public bool IsCompleted { get; set; }
