@@ -9,6 +9,7 @@
         public DateTime CreateDate { get; set; }
         public DateTime? LastModifiedDate { get; set; } = DateTime.MinValue;
         public Guid Creator {  get; set; }
+        public string PaymentTerms { get; set; } //update to ENUM
 
     }
 }
