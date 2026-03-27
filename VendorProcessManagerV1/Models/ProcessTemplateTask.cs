@@ -14,7 +14,7 @@ namespace VendorProcessManagerV1.Models
         public bool ApprovalRequired { get; set; }
         public int SortOrder { get; set; }
         public string DefaultOwnerRole {  get; set; }
-        public List<Task>? DependsOn { get; set; }
-        public List<Task>? SuccessorTasks { get; set; }
+        public List<ProcessTemplateTask>? DependsOn { get; set; }
+        public List<ProcessTemplateTask>? SuccessorTasks { get; set; }
     }
 }
