@@ -35,6 +35,24 @@
                                     <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="ProcessTemplates" asp-action="Create">Create Process Templates</a>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-bg-dark" type="button" data-bs-toggle="dropdown" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                               aria-expanded="false" aria-label="Process Instances">Process Instances</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="ProcessInstances" asp-action="Index">List Process Instances</a>
+                                <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="ProcessInstances" asp-action="Create">Create Process Instances</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-bg-dark" type="button" data-bs-toggle="dropdown" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                               aria-expanded="false" aria-label="Process Instances">Vendor Candidates</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="VendorCandidates" asp-action="Index">List Vendors</a>
+                                <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="VendorCandidates" asp-action="Create">Create Vendor Candidate</a>
+                            </div>
+                        </li>
+                        
+                        
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
