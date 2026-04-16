@@ -1,0 +1,69 @@
+﻿@model VendorProcessManagerV1.Models.ProcessTemplateTransition
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>ProcessTemplateTransition</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ProcessTemplateId" class="control-label"></label>
+                <input asp-for="ProcessTemplateId" class="form-control" />
+                <span asp-validation-for="ProcessTemplateId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FromProcessTemplateTaskId" class="control-label"></label>
+                <input asp-for="FromProcessTemplateTaskId" class="form-control" />
+                <span asp-validation-for="FromProcessTemplateTaskId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ToProcessTemplateTaskId" class="control-label"></label>
+                <input asp-for="ToProcessTemplateTaskId" class="form-control" />
+                <span asp-validation-for="ToProcessTemplateTaskId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DisplayLabel" class="control-label"></label>
+                <input asp-for="DisplayLabel" class="form-control" />
+                <span asp-validation-for="DisplayLabel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SortOrder" class="control-label"></label>
+                <input asp-for="SortOrder" class="form-control" />
+                <span asp-validation-for="SortOrder" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConditionType" class="control-label"></label>
+                <input asp-for="ConditionType" class="form-control" />
+                <span asp-validation-for="ConditionType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ConditionExpression" class="control-label"></label>
+                <input asp-for="ConditionExpression" class="form-control" />
+                <span asp-validation-for="ConditionExpression" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsDefault" class="control-label"></label>
+                <input asp-for="IsDefault" class="form-control" />
+                <span asp-validation-for="IsDefault" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

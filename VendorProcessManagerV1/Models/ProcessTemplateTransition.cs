@@ -8,9 +8,9 @@
         public Guid ToProcessTemplateTaskId { get; set; }
         public string DisplayLabel { get; set; }
         public int SortOrder { get; set; }
-        //public string? ConditionType { get; set; }
-        //public int? ConditionValue  { get; set; }
-        //public bool? IsDefault { get; set; }
-
+        public string? ConditionType { get; set; }
+        public int? ConditionExpression  { get; set; }
+        public bool? IsDefault { get; set; }
+        
     }
 }
