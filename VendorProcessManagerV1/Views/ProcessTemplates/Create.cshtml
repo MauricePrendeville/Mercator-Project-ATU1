@@ -1,4 +1,5 @@
-﻿@model VendorProcessManagerV1.Models.ProcessTemplate
+﻿@* @model VendorProcessManagerV1.Models.ProcessTemplate *@
+@model VendorProcessManagerV1.ViewModels.CreateProcessTemplateViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -30,7 +31,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="Creator" class="control-label"></label>
-                <input asp-for="Creator" class="form-control" />
+               @*  <input asp-for="Creator" class="form-control" /> *@
+               <select asp-for="Creator" 
+                        asp-items="Model.CreatorOptions"
+                        class="form-control">
+                        <option value="">-Select a user-</option>
+                    </select>
                 <span asp-validation-for="Creator" class="text-danger"></span>
             </div>
             <div class="form-group">

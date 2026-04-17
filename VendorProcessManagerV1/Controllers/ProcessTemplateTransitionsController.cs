@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VendorProcessManagerV1.Data;
 using VendorProcessManagerV1.Models;
+using VendorProcessManagerV1.ViewModels;
 
 namespace VendorProcessManagerV1.Controllers
 {
@@ -48,7 +49,7 @@ namespace VendorProcessManagerV1.Controllers
         {
             return View();
         }
-
+        
         // POST: ProcessTemplateTransitions/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

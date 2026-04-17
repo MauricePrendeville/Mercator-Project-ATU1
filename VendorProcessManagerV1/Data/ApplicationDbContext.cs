@@ -6,7 +6,7 @@ using VendorProcessManagerV1.Models;
 
 namespace VendorProcessManagerV1.Data
 {
-    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<User>(options)
+    public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<AppUser>(options)
     {
         public DbSet<ProcessTask> ProcessTasks { get; set; }
         public DbSet<AuditLog> AuditLogs { get; set; }

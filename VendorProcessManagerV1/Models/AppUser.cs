@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 namespace VendorProcessManagerV1.Models
 {
-    public class User : IdentityUser
+    public class AppUser : IdentityUser
     {
         //Guid Id { get; set; }
         public string FirstName { get; set; }
