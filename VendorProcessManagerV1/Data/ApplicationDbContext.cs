@@ -19,7 +19,7 @@ namespace VendorProcessManagerV1.Data
         public DbSet<VendorCandidate> VendorCandidates { get; set; }
         public DbSet<ProcessTaskTransition> ProcessTaskTransition { get; set; } = default!;
         public DbSet<ProcessTemplateTransition> ProcessTemplateTransition { get; set; } = default!;
-
+               
         //protected override void OnConfiguring(DbContextOptionsBuilder options)
         //    => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
        
