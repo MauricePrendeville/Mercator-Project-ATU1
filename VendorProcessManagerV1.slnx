@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="DiagramGenerator/DiagramGenerator.csproj" Id="608c94a7-7597-4655-8611-17750a68ee6f" />
   <Project Path="VendorProcessManager-Tests/VPM_UnitTests.csproj" Id="d8c042a9-eb0b-4a95-8929-3805e8fad80d" />
   <Project Path="VendorProcessManagerV1/VendorProcessManagerV1.csproj" />
 </Solution>

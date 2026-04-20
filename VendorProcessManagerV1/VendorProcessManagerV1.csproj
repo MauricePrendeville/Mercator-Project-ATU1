@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.3.8" />
     <PackageReference Include="FontAwesome" Version="4.7.0" />
+    <PackageReference Include="MermaidClassDiagramGenerator" Version="1.2.1" />
     <PackageReference Include="MermaidDotNet" Version="0.7.34" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="10.0.6" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="10.0.6" />
