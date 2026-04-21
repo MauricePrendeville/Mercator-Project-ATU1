@@ -59,7 +59,7 @@ namespace VendorProcessManagerV1.Controllers
         // GET: ProcessTasks/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new CreateAppUserViewModel());
         }
 
         // POST: ProcessTasks/Create
@@ -67,9 +67,11 @@ namespace VendorProcessManagerV1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstName," +
-            "LastName,CreatedDate,UpdatedDate," +
-            "Team, UserType")] AppUser appUser, string password)
+        
+        public async Task<IActionResult> Create(CreateAppUserViewModel vm)
+        //public async Task<IActionResult> Create([Bind("FirstName," +
+         //   "LastName,CreatedDate,UpdatedDate," +
+           // "Team, UserType")] AppUser appUser, string password)
         {
             //if (ModelState.IsValid)
             //{
@@ -80,12 +82,25 @@ namespace VendorProcessManagerV1.Controllers
             //}
             if (!ModelState.IsValid) {
                 //await PopulateDropdowns(appUser);
-                return View(appUser); 
+                return View(vm); 
             }
-            appUser.CreatedDate = DateTime.Now;
-            appUser.UpdatedDate = DateTime.Now;
+            var user = new AppUser
+            {
+                UserName = vm.UserName,
+                Email = vm.Email,
+                FirstName = vm.FirstName,
+                LastName = vm.LastName,
+                Team = vm.Team,
+                UserType = vm.UserType,
 
-            var result = await _userManager.CreateAsync(appUser, password);
+                CreatedDate = DateTime.Now,
+                UpdatedDate = DateTime.Now
+
+            };
+            //vm.CreatedDate = DateTime.Now;
+            //vm.UpdatedDate = DateTime.Now;
+
+            var result = await _userManager.CreateAsync(user, vm.Password);
 
             if (result.Succeeded) 
             { 
@@ -96,7 +111,7 @@ namespace VendorProcessManagerV1.Controllers
             { 
                 ModelState.AddModelError(string.Empty, error.Description);
             }
-            return View(appUser);
+            return View(vm);
 
         }
 
@@ -107,15 +122,18 @@ namespace VendorProcessManagerV1.Controllers
             {
                 return NotFound();
             }
-
+                        
             var appUser = await _userManager.FindByIdAsync(id);
+            
             if (appUser == null)
             {
                 return NotFound();
             }
+
             var vm = new EditAppUserViewModel
             {
                 Id = appUser.Id,
+                UserName = appUser.UserName,
                 FirstName = appUser.FirstName,
                 LastName = appUser.LastName,
                 Email = appUser.Email,
@@ -137,6 +155,21 @@ namespace VendorProcessManagerV1.Controllers
             {
                 return NotFound();
             }
+
+            if (!string.IsNullOrEmpty(vm.NewPassword))
+            {
+                if (vm.NewPassword.Length < 8)
+                {
+                    ModelState.AddModelError("NewPassword", "Password must be at least 8 characters long");
+                }
+
+                if (vm.NewPassword != vm.ConfirmNewPassword) 
+                {
+                    ModelState.AddModelError("ConfirmNewPassword", "Passwords do not match");
+                }
+            }
+
+
             if (!ModelState.IsValid)
             {
                 return View(vm); 
@@ -146,6 +179,7 @@ namespace VendorProcessManagerV1.Controllers
             if (user == null)
                 return NotFound();
 
+            user.UserName = vm.UserName;
             user.FirstName = vm.FirstName;
             user.LastName = vm.LastName;
             user.Team = vm.Team;
@@ -162,6 +196,19 @@ namespace VendorProcessManagerV1.Controllers
                     return View(vm);
                 }            
             }
+
+            if (!string.IsNullOrEmpty(vm.NewPassword)) 
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResult = await _userManager.ResetPasswordAsync(user, token, vm.NewPassword);
+                if (!passwordResult.Succeeded) 
+                {
+                    foreach (var error in passwordResult.Errors)
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    return View(vm);
+                }
+            }
+
 
             var result = await _userManager.UpdateAsync(user);
 
