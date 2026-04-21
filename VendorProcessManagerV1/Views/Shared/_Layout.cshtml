@@ -45,13 +45,20 @@
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-bg-dark" type="button" data-bs-toggle="dropdown" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                               aria-expanded="false" aria-label="Process Instances">Vendor Candidates</a>
+                               aria-expanded="false" aria-label="Vendor Candidates">Vendor Candidates</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="VendorCandidates" asp-action="Index">List Vendors</a>
                                 <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="VendorCandidates" asp-action="Create">Create Vendor Candidate</a>
                             </div>
                         </li>
-                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-bg-dark" type="button" data-bs-toggle="dropdown" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                               aria-expanded="false" aria-label="AppUsers">AppUsers</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="AppUsers" asp-action="Index">List AppUsers</a>
+                                <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="AppUsers" asp-action="Create">Create AppUser</a>
+                            </div>
+                        </li>
                         
                     </ul>
                     <partial name="_LoginPartial" />
