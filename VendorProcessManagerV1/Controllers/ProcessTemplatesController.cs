@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,10 +15,13 @@ namespace VendorProcessManagerV1.Controllers
     public class ProcessTemplatesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ProcessTemplatesController(ApplicationDbContext context)
+        public ProcessTemplatesController(ApplicationDbContext context, 
+                UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: ProcessTemplates
@@ -34,8 +38,12 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processTemplate = await _context.ProcessTemplates
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var processTemplate = await _context.ProcessTemplates 
+                .Include(t => t.Creator)
+                .Include(t => t.Tasks)
+                    .ThenInclude(task => task.Transitions)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
             if (processTemplate == null)
             {
                 return NotFound();
@@ -53,22 +61,27 @@ namespace VendorProcessManagerV1.Controllers
 
         //GET ProcessTemplates/Create with dropdown list
         public async Task<IActionResult> Create()
-        {            
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+
             var vm = new CreateProcessTemplateViewModel
             {
                 CreateDate = DateTime.UtcNow, //check the default timezone later
                 IsActive = true,
+                CreatorName = currentUser.FirstName + " " + currentUser.LastName
+                
+                /*
                 CreatorOptions = new SelectList(
                     await _context.Users
                     .OrderBy(u => u.LastName)
                     .Select(u => new {
-                    u.Id, FullName = u.FirstName + " " + u.LastName
+                        u.Id, FullName = u.FirstName + " " + u.LastName
                     })
-                    .ToListAsync(), 
+                    .ToListAsync(),
                     "Id", //CreatorId 
                     "FullName" //dropdown list
                    )
-
+                */
             };
             return View(vm);
         }
@@ -98,21 +111,25 @@ namespace VendorProcessManagerV1.Controllers
         {
             if (!ModelState.IsValid)
             {
-                await PopulateCreatorDropdown(vm);
+                //await PopulateCreatorDropdown(vm);
                     return View(vm);
             }
 
-            var processTemplate = new ProcessTemplate
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+                return Unauthorized();
+
+            var processTemplate = new ProcessTemplate  
             {
                 Id = Guid.NewGuid(),
                 Name = vm.Name,
                 Description = vm.Description,
                 Category = vm.Category,
-                Creator = vm.Creator,
-                CreateDate = DateTime.UtcNow,
-                IsActive = vm.IsActive,
-                Version = vm.Version
+                CreateDate = DateTime.Now,
+                IsActive = true,
+                Version = vm.Version,
 
+                CreatorId = currentUser.Id
             };
 
             _context.Add(processTemplate);
@@ -210,22 +227,22 @@ namespace VendorProcessManagerV1.Controllers
             return _context.ProcessTemplates.Any(e => e.Id == id);
         }
 
-        private async Task PopulateCreatorDropdown(CreateProcessTemplateViewModel vm)
-        {
-            vm.CreatorOptions = new SelectList(
-                await _context.Users
-                .OrderBy(u => u.LastName)
-                .Select(u => new
-                {
-                    u.Id,
-                    FullName = u.LastName + " " + u.LastName
-                })
-                .ToListAsync(),
-                "Id",
-                "FullName",
-                vm.Creator
+        //private async Task PopulateCreatorDropdown(CreateProcessTemplateViewModel vm)
+        //{
+        //    vm.CreatorOptions = new SelectList(
+        //        await _context.Users
+        //        .OrderBy(u => u.LastName)
+        //        .Select(u => new
+        //        {
+        //            u.Id,
+        //            FullName = u.LastName + " " + u.LastName
+        //        })
+        //        .ToListAsync(),
+        //        "Id",
+        //        "FullName",
+        //        vm.Id
 
-            );
-        }
+        //    );
+        //}
     }
 }
