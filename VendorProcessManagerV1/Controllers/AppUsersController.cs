@@ -86,13 +86,14 @@ namespace VendorProcessManagerV1.Controllers
             }
             var user = new AppUser
             {
-                UserName = vm.UserName,
+                UserName = vm.Email,
                 Email = vm.Email,
                 FirstName = vm.FirstName,
                 LastName = vm.LastName,
                 Team = vm.Team,
                 UserType = vm.UserType,
 
+                EmailConfirmed = true,
                 CreatedDate = DateTime.Now,
                 UpdatedDate = DateTime.Now
 
