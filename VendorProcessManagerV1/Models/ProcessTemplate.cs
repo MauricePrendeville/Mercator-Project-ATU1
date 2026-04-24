@@ -6,10 +6,13 @@
         public string Name { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
-        public Guid Creator {  get; set; }
+        public string CreatorId { get; set; }
+        public AppUser? Creator {  get; set; }
         public DateTime CreateDate { get; set; } = DateTime.Now;
         public bool IsActive { get; set; }
-        public string Version { get; set; }
+        public string? Version { get; set; }
 
+        public ICollection<ProcessTemplateTask> Tasks { get; set; } 
+            = new List<ProcessTemplateTask>();
     }
 }

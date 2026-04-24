@@ -1,0 +1,78 @@
+﻿@model IEnumerable<VendorProcessManagerV1.Models.ProcessTemplateTransition>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProcessTemplateId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FromProcessTemplateTaskId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ToProcessTemplateTaskId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DisplayLabel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SortOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConditionType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConditionExpression)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsDefault)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProcessTemplateId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FromProcessTemplateTaskId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ToProcessTemplateTaskId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DisplayLabel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SortOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConditionType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConditionExpression)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDefault)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
