@@ -7,6 +7,17 @@
 
 <h1>Details</h1>
 
+<h2>@Model.Name</h2>
+<p>@Model.Description</p>
+<p>Created by: @Model.Creator.FirstName @Model.Creator.LastName</p>
+<hr />
+<div>
+    <h4>Tasks</h4>
+    <a asp-controller="ProcessTemplateTasks" 
+        asp-action="Create" 
+        asp-route-templateId="@Model.Id"
+        class="btn btn-primary btn-sm">Add Task</a>
+</div>
 <div>
     <h4>ProcessTemplate</h4>
     <hr />

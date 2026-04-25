@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VendorProcessManagerV1.Data;
 using VendorProcessManagerV1.Models;
+using VendorProcessManagerV1.ViewModels;
 
 namespace VendorProcessManagerV1.Controllers
 {
@@ -44,9 +45,20 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessTemplateTasks/Create
-        public IActionResult Create()
+        public async Task <IActionResult> Create(Guid templateId)
         {
-            return View();
+            var template = await _context.ProcessTemplates.FindAsync(templateId);
+            
+            if (template == null) 
+                return NotFound();
+
+            var vm = new CreateProcessTemplateTaskViewModel
+            {
+                ProcessTemplateId = templateId,
+                TemplateName = template.Name
+            };
+
+            return View(vm);
         }
 
         // POST: ProcessTemplateTasks/Create
@@ -54,16 +66,25 @@ namespace VendorProcessManagerV1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,TemplateID,TaskId,Title,Description,ApproverId,ApproverTeam,ApprovalRequired,SortOrder,DefaultOwnerRole")] ProcessTemplateTask processTemplateTask)
+        public async Task<IActionResult> Create(CreateProcessTemplateTaskViewModel vm)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            var task = new ProcessTemplateTask
             {
-                processTemplateTask.Id = Guid.NewGuid();
-                _context.Add(processTemplateTask);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(processTemplateTask);
+                Id = Guid.NewGuid(),
+                Title = vm.Title,
+                Description = vm.Description,
+                ProcessTemplateId = vm.ProcessTemplateId
+                
+            }; 
+
+            _context.ProcessTemplatesTasks.Add(task);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Details", "ProcessTemplates", 
+                new { id = vm.ProcessTemplateId }); 
+                        
         }
 
         // GET: ProcessTemplateTasks/Edit/5
