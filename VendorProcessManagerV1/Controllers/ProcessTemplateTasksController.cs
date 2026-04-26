@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +15,13 @@ namespace VendorProcessManagerV1.Controllers
     public class ProcessTemplateTasksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ProcessTemplateTasksController(ApplicationDbContext context)
+        public ProcessTemplateTasksController(ApplicationDbContext context, 
+                                               UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: ProcessTemplateTasks
@@ -55,7 +59,11 @@ namespace VendorProcessManagerV1.Controllers
             var vm = new CreateProcessTemplateTaskViewModel
             {
                 ProcessTemplateId = templateId,
-                TemplateName = template.Name
+                TemplateName = template.Name,
+                ApprovalRequired = false, 
+                SortOrder = 0,
+                ApproverOptions = await BuildApproverOptions()
+
             };
 
             return View(vm);
@@ -69,19 +77,27 @@ namespace VendorProcessManagerV1.Controllers
         public async Task<IActionResult> Create(CreateProcessTemplateTaskViewModel vm)
         {
             if (!ModelState.IsValid)
+            {
+                vm.ApproverOptions = await BuildApproverOptions(vm.ApproverId);
                 return View(vm);
+            }
 
             var task = new ProcessTemplateTask
             {
                 Id = Guid.NewGuid(),
                 Title = vm.Title,
                 Description = vm.Description,
-                ProcessTemplateId = vm.ProcessTemplateId
-                
+                ProcessTemplateId = vm.ProcessTemplateId,
+                ApproverId = vm.ApproverId, 
+                ApproverTeam = vm.ApproverTeam, 
+                ApprovalRequired = vm.ApprovalRequired, 
+                SortOrder = vm.SortOrder, 
+                DefaultOwnerRole = vm.DefaultOwnerRole
             }; 
 
             _context.ProcessTemplatesTasks.Add(task);
             await _context.SaveChangesAsync();
+
             return RedirectToAction("Details", "ProcessTemplates", 
                 new { id = vm.ProcessTemplateId }); 
                         
@@ -174,6 +190,19 @@ namespace VendorProcessManagerV1.Controllers
         private bool ProcessTemplateTaskExists(Guid id)
         {
             return _context.ProcessTemplatesTasks.Any(e => e.Id == id);
+        }
+
+        private async Task<SelectList> BuildApproverOptions(string? selectId = null)
+        {
+            var users = await _userManager.Users
+                .OrderBy(u => u.LastName)
+                .Select(u => new
+                {
+                    u.Id,
+                    FullName = u.FirstName + " " + u.LastName
+                })
+                .ToListAsync();
+            return new SelectList(users, "Id", "FullName", selectId);    
         }
     }
 }

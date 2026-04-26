@@ -10,7 +10,7 @@ namespace VendorProcessManagerV1.Models
         //public Guid TaskId { get; set; }
         [Required]
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
         public string? ApproverId   { get; set; }
         public AppUser? Approver { get; set; }
         public string? ApproverTeam { get; set; }
