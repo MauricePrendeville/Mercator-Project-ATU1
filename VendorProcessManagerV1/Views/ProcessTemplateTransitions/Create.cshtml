@@ -1,4 +1,4 @@
-﻿@model VendorProcessManagerV1.Models.ProcessTemplateTransition
+﻿@model VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -34,17 +34,22 @@
                 <span asp-validation-for="SortOrder" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConditionType" class="control-label"></label>
-                <input asp-for="ConditionType" class="form-control" />
+                <label asp-for="ConditionType" class="control-label">Condition type</label>
+                <select asp-for="ConditionType" 
+                        asp-items="Model.ConditionTypeOptions"
+                        class="form-control">
+                        <option value="">--No condition--</option>
+                </select>                
                 <span asp-validation-for="ConditionType" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ConditionExpression" class="control-label"></label>
+                <label asp-for="ConditionExpression" class="control-label">Condition expression</label>
                 <input asp-for="ConditionExpression" class="form-control" />
+                <small class="form-text text-muted">Transition condition</small>
                 <span asp-validation-for="ConditionExpression" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IsDefault" class="control-label"></label>
+                <label asp-for="IsDefault" class="control-label">Default Transition</label>
                 <input asp-for="IsDefault" class="form-control" />
                 <span asp-validation-for="IsDefault" class="text-danger"></span>
             </div>

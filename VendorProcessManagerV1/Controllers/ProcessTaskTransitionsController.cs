@@ -154,5 +154,22 @@ namespace VendorProcessManagerV1.Controllers
         {
             return _context.ProcessTaskTransition.Any(e => e.Id == id);
         }
+
+        private SelectList BuildConditionTypeOptions(string? selected = null)
+        {
+            var types = new List<string>
+            {
+                "Approval",
+                "Value Threshold",
+                "Manual",
+                "Automatic"
+            };
+            return new SelectList(
+                types.Select(t => new { Value = t, Text = t }),
+                "Value",
+                "Text",
+                selected
+            );
+        }
     }
 }
