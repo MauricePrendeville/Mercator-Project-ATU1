@@ -13,10 +13,11 @@ namespace VendorProcessManagerV1.ViewModels
         public string Title { get; set; }
 
         public string? Description { get; set; }
-        
+        //remove ApproverId in TaskTemplate
         public string? ApproverId { get; set; }
         public SelectList? ApproverOptions { get; set; }
         public string? ApproverTeam { get; set; }
+        public SelectList? ApproverTeamOptions { get; set; }
 
         public bool ApprovalRequired { get; set; }
         public int SortOrder { get; set; }

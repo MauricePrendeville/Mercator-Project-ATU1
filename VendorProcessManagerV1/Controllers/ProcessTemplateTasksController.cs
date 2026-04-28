@@ -62,7 +62,7 @@ namespace VendorProcessManagerV1.Controllers
                 TemplateName = template.Name,
                 ApprovalRequired = false, 
                 SortOrder = 0,
-                ApproverOptions = await BuildApproverOptions()
+                ApproverTeamOptions = await BuildTeamOptions()
 
             };
 
@@ -78,7 +78,7 @@ namespace VendorProcessManagerV1.Controllers
         {
             if (!ModelState.IsValid)
             {
-                vm.ApproverOptions = await BuildApproverOptions(vm.ApproverId);
+                vm.ApproverTeamOptions = await BuildTeamOptions(vm.ApproverTeam);
                 return View(vm);
             }
 
@@ -88,7 +88,7 @@ namespace VendorProcessManagerV1.Controllers
                 Title = vm.Title,
                 Description = vm.Description,
                 ProcessTemplateId = vm.ProcessTemplateId,
-                ApproverId = vm.ApproverId, 
+                //ApproverId = vm.ApproverId, 
                 ApproverTeam = vm.ApproverTeam, 
                 ApprovalRequired = vm.ApprovalRequired, 
                 SortOrder = vm.SortOrder, 
@@ -203,6 +203,22 @@ namespace VendorProcessManagerV1.Controllers
                 })
                 .ToListAsync();
             return new SelectList(users, "Id", "FullName", selectId);    
+        }
+
+        private async Task<SelectList>BuildTeamOptions(string? selectedTeam = null) 
+        {
+            var teams = await _userManager.Users
+                .Where(u => u.Team != null && u.Team != "")
+                .Select(u => u.Team)
+                .Distinct()
+                .OrderBy(t => t)
+                .ToListAsync();
+
+            return new SelectList(
+                teams.Select(t => new {Value = t, Text = t}),
+                "Value", 
+                "Text", 
+                selectedTeam);
         }
     }
 }
