@@ -22,7 +22,7 @@ namespace VendorProcessManagerV1.Controllers
         // GET: ProcessTaskTransitions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ProcessTaskTransition.ToListAsync());
+            return View(await _context.ProcessTaskTransitions.ToListAsync());
         }
 
         // GET: ProcessTaskTransitions/Details/5
@@ -33,7 +33,7 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processTaskTransition = await _context.ProcessTaskTransition
+            var processTaskTransition = await _context.ProcessTaskTransitions
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (processTaskTransition == null)
             {
@@ -74,7 +74,7 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processTaskTransition = await _context.ProcessTaskTransition.FindAsync(id);
+            var processTaskTransition = await _context.ProcessTaskTransitions.FindAsync(id);
             if (processTaskTransition == null)
             {
                 return NotFound();
@@ -125,7 +125,7 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processTaskTransition = await _context.ProcessTaskTransition
+            var processTaskTransition = await _context.ProcessTaskTransitions
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (processTaskTransition == null)
             {
@@ -140,10 +140,10 @@ namespace VendorProcessManagerV1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var processTaskTransition = await _context.ProcessTaskTransition.FindAsync(id);
+            var processTaskTransition = await _context.ProcessTaskTransitions.FindAsync(id);
             if (processTaskTransition != null)
             {
-                _context.ProcessTaskTransition.Remove(processTaskTransition);
+                _context.ProcessTaskTransitions.Remove(processTaskTransition);
             }
 
             await _context.SaveChangesAsync();
@@ -152,7 +152,7 @@ namespace VendorProcessManagerV1.Controllers
 
         private bool ProcessTaskTransitionExists(Guid id)
         {
-            return _context.ProcessTaskTransition.Any(e => e.Id == id);
+            return _context.ProcessTaskTransitions.Any(e => e.Id == id);
         }
 
         private SelectList BuildConditionTypeOptions(string? selected = null)

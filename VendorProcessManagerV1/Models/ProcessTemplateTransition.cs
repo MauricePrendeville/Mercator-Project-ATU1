@@ -8,8 +8,8 @@ namespace VendorProcessManagerV1.Models
         [Required]
         public Guid FromProcessTemplateTaskId { get; set; }
         public ProcessTemplateTask FromProcessTemplateTask { get; set; }
-        public Guid ToProcessTemplateTaskId { get; set; }
-        public ProcessTemplateTask ToProcessTemplateTask { get; set; }
+        public Guid? ToProcessTemplateTaskId { get; set; }
+        public ProcessTemplateTask? ToProcessTemplateTask { get; set; }
         [Required]
         public string DisplayLabel { get; set; }
         public int SortOrder { get; set; }

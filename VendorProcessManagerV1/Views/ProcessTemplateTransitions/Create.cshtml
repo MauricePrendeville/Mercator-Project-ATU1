@@ -1,33 +1,50 @@
 ﻿@model VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add Transition";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h4>Add transition to task: <em>@Model.TaskTitle</em></h4>
+<p class ="text-muted">Template: @Model.TemplateName</p>
 
-<h1>Create</h1>
+@if (Model.HasExistingDefault)
+{
+    <div class="alert aslert-warning">
+        This task already has a default transition 
+        (<strong>@Model.ExistingDefaultLabel</strong>)
+    </div>
+}
 
-<h4>ProcessTemplateTransition</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <!--Hidden fields-->
+            <input type="hidden" asp-for="FromProcessTemplateTaskId" />
+            <input type="hidden" asp-for="ProcessTemplateId" />
+            <input type="hidden" asp-for="TaskTitle" />
+            <input type="hidden" asp-for="TemplateName" />
+            <input type="hidden" asp-for="HasExistingDefault" />
+            <input type="hidden" asp-for="ExistingDefaultLabel" />
+
+            <!--Dieplay label - freetext-->           
             <div class="form-group">
-                <label asp-for="FromProcessTemplateTaskId" class="control-label"></label>
-                <input asp-for="FromProcessTemplateTaskId" class="form-control" />
-                <span asp-validation-for="FromProcessTemplateTaskId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ToProcessTemplateTaskId" class="control-label"></label>
-                <input asp-for="ToProcessTemplateTaskId" class="form-control" />
-                <span asp-validation-for="ToProcessTemplateTaskId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DisplayLabel" class="control-label"></label>
-                <input asp-for="DisplayLabel" class="form-control" />
+                <label asp-for="DisplayLabel" class="control-label">Transition Label</label>
+                <input asp-for="DisplayLabel" class="form-control" 
+                    placeholder="e.g. Approved, Rejected, Escalate" />
                 <span asp-validation-for="DisplayLabel" class="text-danger"></span>
             </div>
+            <!-- ToProcessTemplateTaskId - dropdown-->
+            <div class="form-group">
+                <label asp-for="ToProcessTemplateTaskId" class="control-label">Goes to task</label>
+                <select asp-for="ToProcessTemplateTaskId"
+                        asp-items="Model.TargetTaskOptions"
+                        class="form-control">
+                </select>
+                <span asp-validation-for="ToProcessTemplateTaskId" class="text-danger"></span>
+            </div>
+            <!--SortOrder - number-->   
             <div class="form-group">
                 <label asp-for="SortOrder" class="control-label"></label>
                 <input asp-for="SortOrder" class="form-control" />
@@ -42,19 +59,26 @@
                 </select>                
                 <span asp-validation-for="ConditionType" class="text-danger"></span>
             </div>
+            <!--Condition Expression -->
             <div class="form-group">
                 <label asp-for="ConditionExpression" class="control-label">Condition expression</label>
                 <input asp-for="ConditionExpression" class="form-control" />
                 <small class="form-text text-muted">Transition condition</small>
                 <span asp-validation-for="ConditionExpression" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="IsDefault" class="control-label">Default Transition</label>
-                <input asp-for="IsDefault" class="form-control" />
-                <span asp-validation-for="IsDefault" class="text-danger"></span>
+            <!-- IsDefault - checkbox-->
+            <div class="form-group form-check">
+                <input asp-for="IsDefault" class="form-check-input" type="checkbox" />
+                <label asp-for="IsDefault" class="form-check-label">Default Transition
+                <small class="text-muted">(taken if no condition met)</small>
+                </label>                
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save transition" class="btn btn-primary" />
+                <a asp-action="Details"
+                asp-controller="ProcessTemplates"
+                asp-route-id="@Model.ProcessTemplateId" 
+                class="btn btn-secondary">Cancel</a>
             </div>
         </form>
     </div>

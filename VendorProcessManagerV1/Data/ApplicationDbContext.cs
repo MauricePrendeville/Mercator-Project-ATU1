@@ -19,8 +19,8 @@ namespace VendorProcessManagerV1.Data
         public DbSet<TemplateDependency> TemplateDependencies { get; set; }
         //public DbSet<User> Users {  get; set; }
         public DbSet<VendorCandidate> VendorCandidates { get; set; }
-        public DbSet<ProcessTaskTransition> ProcessTaskTransition { get; set; } = default!;
-        public DbSet<ProcessTemplateTransition> ProcessTemplateTransition { get; set; } = default!;
+        public DbSet<ProcessTaskTransition> ProcessTaskTransitions { get; set; } = default!;
+        public DbSet<ProcessTemplateTransition> ProcessTemplateTransitions { get; set; } = default!;
 
         // public DbSet<AppUser> AppUsers { get; set; }
         //protected override void OnConfiguring(DbContextOptionsBuilder options)

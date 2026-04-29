@@ -100,7 +100,7 @@
         
                     <a asp-controller="ProcessTemplateTransitions" 
                     asp-action="Create" 
-                    asp-route-taskId="@task.Id" 
+                       asp-route-fromTemplateTaskId="@task.Id"
                     class="btn btn-sm btn-outline-secondary">Add Transition</a>
                 </div>    
             </div>
@@ -127,7 +127,16 @@
                         @foreach (var transition in task.Transitions)
                         {
                         <tr>
-                            <td>@transition.DisplayLabel</td>                            
+                            <td>@transition.DisplayLabel
+                            @if (transition.IsDefault == true)
+                            {
+                                <span class="badge bg-success ms-1">Default</span>
+                            }
+                        <td>
+                            @(transition.ToProcessTemplateTask?.Title ?? "End of process")
+                        </td>
+
+                        </td>                            
                             <td><a asp-controller="ProcessTemplateTransitions"
                                 asp-action="Edit" 
                                 asp-route-id="@transition.Id" 

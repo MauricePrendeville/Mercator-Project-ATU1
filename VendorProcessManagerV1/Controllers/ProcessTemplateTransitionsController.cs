@@ -23,7 +23,7 @@ namespace VendorProcessManagerV1.Controllers
         // GET: ProcessTemplateTransitions
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ProcessTemplateTransition.ToListAsync());
+            return View(await _context.ProcessTemplateTransitions.ToListAsync());
         }
 
         // GET: ProcessTemplateTransitions/Details/5
@@ -34,7 +34,7 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processTemplateTransition = await _context.ProcessTemplateTransition
+            var processTemplateTransition = await _context.ProcessTemplateTransitions
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (processTemplateTransition == null)
             {
@@ -45,26 +45,89 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessTemplateTransitions/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(Guid fromTemplateTaskId)
         {
-            return View();
+            var task = await _context.ProcessTemplatesTasks
+                .Include(t =>t.ProcessTemplate)
+                .Include(t => t.Transitions)
+                .FirstOrDefaultAsync(t => t.Id == fromTemplateTaskId);
+
+            if(task == null) 
+                return NotFound();
+
+            var existingDefault = task.Transitions
+                .FirstOrDefault(t => t.IsDefault);
+
+            var vm = new CreateProcessTemplateTransitionViewModel
+            {
+                FromProcessTemplateTaskId = fromTemplateTaskId,
+                ProcessTemplateId = task.ProcessTemplateId,
+                TaskTitle = task.Title,
+                TemplateName = task.ProcessTemplate.Name,
+                HasExistingDefault = existingDefault != null,
+                ExistingDefaultLabel = existingDefault?.DisplayLabel,
+                SortOrder = task.Transitions.Count + 1,
+                ConditionTypeOptions = BuildConditionTypeOptions(), 
+                TargetTaskOptions = await BuildTargetTaskOptions(
+                    task.ProcessTemplateId, fromTemplateTaskId)
+            };
+            
+            return View(vm);
         }
-        
+
         // POST: ProcessTemplateTransitions/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,ProcessTemplateId,FromProcessTemplateTaskId,ToProcessTemplateTaskId,DisplayLabel,SortOrder,ConditionType,ConditionExpression,IsDefault")] ProcessTemplateTransition processTemplateTransition)
+        public async Task<IActionResult> Create(CreateProcessTemplateTransitionViewModel vm)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                processTemplateTransition.Id = Guid.NewGuid();
-                _context.Add(processTemplateTransition);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                vm.TargetTaskOptions = await BuildTargetTaskOptions(
+                                            vm.ProcessTemplateId,
+                                            vm.FromProcessTemplateTaskId);
+                vm.ConditionTypeOptions = BuildConditionTypeOptions(vm.ConditionType);
+                return View(vm); 
+
+                //processTemplateTransition.Id = Guid.NewGuid();
+                //_context.Add(processTemplateTransition);
+                //await _context.SaveChangesAsync();
+                //return RedirectToAction(nameof(Index));
             }
-            return View(processTemplateTransition);
+            //return View(processTemplateTransition);
+
+            if (vm.IsDefault)
+            {
+                var existingDefault = await _context.ProcessTemplateTransitions 
+                    .FirstOrDefaultAsync(t =>
+                        t.FromProcessTemplateTaskId == vm.FromProcessTemplateTaskId &&
+                        t.IsDefault);
+
+                if (existingDefault != null)
+                {
+                    existingDefault.IsDefault = false;
+                    _context.Update(existingDefault);
+                }
+            }
+
+            var transition = new ProcessTemplateTransition
+            {
+                Id = Guid.NewGuid(),
+                FromProcessTemplateTaskId = vm.FromProcessTemplateTaskId,
+                ToProcessTemplateTaskId = vm.ToProcessTemplateTaskId,
+                DisplayLabel = vm.DisplayLabel, 
+                SortOrder = vm.SortOrder,
+                ConditionType = vm.ConditionType,
+                ConditionExpression = vm.ConditionExpression,
+                IsDefault = vm.IsDefault
+            };
+
+            _context.ProcessTemplateTransitions.Add(transition);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("Details", "ProcessTemplates",
+                new { id = vm.ProcessTemplateId });
         }
 
         // GET: ProcessTemplateTransitions/Edit/5
@@ -75,7 +138,7 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processTemplateTransition = await _context.ProcessTemplateTransition.FindAsync(id);
+            var processTemplateTransition = await _context.ProcessTemplateTransitions.FindAsync(id);
             if (processTemplateTransition == null)
             {
                 return NotFound();
@@ -126,7 +189,7 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processTemplateTransition = await _context.ProcessTemplateTransition
+            var processTemplateTransition = await _context.ProcessTemplateTransitions
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (processTemplateTransition == null)
             {
@@ -141,10 +204,10 @@ namespace VendorProcessManagerV1.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            var processTemplateTransition = await _context.ProcessTemplateTransition.FindAsync(id);
+            var processTemplateTransition = await _context.ProcessTemplateTransitions.FindAsync(id);
             if (processTemplateTransition != null)
             {
-                _context.ProcessTemplateTransition.Remove(processTemplateTransition);
+                _context.ProcessTemplateTransitions.Remove(processTemplateTransition);
             }
 
             await _context.SaveChangesAsync();
@@ -153,7 +216,41 @@ namespace VendorProcessManagerV1.Controllers
 
         private bool ProcessTemplateTransitionExists(Guid id)
         {
-            return _context.ProcessTemplateTransition.Any(e => e.Id == id);
+            return _context.ProcessTemplateTransitions.Any(e => e.Id == id);
         }
+
+        private SelectList BuildConditionTypeOptions(string? selected = null)
+        {
+            var types = new List<string>
+            {
+                "Approval",
+                "Value Threshold",
+                "Manual",
+                "Automatic"
+            };
+            return new SelectList(
+                types.Select(t => new { Value = t, Text = t }),
+                "Value",
+                "Text",
+                selected
+            );
+        }
+
+        private async Task<SelectList> BuildTargetTaskOptions(
+            Guid templateId, 
+            Guid currentTaskId, 
+            Guid? selectedId = null)
+        {
+            var tasks = await _context.ProcessTemplatesTasks
+                .Where(t => t.ProcessTemplateId == templateId &&
+                t.Id != currentTaskId)
+                .OrderBy(t => t.SortOrder)
+                .Select(t => new { t.Id, t.Title })
+                .ToListAsync();
+
+            return new SelectList(tasks, "Id", "Title", selectedId); 
+        }
+
+        
     }
 }
