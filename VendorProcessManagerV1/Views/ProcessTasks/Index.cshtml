@@ -14,7 +14,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Task_Id)
+                @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
@@ -23,7 +23,7 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
+                @Html.DisplayNameFor(model => model.StartedDate)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.UpdatedDate)
@@ -50,13 +50,13 @@
                 @Html.DisplayNameFor(model => model.ApproveStatus)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskStatus)
+                @Html.DisplayNameFor(model => model.ProcessTaskStatus)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IsCompleted)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RequiresApproval)
+                @Html.DisplayNameFor(model => model.ApprovalRequired)
             </th>
             <th></th>
         </tr>
@@ -65,7 +65,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Task_Id)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -74,7 +74,7 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
+                @Html.DisplayFor(modelItem => item.StartedDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UpdatedDate)
@@ -101,13 +101,13 @@
                 @Html.DisplayFor(modelItem => item.ApproveStatus)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TaskStatus)
+                @Html.DisplayFor(modelItem => item.ProcessTaskStatus)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsCompleted)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RequiresApproval)
+                @Html.DisplayFor(modelItem => item.ApprovalRequired)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

@@ -67,7 +67,12 @@
         </dd>
     </dl>
 </div>
-<div>
+<div> 
+    <a asp-action="StartInstance" 
+        asp-controller="ProcessTemplates" 
+        asp-route-id="@Model.Id" 
+        class="btn btn-success">Start Instance
+    </a>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>

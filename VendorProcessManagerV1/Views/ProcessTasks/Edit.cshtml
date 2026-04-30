@@ -15,9 +15,9 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
-                <label asp-for="Task_Id" class="control-label"></label>
-                <input asp-for="Task_Id" class="form-control" />
-                <span asp-validation-for="Task_Id" class="text-danger"></span>
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" />
+                <span asp-validation-for="Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -30,9 +30,9 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedDate" class="control-label"></label>
-                <input asp-for="CreatedDate" class="form-control" />
-                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+                <label asp-for="StartedDate" class="control-label"></label>
+                <input asp-for="StartedDate" class="form-control" />
+                <span asp-validation-for="StartedDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="UpdatedDate" class="control-label"></label>
@@ -75,9 +75,9 @@
                 <span asp-validation-for="ApproveStatus" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="TaskStatus" class="control-label"></label>
-                <input asp-for="TaskStatus" class="form-control" />
-                <span asp-validation-for="TaskStatus" class="text-danger"></span>
+                <label asp-for="ProcessTaskStatus" class="control-label"></label>
+                <input asp-for="ProcessTaskStatus" class="form-control" />
+                <span asp-validation-for="ProcessTaskStatus" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
@@ -86,7 +86,7 @@
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="RequiresApproval" /> @Html.DisplayNameFor(model => model.RequiresApproval)
+                    <input class="form-check-input" asp-for="ApprovalRequired" /> @Html.DisplayNameFor(model => model.ApprovalRequired)
                 </label>
             </div>
             <div class="form-group">

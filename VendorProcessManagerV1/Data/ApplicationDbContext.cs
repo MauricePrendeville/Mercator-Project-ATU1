@@ -49,6 +49,96 @@ namespace VendorProcessManagerV1.Data
                 .HasIndex(t => new { t.FromProcessTemplateTaskId, t.IsDefault })
                 .IsUnique()
                 .HasFilter("[IsDefault] =1");
+
+            modelBuilder.Entity<ProcessInstance>()
+                .HasOne(i => i.ProcessTemplate)
+                .WithMany()
+                .HasForeignKey(i => i.ProcessTemplateId)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProcessInstance>()
+                .HasOne(i => i.InitiatedBy)
+                .WithMany()
+                .HasForeignKey(i => i.InitiatedById)
+                .OnDelete(DeleteBehavior.NoAction);
+                   
+            modelBuilder.Entity<ProcessInstance>()
+               .HasOne(i => i.VendorCandidate)
+               .WithMany()
+               .HasForeignKey(i => i.VendorCandidateId)
+               .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProcessTask>()
+                .HasOne(t => t.ProcessInstance)
+                .WithMany(i => i.Tasks)
+                .HasForeignKey(t => t.ProcessInstanceId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ProcessTask>()
+                .HasOne(t => t.ProcessTemplateTask)
+                .WithMany()
+                .HasForeignKey(t => t.ProcessTemplateTaskId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProcessTask>()
+                .HasOne(t => t.Creator)
+                .WithMany()
+                .HasForeignKey(t => t.CreatorId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProcessTask>()
+                .HasOne(t => t.Approver)
+                .WithMany()
+                .HasForeignKey(t => t.ApproverId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProcessTask>()
+                .HasOne(t => t.Owner)
+                .WithMany()
+                .HasForeignKey(t => t.OwnerId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProcessTemplate>()
+                .HasOne(t => t.Creator)
+                .WithMany()
+                .HasForeignKey(t => t.CreatorId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<ProcessTemplateTask>()
+                .HasOne(t => t.ProcessTemplate)
+                .WithMany(t => t.Tasks)
+                .HasForeignKey(t => t.ProcessTemplateId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ProcessTemplateTask>()
+                .HasMany(t => t.Transitions)
+                .WithOne(t => t.FromProcessTemplateTask)
+                .HasForeignKey(t => t.FromProcessTemplateTaskId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            foreach (var fk in modelBuilder.Model
+                .GetEntityTypes()
+                .SelectMany(e => e.GetForeignKeys())
+                .Where(fk => !fk.IsOwnership &&
+                               fk.DeleteBehavior == DeleteBehavior.Cascade))
+            {
+                var child = fk.DeclaringEntityType.ClrType.Name;
+                var parent = fk.PrincipalEntityType.ClrType.Name;
+
+                var allowedCascades = new[]
+                {
+                    ("ProcessTask", "ProcessInstance"), 
+                    ("ProcessTemplateTask", "ProcessTemplate"), 
+                    ("ProcessTemplateTransition", "ProcessTemplateTask")
+                };
+
+                var isAllowed = allowedCascades.Any(c =>
+                    c.Item1 == child && c.Item2 == parent);
+                if (!isAllowed)
+                    fk.DeleteBehavior = DeleteBehavior.NoAction; 
+            }
         }
+
     }
 }
