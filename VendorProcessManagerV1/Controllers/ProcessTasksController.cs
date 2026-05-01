@@ -1,22 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using VendorProcessManagerV1.Data;
 using VendorProcessManagerV1.Models;
+using VendorProcessManagerV1.ViewModels;
 
 namespace VendorProcessManagerV1.Controllers
 {
     public class ProcessTasksController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ProcessTasksController(ApplicationDbContext context)
+        public ProcessTasksController(ApplicationDbContext context,
+                                        UserManager<AppUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: ProcessTasks
@@ -69,17 +74,39 @@ namespace VendorProcessManagerV1.Controllers
         // GET: ProcessTasks/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
+            var task = await _context.ProcessTasks
+                .Include(t => t.ProcessInstance)
+                .FirstOrDefaultAsync(t => t.Id == id); 
+            
             if (id == null)
             {
                 return NotFound();
             }
 
-            var processTask = await _context.ProcessTasks.FindAsync(id);
-            if (processTask == null)
+            var vm = new EditProcessTaskViewModel
             {
-                return NotFound();
-            }
-            return View(processTask);
+                Id = task.Id, 
+                Title = task.Title,
+                Description = task.Description,
+                SortOrder = task.SortOrder,
+                ApprovalRequired = task.ApprovalRequired,
+                ApproverTeam = task.ApproverTeam,
+                ProcessInstanceId = task.ProcessInstanceId,
+                OwnerId = task.OwnerId,
+                TaskNotes = task.TaskNotes,
+                StartedDate = task.StartedDate,
+                ProcessTaskStatus   = task.ProcessTaskStatus,
+                IsCompleted = task.IsCompleted,
+                CompletedDate = task.CompletedDate,
+                ApproverId = task.ApproverId,
+                ApproveStatus = task.ApproveStatus,
+                ApproveDate = task.ApproveDate,
+                OwnerOptions = await BuildUserOptions(task.OwnerId), 
+                ApproverOptions = await BuildUserOptions(task.ApproverId), 
+                StatusOptions = BuildStatusOptions(task.ProcessTaskStatus), 
+                ApproveStatusOptions = BuildApproveStatusOptions(task.ApproveStatus)
+            };
+            return View(vm);
         }
 
         // POST: ProcessTasks/Edit/5
@@ -153,6 +180,33 @@ namespace VendorProcessManagerV1.Controllers
         private bool ProcessTaskExists(Guid id)
         {
             return _context.ProcessTasks.Any(e => e.Id == id);
+        }
+
+        private async Task<SelectList>BuildUserOptions(string? selectedId = null)
+        {
+            var users = await _userManager.Users
+                .OrderBy(u => u.LastName)
+                .Select(u => new { u.Id, FullName = u.FirstName + " " + u.LastName })
+                .ToListAsync();
+            return new SelectList(users, "Id", "FullName", selectedId); 
+        }
+
+        private SelectList BuildStatusOptions(ProcessTaskStatus? selected = null)
+        {
+            var statuses = Enum.GetValues(typeof(ProcessTaskStatus))
+                .Cast<ProcessTaskStatus>()
+                .Select(s => new {Value = s, Text = s.ToString()})
+                .ToList();
+            return new SelectList(statuses, "Value", "Text", selected);
+        }
+
+        private SelectList BuildApproveStatusOptions(ApproveStatus? selected = null)
+        {
+            var statuses = Enum.GetValues(typeof(ApproveStatus))
+                .Cast<ApproveStatus>()
+                .Select(s => new { Value = s, Text = s.ToString() })
+                .ToList();
+            return new SelectList(statuses, "Value", "Text", selected);
         }
     }
 }

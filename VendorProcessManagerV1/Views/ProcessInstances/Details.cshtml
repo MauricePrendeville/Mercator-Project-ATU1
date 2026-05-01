@@ -22,9 +22,10 @@
     <dt class="col-sm-3">Status</dt>
     <dd class="col-sm-9">
         <span class="badge 
-            @(Model.Status == ProcessInstanceStatus.NotStarted ? "bg-secondary":
-            Model.Status == ProcessInstanceStatus.InProgress ? "bg-primary" :
-            Model.Status == ProcessInstanceStatus.Completed ? "bg-success": "bg-danger")">
+            @(Model.Status  == ProcessInstanceStatus.NotStarted ? "bg-secondary":
+            Model.Status    == ProcessInstanceStatus.InProgress ? "bg-primary":
+            Model.Status    == ProcessInstanceStatus.Completed  ? "bg-success": 
+                "bg-danger")">
             @Model.Status</span>
      </dd>
 
@@ -140,54 +141,7 @@ else
     <div class="alert alert-warning">No tasks found for this instance</div>
 }
 
-<div>
-    <h4>ProcessInstance</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ProcessTemplateId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ProcessTemplateId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.VendorCandidateId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.VendorCandidateId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.InitiatedBy)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.InitiatedBy)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StartDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StartDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.TargetEndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TargetEndDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ActualEndDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ActualEndDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
-</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>

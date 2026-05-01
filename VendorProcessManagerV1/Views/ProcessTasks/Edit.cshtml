@@ -1,84 +1,87 @@
-﻿@model VendorProcessManagerV1.Models.ProcessTask
+﻿@model VendorProcessManagerV1.ViewModels.EditProcessTaskViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit task";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h2>Edit task</h2>
 
-<h4>ProcessTask</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="StartedDate" class="control-label"></label>
-                <input asp-for="StartedDate" class="form-control" />
-                <span asp-validation-for="StartedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedDate" class="control-label"></label>
-                <input asp-for="UpdatedDate" class="form-control" />
-                <span asp-validation-for="UpdatedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CompletedDate" class="control-label"></label>
-                <input asp-for="CompletedDate" class="form-control" />
-                <span asp-validation-for="CompletedDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Creator" class="control-label"></label>
-                <input asp-for="Creator" class="form-control" />
-                <span asp-validation-for="Creator" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Owner" class="control-label"></label>
-                <input asp-for="Owner" class="form-control" />
-                <span asp-validation-for="Owner" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ApproverTeam" class="control-label"></label>
-                <input asp-for="ApproverTeam" class="form-control" />
-                <span asp-validation-for="ApproverTeam" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Approver" class="control-label"></label>
-                <input asp-for="Approver" class="form-control" />
-                <span asp-validation-for="Approver" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ApproveDate" class="control-label"></label>
-                <input asp-for="ApproveDate" class="form-control" />
-                <span asp-validation-for="ApproveDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ApproveStatus" class="control-label"></label>
-                <input asp-for="ApproveStatus" class="form-control" />
-                <span asp-validation-for="ApproveStatus" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProcessTaskStatus" class="control-label"></label>
-                <input asp-for="ProcessTaskStatus" class="form-control" />
-                <span asp-validation-for="ProcessTaskStatus" class="text-danger"></span>
-            </div>
+<form asp-action="Edit">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <input type="hidden" asp-for="Id" />
+    <input type="hidden" asp-for="ProcessInstanceId" />
+    <input type="hidden" asp-for="Title" />
+    <input type="hidden" asp-for="SortOrder" />
+    <input type="hidden" asp-for="ApprovalRequired" />
+    <input type="hidden" asp-for="ApproverTeam" />
+
+
+<div class="card mb-3">
+    <div class="card-header">Task details</div>
+    <div class="card-body"> 
+        <dl class="row mb-0">
+            <dt class="col-sm-3">Title</dt>
+            <dd class="col-sm-9">@Model.Title</dd>
+                
+            <dt class="col-sm-3">Description</dt>
+            <dd class="col-sm-9">@Model.Description</dd>
+
+            <dt class="col-sm-3">Sort Order</dt>
+            <dd class="col-sm-9">@Model.SortOrder</dd>
+
+            <dt class="col-sm-3">Approver Team</dt>
+            <dd class="col-sm-9">@Model.ApproverTeam</dd>
+
+            <dt class="col-sm-3">Approval Required</dt>
+            <dd class="col-sm-9">@Model.ApprovalRequired</dd>
+        </dl>
+    </div>
+</div>
+<div class="card mb-3">
+    <div class="card-header">Execution</div>
+    <div class="card-body">
+
+        <div class="form-group">
+            <label asp-for="OwnerId" class="control-label">Owner</label>
+            <select asp-for="OwnerId"
+                    asp-items="Model.OwnerOptions"
+                    class="form-control">
+                    <option value="">--Unassigned--</option>
+                </select>
+                <span asp-validation-for="OwnerId" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="ProcessTaskStatus" class="control-label">
+                Status
+            </label>
+            <select asp-for="ProcessTaskStatus" 
+                    asp-items="Model.StatusOptions" 
+                    class="form-control">
+            </select>
+            <span asp-validation-for="ProcessTaskStatus" 
+                class="text-danger">
+            </span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="TaskNotes" class="control-label">
+                Task notes
+            </label>
+            <textarea asp-for="TaskNotes"
+                      class="form-control"
+                      rows="3"></textarea>
+            <span asp-validation-for="StartedDate" class="text-danger"></span>
+        </div>
+
+
+
+    </div>
+</div>
+            
+            
             <div class="form-group form-check">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="IsCompleted" /> @Html.DisplayNameFor(model => model.IsCompleted)
