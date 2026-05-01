@@ -336,6 +336,10 @@ namespace VendorProcessManagerV1.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("InstanceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("ProcessTemplateId")
                         .HasColumnType("uniqueidentifier");
 

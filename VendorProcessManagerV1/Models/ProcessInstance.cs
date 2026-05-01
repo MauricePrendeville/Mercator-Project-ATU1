@@ -7,6 +7,8 @@
     {
         public Guid Id { get; set; }
 
+        public string InstanceName { get; set; }
+
         //link to template
         public Guid ProcessTemplateId { get; set; }
         public ProcessTemplate ProcessTemplate { get; set; }

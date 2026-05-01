@@ -12,8 +12,8 @@ using VendorProcessManagerV1.Data;
 namespace VendorProcessManagerV1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260430204307_UpdateRelationshipsInstanceToTemplate")]
-    partial class UpdateRelationshipsInstanceToTemplate
+    [Migration("20260501154511_UpdateProcessInstanceAndTask")]
+    partial class UpdateProcessInstanceAndTask
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -338,6 +338,10 @@ namespace VendorProcessManagerV1.Migrations
                     b.Property<string>("InitiatedById")
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("InstanceName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProcessTemplateId")
                         .HasColumnType("uniqueidentifier");

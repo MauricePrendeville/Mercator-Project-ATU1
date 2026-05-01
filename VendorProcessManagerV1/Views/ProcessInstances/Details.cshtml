@@ -1,11 +1,144 @@
 ﻿@model VendorProcessManagerV1.Models.ProcessInstance
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Instance Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>@Model.InstanceName</h1>
+<dl class="row">
+    <dt class="col-sm-3">Template</dt>
+    <dd class="col-sm-9">@Model.ProcessTemplate?.Name</dd>
+
+    <dt class="col-sm-3">Vendor Candidate</dt>
+    <dd class="col-sm-9">@Model.VendorCandidate?.Name</dd>
+
+    <dt class="col-sm-3">Initiated By</dt>
+    <dd class="col-sm-9">@Model.InitiatedBy?.FirstName @Model.InitiatedBy?.LastName</dd>
+
+    <dt class="col-sm-3">Created</dt>
+    <dd class="col-sm-9">@Model.CreatedDate.ToShortDateString()</dd>
+
+    <dt class="col-sm-3">Status</dt>
+    <dd class="col-sm-9">
+        <span class="badge 
+            @(Model.Status == ProcessInstanceStatus.NotStarted ? "bg-secondary":
+            Model.Status == ProcessInstanceStatus.InProgress ? "bg-primary" :
+            Model.Status == ProcessInstanceStatus.Completed ? "bg-success": "bg-danger")">
+            @Model.Status</span>
+     </dd>
+
+</dl>
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h4>Tasks</h4>
+    <span class="text-muted">
+        @Model.Tasks.Count(t => t.IsCompleted) of @Model.Tasks.Count completed
+    </span>
+</div>
+
+@if (Model.Tasks != null && Model.Tasks.Any())
+{
+    <table class="table table-bordered">
+        <thead class="table-light">
+            <tr>
+                    <th>#</th>
+                    <th>Task</th>
+                    <th>Owner</th>
+                    <th>Approver Team</th>
+                    <th>Approval</th>
+                    <th>Status</th>
+                    <th>Completed</th>
+                    <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model.Tasks.OrderBy(t => t.SortOrder))
+            {
+                    <tr class="
+                        @(task.ProcessTaskStatus == ProcessTaskStatus.Completed ? "table-success" :
+                          task.ProcessTaskStatus == ProcessTaskStatus.InProgress ? "table-primary" :
+                          task.ProcessTaskStatus == ProcessTaskStatus.Rejected ? "table-danger" :
+                            "")">
+                        
+                        <td>@task.SortOrder</td>    
+                        <td><strong>@task.Title</strong>
+                            @if(!string.IsNullOrEmpty(task.Description))
+                        {
+                               <br/>
+                               <small class="text-muted">@task.Description</small>
+                        }
+                    </td>
+                    <td>
+                        @if (task.Owner != null)
+                        {
+                            @task.Owner.FirstName @task.Owner.LastName
+                        }
+                        else
+                        {
+                            <span class="text-muted">Unassigned</span>
+                        }
+                    </td>
+                    <td>@task.ApproverTeam</td>
+                    <td>
+                        @if (task.ApprovalRequired)
+                        {
+                            <span class="badge bg-warning text-dark">Required</span>
+                            if (task.ApproveStatus.HasValue)
+                            {
+                                <span class="badge
+                                    @(task.ApproveStatus ==ApproveStatus.Approved ?"bg-success":
+                                      task.ApproveStatus == ApproveStatus.Rejected ? "bg-danger":
+                                      task.ApproveStatus == ApproveStatus.Pending ? "bg-warning": 
+                                      "bg-secondary")">
+                                    @task.ApproveStatus
+                                    </span>
+                            }
+                        }
+                        else
+                        {
+                           <span class="text-muted">Not Required</span>
+                        }
+                    </td>
+                    <td>
+                        <span class="badge 
+                            @(task.ProcessTaskStatus == ProcessTaskStatus.NotStarted ? "bg-secondary":
+                              task.ProcessTaskStatus == ProcessTaskStatus.InProgress ? "bg-primary":
+                              task.ProcessTaskStatus == ProcessTaskStatus.Completed ? "bg-success":
+                              task.ProcessTaskStatus == ProcessTaskStatus.Approved ? "bg-success":
+                              task.ProcessTaskStatus == ProcessTaskStatus.Rejected ? "bg-danger":
+                              "bg-warning text-dark")">@task.ProcessTaskStatus
+                        </span>
+                    </td>
+                    <td>
+                        @if (task.CompletedDate.HasValue)
+                        {
+                            @task.CompletedDate.Value.ToShortDateString()
+                        }
+                        else 
+                        {
+                            <span class="text-muted">-</span>
+                        }
+                    </td>
+
+                    <td>
+                        <a asp-controller="ProcessTasks"
+                        asp-action="Edit"
+                        asp-route-id="@task.Id"
+                        class="btn btn-sm btn-outline-primary">Edit</a>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+}
+else
+
+{
+    <div class="alert alert-warning">No tasks found for this instance</div>
+}
 
 <div>
     <h4>ProcessInstance</h4>

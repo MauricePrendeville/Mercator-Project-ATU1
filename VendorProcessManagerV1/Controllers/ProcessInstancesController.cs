@@ -43,7 +43,14 @@ namespace VendorProcessManagerV1.Controllers
             }
 
             var processInstance = await _context.ProcessInstances
+                .Include(i => i.ProcessTemplate)
+                .Include(i => i.VendorCandidate)
+                .Include(i => i.InitiatedBy)
+                .Include(i => i.Tasks.OrderBy(t => t.SortOrder))
+                    .ThenInclude(t =>t.Owner)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+
             if (processInstance == null)
             {
                 return NotFound();
@@ -152,7 +159,16 @@ namespace VendorProcessManagerV1.Controllers
         public async Task<IActionResult> StartInstance(StartProcessInstanceViewModel vm)
         {
             if (!ModelState.IsValid)
+            {   
+                vm.VendorCandidateOptions = new SelectList(
+                    await _context.VendorCandidates
+                    .OrderBy(v => v.Name)
+                    .ToListAsync(), 
+                    "Id", 
+                    "Name"
+                    );
                 return View(vm);
+            }
 
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser == null)
@@ -162,13 +178,14 @@ namespace VendorProcessManagerV1.Controllers
             {
                 var instance = await _processInstanceService.StartInstanceAsync(
                     vm.ProcessTemplateId,
+                    vm.InstanceName, 
                     vm.VendorCandidateId,
                     currentUser.Id);
 
                 TempData["Success"] = "Process instance started successfully.";
 
                 //redirect
-                return RedirectToAction("Details", "ProcessInstances",
+                return RedirectToAction("Details", 
                     new { id = instance.Id });
             }
 

@@ -15,6 +15,7 @@ namespace VendorProcessManagerV1.Services
 
         public async Task<ProcessInstance> StartInstanceAsync(
             Guid templateId, 
+            string instanceName,
             Guid vendorCandidateId,
             string initiatedById)
         {
@@ -34,7 +35,7 @@ namespace VendorProcessManagerV1.Services
             {
                 Id = Guid.NewGuid(), 
                 ProcessTemplateId = templateId, 
-                //Name = instanceName, 
+                InstanceName = instanceName, 
                 InitiatedById = initiatedById, 
                 VendorCandidateId = vendorCandidateId,
                 CreatedDate = DateTime.Now, 
@@ -56,7 +57,9 @@ namespace VendorProcessManagerV1.Services
                     SortOrder = templateTask.SortOrder,
                     ProcessTaskStatus = ProcessTaskStatus.NotStarted,
                     StartedDate = null,
-                    CompletedDate = null
+                    CompletedDate = null, 
+                    CreatorId = initiatedById, 
+                    OwnerId = initiatedById
                 };
 
                 instance.Tasks.Add(instanceTask); 
