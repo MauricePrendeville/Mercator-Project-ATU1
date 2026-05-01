@@ -1,0 +1,62 @@
+﻿@model VendorProcessManagerV1.ViewModels.StartProcessInstanceViewModel
+
+@{
+    ViewData["Title"] = "Start Process Instance";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Start instance of: <em>@Model.TemplateName</em></h2>
+<p class="text-muted">This will create a live instance of 
+    @Model.TaskCount tasks intitalised by the template</p>
+
+<h4>ProcessInstance</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="StartInstance">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <input type="hidden" asp-for="ProcessTemplateId" />
+            <input type="hidden" asp-for="TemplateName" />
+            <input type="hidden" asp-for="TaskCount" />
+
+            <div class="form-group">
+                <label asp-for="InstanceName" class="control-label">InstanceName</label>
+                <input asp-for="InstanceName" 
+                        class="form-control" 
+                        value="@Model.SuggestedName"/>
+                        <small class="form-text text-muted">
+                            Give the instance a meaningful name. 
+                        </small>
+                <span asp-validation-for="InstanceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VendorCandidateId" class="control-label">
+                    Vendor Candidate
+                </label>
+                <select asp-for="VendorCandidateId" 
+                        asp-items="Model.VendorCandidateOptions" 
+                        class="form-control">
+                    <option value="">--Select a vendor--</option>
+                    </select>
+                    <span asp-validation-for="VendorCandidateId" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-success">Start Instance</button>
+            <a asp-action="Details"
+                asp-controller="ProcessTemplates"
+                asp-route-id="@Model.ProcessTemplateId"
+                class="btn btn-secondary">Cancel</a>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -9,6 +9,7 @@ namespace VendorProcessManagerV1.Services
     {
         Task<ProcessInstance> StartInstanceAsync(
             Guid templateId,
+            Guid vendorCandidateId,
             string createdById);
     }
 }

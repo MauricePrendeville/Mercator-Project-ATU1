@@ -1,22 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using VendorProcessManagerV1.Data;
 using VendorProcessManagerV1.Models;
+using VendorProcessManagerV1.Services;
+using VendorProcessManagerV1.ViewModels;
 
 namespace VendorProcessManagerV1.Controllers
 {
     public class ProcessInstancesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IProcessInstanceService _processInstanceService;
 
-        public ProcessInstancesController(ApplicationDbContext context)
+        public ProcessInstancesController(ApplicationDbContext context,
+            UserManager<AppUser> userManager,
+            IProcessInstanceService processInstanceService)
         {
             _context = context;
+            _userManager = userManager;
+            _processInstanceService = processInstanceService;
         }
 
         // GET: ProcessInstances
@@ -44,9 +53,30 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessInstances/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(Guid id)
         {
-            return View();
+            var template = await _context.ProcessTemplates
+                .Include(t => t.Tasks)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (template == null)
+                return NotFound();
+
+            if (!template.Tasks.Any())
+            {
+                TempData["Error"] = "Cannot start an instance. Template has no tasks";
+                return RedirectToAction("Details", new { id });
+            }
+
+            var vm = new StartProcessInstanceViewModel
+            {
+                ProcessTemplateId = template.Id,
+                TemplateName = template.Name,
+                TaskCount = template.Tasks.Count,
+                InstanceName = template.Name + "-" + DateTime.Now.ToString("dd MMM yyyy")
+            };
+
+            return View(vm);
         }
 
         // POST: ProcessInstances/Create
@@ -81,7 +111,73 @@ namespace VendorProcessManagerV1.Controllers
             }
             return View(processInstance);
         }
+        //GET: ProcessTemplates/StartInstance/templateId
+        public async Task<IActionResult> StartInstance(Guid id)
+        {
+            var template = await _context.ProcessTemplates
+                .Include(t => t.Tasks)
+                .FirstOrDefaultAsync(t => t.Id == id);
 
+            if (template == null)
+                return NotFound();
+
+            if (!template.Tasks.Any())
+            {
+                TempData["Error"] = "Cannot start an instance this template has no tasks.";
+                return RedirectToAction("Details", new { id });
+            }
+
+            var vm = new StartProcessInstanceViewModel
+            {
+                ProcessTemplateId = template.Id,
+                TemplateName = template.Name,
+                TaskCount = template.Tasks.Count,
+                SuggestedName = template.Name + "-" +
+                                DateTime.Now.ToString("dd MM yyyy"), 
+                VendorCandidateOptions = new SelectList(
+                    await _context.VendorCandidates
+                        .OrderBy(v => v.Name)
+                        .ToListAsync(),
+                    "Id", 
+                    "Name"
+                 )
+            };
+
+            return View(vm);
+        }
+
+        //POST ProcessTemplates/StartInstance
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> StartInstance(StartProcessInstanceViewModel vm)
+        {
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+                return Unauthorized();
+
+            try
+            {
+                var instance = await _processInstanceService.StartInstanceAsync(
+                    vm.ProcessTemplateId,
+                    vm.VendorCandidateId,
+                    currentUser.Id);
+
+                TempData["Success"] = "Process instance started successfully.";
+
+                //redirect
+                return RedirectToAction("Details", "ProcessInstances",
+                    new { id = instance.Id });
+            }
+
+            catch (InvalidOperationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(vm);
+            }
+        }
         // POST: ProcessInstances/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

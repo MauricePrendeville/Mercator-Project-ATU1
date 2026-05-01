@@ -14,5 +14,9 @@ namespace VendorProcessManagerV1.ViewModels
         public string InstanceName { get; set; }
         public string? SuggestedName { get; set; }
 
+        [Required] 
+        public Guid VendorCandidateId { get; set; }
+        public SelectList? VendorCandidateOptions { get; set; }
+
     }
 }

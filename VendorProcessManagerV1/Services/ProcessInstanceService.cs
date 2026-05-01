@@ -15,6 +15,7 @@ namespace VendorProcessManagerV1.Services
 
         public async Task<ProcessInstance> StartInstanceAsync(
             Guid templateId, 
+            Guid vendorCandidateId,
             string initiatedById)
         {
             var template = await _context.ProcessTemplates
@@ -35,6 +36,7 @@ namespace VendorProcessManagerV1.Services
                 ProcessTemplateId = templateId, 
                 //Name = instanceName, 
                 InitiatedById = initiatedById, 
+                VendorCandidateId = vendorCandidateId,
                 CreatedDate = DateTime.Now, 
                 Status = ProcessInstanceStatus.NotStarted
             };

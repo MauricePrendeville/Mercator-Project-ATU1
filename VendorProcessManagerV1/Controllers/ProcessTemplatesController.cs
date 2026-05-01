@@ -249,7 +249,7 @@ namespace VendorProcessManagerV1.Controllers
         //    );
         //}
 
-        //GET: ProcessTemplates/StartInstance/templateId
+       /* //GET: ProcessTemplates/StartInstance/templateId
         public async Task<IActionResult> StartInstance(Guid id)
         {
             var template = await _context.ProcessTemplates
@@ -307,6 +307,6 @@ namespace VendorProcessManagerV1.Controllers
                 ModelState.AddModelError(string.Empty, ex.Message);
                 return View(vm);
             }
-        }
+        }*/
     }
 }
