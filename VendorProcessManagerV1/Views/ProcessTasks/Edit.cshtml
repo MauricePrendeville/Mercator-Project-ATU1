@@ -76,28 +76,85 @@
             <span asp-validation-for="StartedDate" class="text-danger"></span>
         </div>
 
+        <div class="form-group form-check">
+            <input asp-for="IsCompleted" class="form-check-input" />
+            <label asp-for="IsCompleted" class="form-check-label">
+                Mark as completed
+            </label> 
+        </div>
 
+        <div class="form-group">
+            <label asp-for="CompletedDate" class="control-label">
+                Completed date
+            </label>
+            <input asp-for="CompletedDate" 
+                    class="form-control" 
+                    type="datetime-local" />
+            <span asp-validation-for="CompletedDate" 
+                    class="text-danger"></span>
+        </div>
 
     </div>
 </div>
             
-            
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsCompleted" /> @Html.DisplayNameFor(model => model.IsCompleted)
-                </label>
+    @if (Model.ApprovalRequired)
+        {
+            <div class="card-mb-3">
+                <div class="card-header">
+                    Approval
+                </div>
+
+                <div class="card-body">
+                    <div class="form-group">
+                        <label asp-for="ApproverId" class="control-label">Approver</label>
+                        <select asp-for="ApproverId" 
+                            asp-items="Model.ApproverOptions" 
+                            class="form-control">
+                            <option value="">-Select Approver-</option>
+                        </select>
+
+                        <span asp-validation-for="ApproverId" 
+                                class="text-danger">
+                            </span>
+                            
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApproveStatus" 
+                            class="control-label">
+                            Approval status
+                        </label>
+                        <select asp-for="ApproveStatus" 
+                                asp-items="Model.ApproveStatusOptions"
+                                class="form-control">
+                            <option value="">-Not set--</option>
+                        </select>
+                        <span asp-validation-for="ApproveStatus" 
+                                class="text-danger">
+                        </span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="ApproveDate" 
+                                class="control-label">
+                            Approval date
+                        </label>
+                        <input asp-for="ApproveDate" 
+                                class="form-control"
+                                type="datetime-local" />
+                                <span asp-validation-for="ApproveDate" 
+                                        class="text-danger"></span>
+                    </div>
+                </div>
             </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="ApprovalRequired" /> @Html.DisplayNameFor(model => model.ApprovalRequired)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+        }         
+        
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a asp-action="Details" 
+            asp-controller="ProcessInstance"
+            asp-route-id="@Model.ProcessInstanceId"
+            class="btn btn-secondary">Cancel</a>
+        
+</form>
+   
 
 <div>
     <a asp-action="Index">Back to List</a>
