@@ -50,8 +50,10 @@
         //public List<ProcessTask>? DependsOn { get; set; } //may replace with dependency table
         //public List<ProcessTask>? SuccessorTasks { get; set; }
         public bool IsCompleted { get; set; }
+        public bool IsActive { get; set; }
+        public Guid? ActivatedByTransitionId { get; set; }
+        public Guid? SelectedTransitionId { get; set; }
        
-
     }
 
     public enum ProcessTaskStatus

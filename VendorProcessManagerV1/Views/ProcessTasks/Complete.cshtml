@@ -1,0 +1,32 @@
+﻿@model VendorProcessManagerV1.ViewModels.CompleteProcessTaskViewModel
+
+@{
+    ViewData["Title"] = "Complete Process Task";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Complete task: <em>@Model.TaskTitle</em></h2>
+
+<form asp-action="Complete">
+    <input type="hidden" asp-for="TaskId" />
+    <input type="hidden" asp-for="ProcessInstanceId" />
+
+    @if (Model.HasTransitions)
+    {
+        <div class="card mb-3">
+            <div class="card-headed w-75">Select the next path</div>
+            <div class="card-body w-75">
+                @foreach (var transition in Model.Transitions)
+                {
+
+                    
+                }
+
+         </div>
+    }
+
+
+
+
+
+</form>

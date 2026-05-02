@@ -19,8 +19,8 @@
 
 
 <div class="card mb-3">
-    <div class="card-header">Task details</div>
-    <div class="card-body"> 
+    <div class="card-header w-75">Task details</div>
+    <div class="card-body w-75"> 
         <dl class="row mb-0">
             <dt class="col-sm-3">Title</dt>
             <dd class="col-sm-9">@Model.Title</dd>
@@ -40,8 +40,8 @@
     </div>
 </div>
 <div class="card mb-3">
-    <div class="card-header">Execution</div>
-    <div class="card-body">
+    <div class="card-header w-75">Execution</div>
+    <div class="card-body w-75">
 
         <div class="form-group">
             <label asp-for="OwnerId" class="control-label">Owner</label>
@@ -149,16 +149,12 @@
         
         <button type="submit" class="btn btn-primary">Save</button>
         <a asp-action="Details" 
-            asp-controller="ProcessInstance"
+            asp-controller="ProcessInstances"
             asp-route-id="@Model.ProcessInstanceId"
             class="btn btn-secondary">Cancel</a>
         
 </form>
    
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
