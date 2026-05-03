@@ -127,6 +127,16 @@
                         asp-action="Edit"
                         asp-route-id="@task.Id"
                         class="btn btn-sm btn-outline-primary">Edit</a>
+
+                        @if (task.IsActive && 
+                                task.ProcessTaskStatus != ProcessTaskStatus.Completed && 
+                                                        task.ProcessTaskStatus != ProcessTaskStatus.Skipped)
+                        {
+                            <a asp-controller="ProcessTasks"
+                                asp-action="Complete"
+                                asp-route-id="@task.Id"
+                                class="btn btn-sm btn-success">Complete</a>
+                        }
                     </td>
                 </tr>
             }

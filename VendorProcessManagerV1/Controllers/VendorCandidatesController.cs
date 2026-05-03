@@ -22,7 +22,12 @@ namespace VendorProcessManagerV1.Controllers
         // GET: VendorCandidates
         public async Task<IActionResult> Index()
         {
-            return View(await _context.VendorCandidates.ToListAsync());
+            var vendors = await _context.VendorCandidates
+                .Include(v => v.ProcessInstances)
+                .OrderBy(v => v.Name)
+                .ToListAsync(); 
+
+            return View(vendors);
         }
 
         // GET: VendorCandidates/Details/5
@@ -34,7 +39,12 @@ namespace VendorProcessManagerV1.Controllers
             }
 
             var vendorCandidate = await _context.VendorCandidates
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .Include(v => v.ProcessInstances)
+                    .ThenInclude(i => i.ProcessTemplate)
+                .Include(v => v.ProcessInstances)
+                    .ThenInclude(i => i.InitiatedBy)
+                .FirstOrDefaultAsync(v => v.Id == id);
+
             if (vendorCandidate == null)
             {
                 return NotFound();

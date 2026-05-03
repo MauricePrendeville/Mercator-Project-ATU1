@@ -42,8 +42,12 @@ namespace VendorProcessManagerV1.Services
                 Status = ProcessInstanceStatus.NotStarted
             };
 
-            foreach (var templateTask in template.Tasks.OrderBy(t => t.SortOrder))
+            var sortedTasks = template.Tasks.OrderBy(t => t.SortOrder).ToList();
+
+            for (int i = 0; i < sortedTasks.Count; i++)
             {
+                var templateTask = sortedTasks[i];
+
                 var instanceTask = new ProcessTask
                 {
                     Id = Guid.NewGuid(),
@@ -55,7 +59,9 @@ namespace VendorProcessManagerV1.Services
                     ApproverTeam = templateTask.ApproverTeam,
                     ApprovalRequired = templateTask.ApprovalRequired,
                     SortOrder = templateTask.SortOrder,
-                    ProcessTaskStatus = ProcessTaskStatus.NotStarted,
+                    ProcessTaskStatus = i == 0? ProcessTaskStatus.InProgress :
+                                                ProcessTaskStatus.NotStarted,
+                    IsActive = i == 0,
                     StartedDate = null,
                     CompletedDate = null, 
                     CreatorId = initiatedById, 

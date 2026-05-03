@@ -11,5 +11,8 @@
         public Guid Creator {  get; set; }
         public string PaymentTerms { get; set; } //update to ENUM
 
+        public ICollection<ProcessInstance> ProcessInstances { get; set; }
+            = new List<ProcessInstance>();
+
     }
 }

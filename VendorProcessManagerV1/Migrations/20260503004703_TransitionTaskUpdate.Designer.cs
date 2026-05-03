@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VendorProcessManagerV1.Data;
 
@@ -11,9 +12,11 @@ using VendorProcessManagerV1.Data;
 namespace VendorProcessManagerV1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260503004703_TransitionTaskUpdate")]
+    partial class TransitionTaskUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -734,7 +737,7 @@ namespace VendorProcessManagerV1.Migrations
                         .IsRequired();
 
                     b.HasOne("VendorProcessManagerV1.Models.VendorCandidate", "VendorCandidate")
-                        .WithMany("ProcessInstances")
+                        .WithMany()
                         .HasForeignKey("VendorCandidateId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
@@ -839,11 +842,6 @@ namespace VendorProcessManagerV1.Migrations
             modelBuilder.Entity("VendorProcessManagerV1.Models.ProcessTemplateTask", b =>
                 {
                     b.Navigation("Transitions");
-                });
-
-            modelBuilder.Entity("VendorProcessManagerV1.Models.VendorCandidate", b =>
-                {
-                    b.Navigation("ProcessInstances");
                 });
 #pragma warning restore 612, 618
         }

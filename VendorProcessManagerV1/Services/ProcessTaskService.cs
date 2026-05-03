@@ -41,7 +41,7 @@ namespace VendorProcessManagerV1.Services
         }
 
         public async Task<List<ProcessTemplateTransition>>
-            GetAvailableTransitionsASync(Guid taskId)
+            GetAvailableTransitionsAsync(Guid taskId)
         {
             var task = await _context.ProcessTasks
                 .FirstOrDefaultAsync(t => t.Id == taskId);
@@ -79,7 +79,7 @@ namespace VendorProcessManagerV1.Services
             task.CompletedDate = DateTime.Now;
             task.SelectedTransitionId = selectedTransitionId;
 
-            var transitions = await GetAvailableTransitionsASync(taskId); 
+            var transitions = await GetAvailableTransitionsAsync(taskId); 
 
             if(transitions.Any())
             {
@@ -109,7 +109,7 @@ namespace VendorProcessManagerV1.Services
                         if(nextTask != null)
                         {
                             nextTask.IsActive = true;
-                            nextTask.ProcessTaskStatus = ProcessTask.InProgress;
+                            nextTask.ProcessTaskStatus = ProcessTaskStatus.InProgress;
                             nextTask.StartedDate = DateTime.Now;
 
                             await DeactivateUnselectedBranchesAsync(
@@ -173,7 +173,7 @@ namespace VendorProcessManagerV1.Services
             return new CompleteTaskResult { Succeeded = true }; 
         }
 
-        private async Task DeactivateUnselectedBranchesASync(
+        private async Task DeactivateUnselectedBranchesAsync(
             ProcessTask completedTask, 
             ProcessTemplateTransition selectedTransition, 
             List<ProcessTemplateTransition> allTransitions)

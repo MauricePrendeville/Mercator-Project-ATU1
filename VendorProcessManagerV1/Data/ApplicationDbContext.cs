@@ -65,7 +65,7 @@ namespace VendorProcessManagerV1.Data
                    
             modelBuilder.Entity<ProcessInstance>()
                .HasOne(i => i.VendorCandidate)
-               .WithMany()
+               .WithMany(v => v.ProcessInstances)
                .HasForeignKey(i => i.VendorCandidateId)
                .OnDelete(DeleteBehavior.NoAction);
 

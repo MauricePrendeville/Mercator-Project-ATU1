@@ -1,4 +1,4 @@
-﻿@model VendorProcessManagerV1.ViewModels.CompleteProcessTaskViewModel
+﻿@model VendorProcessManagerV1.ViewModels.CompleteTaskViewModel
 
 @{
     ViewData["Title"] = "Complete Process Task";
@@ -18,15 +18,54 @@
             <div class="card-body w-75">
                 @foreach (var transition in Model.Transitions)
                 {
-
-                    
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" 
+                            type="radio"
+                            name="SelectedTransitionId" 
+                            id="transition_@transition.Id"
+                            value="@transition.Id"
+                            @(transition.Id == Model.DefaultTransitionId 
+                                ? "checked" : "") />
+                        <label class="form-check-label" 
+                               for="transition_@transition.Id">
+                          <strong>@transition.DisplayLabel</strong>
+                          @if (transition.IsDefault)
+                            {
+                                <span class="badge bg-success ms-1">
+                                    Default
+                                </span>
+                            }
+                            @if (!string.IsNullOrEmpty(transition.ConditionExpression))
+                            {
+                                <small class="text-muted ms-2">
+                                    @transition.ConditionExpression
+                                </small>
+                            }
+                            <br />
+                            <small class="text-muted">
+                                Goes to:
+                                @(transition.ToProcessTemplateTask?.Title 
+                                ?? "End of Process.")
+                            </small>
+                        </label>
+                    </div>                    
                 }
-
+            </div>
          </div>
     }
+    else
+    {
+        <p class="text-muted">This task has no transition choice - 
+            completing it will move to the next task in sequence.</p>        
+    }
 
-
-
-
-
+    <button type="submit" class="btn btn-success">
+        Complete Task
+    </button>
+    <a asp-action="Details" 
+        asp-controller="ProcessInstances" 
+        asp-route-id="@Model.ProcessInstanceId"
+        class="btn btn-secondary">
+        Cancel
+    </a>
 </form>
