@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MermaidDotNet;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,8 +21,8 @@ namespace VendorProcessManagerV1.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IProcessInstanceService _processInstanceService;
 
-        public ProcessTemplatesController(ApplicationDbContext context, 
-                UserManager<AppUser> userManager, 
+        public ProcessTemplatesController(ApplicationDbContext context,
+                UserManager<AppUser> userManager,
                 IProcessInstanceService processInstanceService)
         {
             _context = context;
@@ -42,7 +44,7 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processTemplate = await _context.ProcessTemplates 
+            var processTemplate = await _context.ProcessTemplates
                 .Include(t => t.Creator)
                 .Include(t => t.Tasks)
                     .ThenInclude(task => task.Transitions)
@@ -52,6 +54,10 @@ namespace VendorProcessManagerV1.Controllers
             {
                 return NotFound();
             }
+
+            //adding mermaid flowchart capability. Uses MermaidDotNet
+            var diagram = BuildTemplateDiagram(processTemplate);
+            ViewBag.MermaidDiagram = diagram;
 
             return View(processTemplate);
         }
@@ -73,7 +79,7 @@ namespace VendorProcessManagerV1.Controllers
                 CreateDate = DateTime.UtcNow, //check the default timezone later
                 IsActive = true,
                 CreatorName = currentUser.FirstName + " " + currentUser.LastName
-                
+
                 /*
                 CreatorOptions = new SelectList(
                     await _context.Users
@@ -110,20 +116,20 @@ namespace VendorProcessManagerV1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create (
+        public async Task<IActionResult> Create(
             CreateProcessTemplateViewModel vm)
         {
             if (!ModelState.IsValid)
             {
                 //await PopulateCreatorDropdown(vm);
-                    return View(vm);
+                return View(vm);
             }
 
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser == null)
                 return Unauthorized();
 
-            var processTemplate = new ProcessTemplate  
+            var processTemplate = new ProcessTemplate
             {
                 Id = Guid.NewGuid(),
                 Name = vm.Name,
@@ -140,7 +146,7 @@ namespace VendorProcessManagerV1.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-       
+
 
         // GET: ProcessTemplates/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
@@ -229,6 +235,71 @@ namespace VendorProcessManagerV1.Controllers
         private bool ProcessTemplateExists(Guid id)
         {
             return _context.ProcessTemplates.Any(e => e.Id == id);
+        }
+
+        private string BuildTemplateDiagram(ProcessTemplate template)
+        {
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("flowchart TD");
+
+            var sortedTasks = template.Tasks.OrderBy(t => t.SortOrder).ToList();
+
+            var firstTask = sortedTasks.FirstOrDefault();
+            if (firstTask != null)
+            {
+                var firstRef = "T" + firstTask.Id.ToString("N").Substring(0, 8);
+                sb.AppendLine($"    START([Start]) --> {firstRef}");
+            }
+
+            foreach (var task in sortedTasks)
+            {
+                var taskRef = "T" + task.Id.ToString("N").Substring(0, 8);
+                var safeTitle = task.Title.Replace("\"", "'")
+                                            .Replace("\n", " ");
+
+                sb.AppendLine($"    {taskRef}[\"{task.SortOrder}.{safeTitle}\"]");
+                
+                    if (task.Transitions != null && task.Transitions.Any())
+                    {
+                        foreach(var tr in task.Transitions.OrderBy(t => task.SortOrder))
+                        {
+                            var safeLabel = tr.DisplayLabel.Replace("\"", "'");
+
+                            if (tr.ToProcessTemplateTaskId.HasValue)
+                            {
+                                var targetRef = "T" + tr.ToProcessTemplateTaskId.Value
+                                    .ToString("N").Substring(0, 8);
+                                sb.AppendLine(
+                                    $"  {taskRef} -->|\"{safeLabel}\"| {targetRef}");
+                            }
+                            else
+                            {
+                                sb.AppendLine(
+                                    $"  {taskRef} -->|\"{safeLabel}\"| " +
+                                    $"END([End of process])");
+                            }
+                        }
+                    }
+                    else
+                    { 
+                        var next = sortedTasks
+                            .SkipWhile(t => t.Id != task.Id)
+                            .Skip(1)
+                            .FirstOrDefault(); 
+                        if (next != null)
+                        {
+                            var nextRef = "T" + next.Id.ToString("N").Substring(0, 8);
+                            sb.AppendLine($"    {taskRef} --> {nextRef}");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"    {taskRef} --> COMPLETE([Complete])");
+                        }
+
+                    }
+
+            }
+            return sb.ToString();
         }
 
         //private async Task PopulateCreatorDropdown(CreateProcessTemplateViewModel vm)

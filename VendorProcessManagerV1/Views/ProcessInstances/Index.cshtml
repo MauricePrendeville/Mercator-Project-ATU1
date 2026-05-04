@@ -14,22 +14,31 @@
     <thead>
         <tr>
             <th>
-                Instance Name
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["InstanceNameSort"]">Instance Name
+                    @if(ViewData["CurrentSort"]?.ToString() == "name_asc")
+                    {
+                        <span>upicon</span>
+                    }
+                    else if (ViewData["CurrentSort"]?.ToString() == "name.desc")
+                    {
+                        <span>downicon</span>
+                    }
+                </a>
             </th>
             <th>
-                Template
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TemplateSort"]">Template</a>
             </th>
             <th>
-                Vendor
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["VendorSort"]">Vendor</a>
             </th>
             <th>
-                Initiated By
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedSort"]">Initiated By</a>
             </th>
             <th>
-                Created
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedSort"]">Created</a>
             </th>            
             <th>
-                Status
+               <a asp-action="Index" asp-route-sortOrder="@ViewData["StatusSort"]">Status</a>
             </th>
             <th></th>
         </tr>
@@ -37,7 +46,7 @@
     <tbody>
 @foreach (var item in Model) 
 {
-        <tr>
+        <tr>                
             <td>
                 @item.InstanceName
             </td>

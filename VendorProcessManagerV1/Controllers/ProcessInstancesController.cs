@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -29,16 +30,42 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessInstances
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            var instances = await _context.ProcessInstances
+            ViewData["CurrentSort"] = sortOrder;
+
+            ViewData["InstanceNameSort"] = sortOrder == "name_asc" ? "name_desc" : "name_asc";
+            ViewData["TemplateSort"] = sortOrder == "template_asc" ? "template_desc" : "template_asc";
+            ViewData["VendorSort"] = sortOrder == "vendor_asc" ? "vendor_desc" : "vendor_asc";
+            ViewData["DateSort"] = sortOrder == "date_asc" ? "date_desc" : "date_asc";
+            ViewData["InitiatorSort"] = sortOrder == "initiator_asc" ? "initiator_desc" : "initiator_asc";
+            ViewData["StatusSort"] = sortOrder == "status_asc" ? "status_desc" : "status_asc";
+
+            var instances = _context.ProcessInstances
                 .Include(i => i.ProcessTemplate)
                 .Include(i => i.InitiatedBy)
                 .Include(i => i.VendorCandidate)
                 .OrderByDescending(i => i.CreatedDate)
-                .ToListAsync();
+                .AsQueryable();
+
+            instances = sortOrder switch
+            {
+                "name_asc" => instances.OrderBy(p => p.InstanceName),
+                "name_desc" => instances.OrderByDescending(p => p.InstanceName),
+                "template_asc" => instances.OrderBy(p => p.ProcessTemplate.Name),
+                "template_desc" => instances.OrderByDescending(p => p.ProcessTemplate.Name),
+                "vendor_asc" => instances.OrderBy(p => p.VendorCandidate.Name),
+                "vendor_desc" => instances.OrderByDescending(p => p.VendorCandidate.Name),
+                "date_asc" => instances.OrderBy(p => p.CreatedDate),
+                "date_desc" => instances.OrderByDescending(p => p.CreatedDate),
+                "initiator_asc" => instances.OrderBy(p => p.InitiatedBy.LastName),
+                "initiator_desc" => instances.OrderByDescending(p => p.InitiatedBy.LastName),
+                "status_asc" => instances.OrderBy(p => p.Status),
+                "status_desc" => instances.OrderByDescending(p => p.Status),
+                _ => instances.OrderBy(p => p.InstanceName)
+            };
             
-            return View(instances);
+            return View(await instances.ToListAsync());
         }
 
         // GET: ProcessInstances/Details/5
@@ -271,6 +298,7 @@ namespace VendorProcessManagerV1.Controllers
             return RedirectToAction(nameof(Index));
                         
         }
+       
 
         // GET: ProcessInstances/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
