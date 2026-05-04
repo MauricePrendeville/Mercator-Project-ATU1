@@ -247,7 +247,44 @@ namespace VendorProcessManagerV1.Controllers
                 new { id = vm.ProcessInstanceId });
         }
 
+        //POST Approve Task
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Approve(ApproveTaskViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                vm.DecisionOptions = BuildApproveStatusOptions();
+                return View(vm);
+            }
 
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+                return Unauthorized();
+
+            var result = await _processTaskService.ApproveTaskAsync(
+                vm.TaskId,
+                currentUser.Id,
+                vm.Decision,
+                vm.Notes);
+
+            if (!result.Succeeded)
+            {
+                TempData["Error"] = result.ErrorMessage;
+                return RedirectToAction("Details", "ProcessInstances",
+                    new
+                    {
+                        id = vm.ProcessInstanceId
+                    });
+            }
+
+            TempData["Success"] = vm.Decision == ApproveStatus.Approved
+                ? "Task approved succesfully."
+                : "Task rejected.";
+
+            return RedirectToAction("Details", "ProcessInstances", 
+                new {id = vm.ProcessInstanceId});
+        }
 
         // GET: ProcessTasks/Delete/5
         public async Task<IActionResult> Delete(Guid? id)

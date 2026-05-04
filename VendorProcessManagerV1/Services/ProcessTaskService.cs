@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.FlowAnalysis;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.FlowAnalysis;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using VendorProcessManagerV1.Data;
@@ -9,11 +10,14 @@ namespace VendorProcessManagerV1.Services
 {
     public class ProcessTaskService : IProcessTaskService
     {
-        private readonly ApplicationDbContext _context; 
+        private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
 
-        public ProcessTaskService(ApplicationDbContext context)
+        public ProcessTaskService(ApplicationDbContext context,
+            UserManager<AppUser> userManager)
         {
-            _context = context; 
+            _context = context;
+            _userManager = userManager;
         }
 
         public async Task<bool> CanStartTaskAsync(Guid taskId)
@@ -40,8 +44,8 @@ namespace VendorProcessManagerV1.Services
                 t.ProcessTaskStatus == ProcessTaskStatus.Skipped); 
         }
 
-        public async Task<List<ProcessTemplateTransition>>
-            GetAvailableTransitionsAsync(Guid taskId)
+        public async Task<List<ProcessTemplateTransition>> GetAvailableTransitionsAsync(
+            Guid taskId)
         {
             var task = await _context.ProcessTasks
                 .FirstOrDefaultAsync(t => t.Id == taskId);
@@ -171,6 +175,88 @@ namespace VendorProcessManagerV1.Services
             }
             await _context.SaveChangesAsync();
             return new CompleteTaskResult { Succeeded = true }; 
+        }
+        /// <summary>
+        /// Checks the User's Team to see if they can approve the task
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public async Task<bool> CanApproveTaskAsync(Guid taskId, string userId)
+        {
+            var task = await _context.ProcessTasks
+                .FirstOrDefaultAsync(t => t.Id == taskId);
+
+            if (task == null) return false;
+
+            //task must require approval to be checked
+            if (!task.ApprovalRequired) return false;
+
+            if (task.ProcessTaskStatus != ProcessTaskStatus.InProgress &&
+                task.ProcessTaskStatus != ProcessTaskStatus.Completed)
+                return false; 
+
+            //task already approved
+            if(task.ApproveStatus == ApproveStatus.Approved || 
+                task.ApproveStatus == ApproveStatus.Rejected) 
+                return false;
+
+            //check user and team
+            var user = await _userManager.FindByIdAsync(userId); 
+            if (user == null) return false;
+
+            //is approver team set in Task
+            if (string.IsNullOrEmpty(task.ApproverTeam)) 
+                return true;
+
+            //does user team match required team
+            return string.Equals(
+                user.Team,
+                task.ApproverTeam,
+                StringComparison.OrdinalIgnoreCase); 
+        }
+
+        public async Task<ApproveTaskResult> ApproveTaskAsync(
+            Guid taskId, 
+            string userId, 
+            ApproveStatus decision, 
+            string? notes)
+        {
+            var canApprove = await CanApproveTaskAsync(taskId, userId);
+            if (!canApprove)
+                return new ApproveTaskResult
+                {
+                    Succeeded = false,
+                    ErrorMessage = "You do not have permission to approve this task. " +
+                                    "Approval is restricted to the designated team."
+                }; 
+
+            var task = await _context.ProcessTasks 
+                .Include(t => t.ProcessInstance)
+                .FirstOrDefaultAsync(t => t.Id == taskId);
+
+            if (task == null)
+                return new ApproveTaskResult
+                {
+                    Succeeded = false,
+                    ErrorMessage = "Task not found"
+                };
+
+            task.ApproveStatus = decision;
+            task.ApproverId = userId;
+            task.ApproveDate = DateTime.Now;
+
+            if (notes != null)
+                task.TaskNotes = notes; 
+            if( decision == ApproveStatus.Rejected) 
+            {
+                task.ProcessTaskStatus = ProcessTaskStatus.Rejected;
+            }
+
+            _context.Update(task); 
+            await _context.SaveChangesAsync();
+
+            return new ApproveTaskResult { Succeeded = true }; 
         }
 
         private async Task DeactivateUnselectedBranchesAsync(

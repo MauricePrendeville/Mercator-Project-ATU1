@@ -3,6 +3,7 @@
 @{
     ViewData["Title"] = "Instance Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var currentUserTeam = ViewBag.CurrentUserTeam as string; 
 }
 
 <h1>@Model.InstanceName</h1>
@@ -136,6 +137,20 @@
                                 asp-action="Complete"
                                 asp-route-id="@task.Id"
                                 class="btn btn-sm btn-success">Complete</a>
+                        }
+
+                        @*Show Approve button if permitted or required*@
+                        @if (task.ApprovalRequired && 
+                            task.ApproveStatus != ApproveStatus.Approved &&
+                            task.ApproveStatus != ApproveStatus.Rejected &&
+                            !string.IsNullOrEmpty(task.ApproverTeam) && 
+                            string.Equals(currentUserTeam, task.ApproverTeam, 
+                                StringComparison.OrdinalIgnoreCase))
+                        {
+                            <a asp-asp-controller="ProcessTasks"
+                            asp-action="Approve" 
+                            asp-route-id="@task.Id"
+                            class="btn btn-sm btn-warning">Approve</a>
                         }
                     </td>
                 </tr>

@@ -50,6 +50,8 @@ namespace VendorProcessManagerV1.Controllers
                     .ThenInclude(t =>t.Owner)
                 .FirstOrDefaultAsync(m => m.Id == id);
 
+            var currentUser = await _userManager.GetUserAsync(User);
+            ViewBag.CurrentUserTeam = currentUser?.Team; 
 
             if (processInstance == null)
             {
