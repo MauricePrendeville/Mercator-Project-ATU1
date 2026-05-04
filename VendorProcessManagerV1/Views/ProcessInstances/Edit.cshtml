@@ -1,11 +1,11 @@
-﻿@model VendorProcessManagerV1.Models.ProcessInstance
+﻿@model VendorProcessManagerV1.ViewModels.EditProcessInstanceViewModel
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h2>Edit</h2>
 
 <h4>ProcessInstance</h4>
 <hr />
@@ -14,42 +14,33 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="ProcessTemplateId" class="control-label"></label>
-                <input asp-for="ProcessTemplateId" class="form-control" />
-                <span asp-validation-for="ProcessTemplateId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="VendorCandidateId" class="control-label"></label>
-                <input asp-for="VendorCandidateId" class="form-control" />
-                <span asp-validation-for="VendorCandidateId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="InitiatedBy" class="control-label"></label>
-                <input asp-for="InitiatedBy" class="form-control" />
-                <span asp-validation-for="InitiatedBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="StartDate" class="control-label"></label>
                 <input asp-for="StartDate" class="form-control" />
                 <span asp-validation-for="StartDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="TargetEndDate" class="control-label"></label>
                 <input asp-for="TargetEndDate" class="form-control" />
                 <span asp-validation-for="TargetEndDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="ActualEndDate" class="control-label"></label>
                 <input asp-for="ActualEndDate" class="form-control" />
                 <span asp-validation-for="ActualEndDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3">
                 <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+            
+                <select asp-for="Status"
+                        asp-items="Model.StatusOptions"
+                        class="form-control">
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            
+            
+            <div class="form-group mb-3">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

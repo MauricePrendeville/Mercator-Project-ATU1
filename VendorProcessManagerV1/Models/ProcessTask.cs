@@ -60,9 +60,9 @@
     {
         NotStarted, 
         InProgress, 
-        Completed,
-        Approved,
-        Rejected, 
+        Completed,   
+        Approved, 
+        Rejected,
         Skipped
     }
 

@@ -31,7 +31,14 @@ namespace VendorProcessManagerV1.Controllers
         // GET: ProcessInstances
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ProcessInstances.ToListAsync());
+            var instances = await _context.ProcessInstances
+                .Include(i => i.ProcessTemplate)
+                .Include(i => i.InitiatedBy)
+                .Include(i => i.VendorCandidate)
+                .OrderByDescending(i => i.CreatedDate)
+                .ToListAsync();
+            
+            return View(instances);
         }
 
         // GET: ProcessInstances/Details/5
@@ -113,13 +120,33 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processInstance = await _context.ProcessInstances.FindAsync(id);
+            var processInstance = await _context.ProcessInstances
+                .Include(i => i.ProcessTemplate)
+                .Include(i => i.VendorCandidate)
+                .FirstOrDefaultAsync(i => i.Id == id);
+
             if (processInstance == null)
             {
                 return NotFound();
             }
-            return View(processInstance);
+
+            var vm = new EditProcessInstanceViewModel
+            {
+                Id = processInstance.Id,
+                Name = processInstance.InstanceName,
+                TemplateName = processInstance.ProcessTemplate?.Name,
+                VendorName = processInstance.VendorCandidate?.Name,
+                CreatedDate = processInstance.CreatedDate,
+                StartDate = processInstance.StartDate,
+                TargetEndDate = processInstance.TargetEndDate,
+                ActualEndDate = processInstance.ActualEndDate,
+                Status = processInstance.Status,
+                StatusOptions = BuildStatusOptions(processInstance.Status)
+            }; 
+
+            return View(vm);
         }
+
         //GET: ProcessTemplates/StartInstance/templateId
         public async Task<IActionResult> StartInstance(Guid id)
         {
@@ -202,34 +229,47 @@ namespace VendorProcessManagerV1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,TemplateId,VendorCandidateId,InitiatedBy,StartDate,TargetEndDate,ActualEndDate,Status")] ProcessInstance processInstance)
+        public async Task<IActionResult> Edit(Guid id, EditProcessInstanceViewModel vm)
         {
-            if (id != processInstance.Id)
+            if (id != vm.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(processInstance);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProcessInstanceExists(processInstance.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                vm.StatusOptions = BuildStatusOptions(vm.Status);
+                return View(vm); 
             }
-            return View(processInstance);
+
+            var processInstance = await _context.ProcessInstances.FindAsync(id);
+            if (processInstance == null)
+                return NotFound();
+
+            processInstance.StartDate       = vm.StartDate;
+            processInstance.TargetEndDate   = vm.TargetEndDate;
+            processInstance.ActualEndDate   = vm.ActualEndDate;
+            processInstance.Status          = vm.Status;
+
+            if (vm.Status == ProcessInstanceStatus.Completed &&
+                processInstance.ActualEndDate == null)
+                processInstance.ActualEndDate = DateTime.Now; 
+
+            try
+            {
+                _context.Update(processInstance);
+                await _context.SaveChangesAsync();
+            }
+            
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.ProcessInstances.Any(i => i.Id == vm.Id))
+                    return NotFound();
+                throw;                
+            }
+            
+            return RedirectToAction(nameof(Index));
+                        
         }
 
         // GET: ProcessInstances/Delete/5
@@ -268,6 +308,17 @@ namespace VendorProcessManagerV1.Controllers
         private bool ProcessInstanceExists(Guid id)
         {
             return _context.ProcessInstances.Any(e => e.Id == id);
+        }
+
+        private SelectList BuildStatusOptions(
+            ProcessInstanceStatus? selected = null)
+        {
+            var statuses = Enum.GetValues(typeof(ProcessInstanceStatus))
+                .Cast<ProcessInstanceStatus>()
+                .Select(s => new { Value = (int)s, Text = s.ToString() })
+                .ToList();
+
+            return new SelectList(statuses, "Value", "Text", (int?)selected); 
         }
     }
 }

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h2>Process Instances</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -14,52 +14,56 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProcessTemplateId)
+                Instance Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.VendorCandidateId)
+                Template
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.InitiatedBy)
+                Vendor
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartDate)
+                Initiated By
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TargetEndDate)
-            </th>
+                Created
+            </th>            
             <th>
-                @Html.DisplayNameFor(model => model.ActualEndDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
+                Status
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model) 
+{
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ProcessTemplateId)
+                @item.InstanceName
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.VendorCandidateId)
+                @item.ProcessTemplate?.Name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.InitiatedBy)
+                @item.VendorCandidate?.Name
+            </td>
+            
+            <td>
+                @item.InitiatedBy?.FirstName
+                @item.InitiatedBy?.LastName
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StartDate)
-            </td>
+                @item.CreatedDate.ToShortDateString()
+            </td>            
+            
             <td>
-                @Html.DisplayFor(modelItem => item.TargetEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ActualEndDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                <span class="badge
+                    @(item.Status == ProcessInstanceStatus.NotStarted ? "bg-secondary" :
+                    item.Status == ProcessInstanceStatus.InProgress ? "bg-primary" :
+                    item.Status == ProcessInstanceStatus.Completed ? "bg-success" : 
+                    "bg-danger")">
+                    @item.Status 
+                </span>
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

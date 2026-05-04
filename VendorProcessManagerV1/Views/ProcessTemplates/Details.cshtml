@@ -16,10 +16,10 @@
     <a asp-controller="ProcessTemplateTasks" 
         asp-action="Create" 
         asp-route-templateId="@Model.Id"
-        class="btn btn-primary btn-sm">Add Task</a>
+        class="btn btn-primary btn-sm mb-3">Add Task</a>
 </div>
 <div>
-    <h4>ProcessTemplate</h4>
+    <h4>Process Template</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -71,14 +71,14 @@
     <a asp-action="StartInstance" 
         asp-controller="ProcessInstances" 
         asp-route-id="@Model.Id" 
-        class="btn btn-success">Start Instance
+        class="btn btn-success mb-3">Start Instance
     </a>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 class="mb-0"><i class="bi bi-list-check"></i> Step Templates</h5>
+        <h5 class="mb-2"><i class="bi bi-list-check"></i> Task List</h5>
         <a asp-controller="ProcessTemplateTasks" asp-action="Create" asp-route-templateId="@Model?.Id" class="btn btn-sm btn-success">
             <i class="bi bi-plus-circle"></i> Add Task
         </a>
@@ -89,10 +89,13 @@
 {
     @foreach (var task in Model.Tasks.OrderBy(t => t.SortOrder))
     {
-        <div class="card-mb-2">
+        <div class="card-mb-3 shadow-sm">
             <div class="card-header d-flex justify-content-between align-items-center">
-            <span>@task.Title</span>
-                <div>
+            <div class="d-flex align-items-center gap-2">
+                <span class="badge bg-primary">@task.SortOrder</span>
+                <strong>@task.Title</strong>
+            </div>
+                <div class="d-flex gap-2">
                     <a asp-controller="ProcessTemplateTasks"
                     asp-action="Edit"
                     asp-route-id="@task.Id"
@@ -106,63 +109,107 @@
                     <a asp-controller="ProcessTemplateTransitions" 
                     asp-action="Create" 
                        asp-route-fromTemplateTaskId="@task.Id"
-                    class="btn btn-sm btn-outline-secondary">Add Transition</a>
+                    class="btn btn-sm btn-outline-secondary">+ Transition</a>
                 </div>    
             </div>
         </div>
         <div class="card-body">
-            <p>@task.Description</p>
-            <p>
-                <strong>Approver team:</strong> @task.ApproverTeam &nbsp; 
-                <strong>Approval required:</strong> @task.ApprovalRequired &nbsp;
-                <strong>Sort order:</strong> @task.SortOrder
-            </p>
+            @if (!string.IsNullOrEmpty(task.Description))
+            {
+                <p class="card-text text-muted small">@task.Description</p>
+            }
+            <div class="d-flex flex-wrap gap-2 align-items-center mt-2">
+                @if (!string.IsNullOrEmpty(task.ApproverTeam))
+                {
+                    <span class="text-muted small">
+                        Approver team: 
+                        <strong class="text-dark">@task.ApproverTeam</strong>
+                    </span>
+                }
+                @if (task.ApprovalRequired)
+                {
+                    <span class="badge bg-warning text-dark">
+                        Approval required
+                    </span>
+                }
+                else
+                {
+                    <span class="badge bg-secondary">No approval</span>
+                }
+                @if (!string.IsNullOrEmpty(task.DefaultOwnerRole))
+                {
+                    <span class="text-muted small">
+                        Role: <strong class="text-dark">@task.DefaultOwnerRole</strong>
 
+                    </span>
+                }
+            </div>
+        </div>
+        
+        <div class="card-footer bg-light">
+            <p class="text-muted small fw-semibold text-uppercase mb-2" 
+                style="font-size:11px; letter-spacing:.05em;">
+                Transitions
+            </p>
             @if (task.Transitions != null && task.Transitions.Any())
             {
-                <table class="table table-sm mb-0">
-                    <thead>
-                        <tr>
-                            <th>Transition</th>
-                            <th>Description</th>
-                            <th></th>
-            </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var transition in task.Transitions)
-                        {
-                        <tr>
-                            <td>@transition.DisplayLabel
-                            @if (transition.IsDefault == true)
-                            {
-                                <span class="badge bg-success ms-1">Default</span>
-                            }
-                        <td>
-                            @(transition.ToProcessTemplateTask?.Title ?? "End of process")
-                        </td>
+                @foreach (var transition in task.Transitions
+                    .OrderBy(t => t.SortOrder))
+                {
+                    <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                        <span class="text-muted">-></span>
+                    <strong class="small">@transition.DisplayLabel</strong>
+                    
 
-                        </td>                            
-                            <td><a asp-controller="ProcessTemplateTransitions"
-                                asp-action="Edit" 
-                                asp-route-id="@transition.Id" 
-                                class="btn btn-sm btn-outline-primary">Edit</a>
-                                
-                                <a asp-controller="ProcessTemplateTransitions" 
-                                asp-action="Delete" 
-                                asp-route-id="@transition.Id" 
-                                class="btn btn-sm btn-outline-danger">Delete</a>
-                            
-                            </td>
-                        </tr>
-                        }
-                    </tbody>
-                    </table>
+                    @if (transition.IsDefault)
+                    {
+                        <span class="badge bg-success">Default</span>
+                    }
+
+                    @if(transition.ToProcessTemplateTask != null)
+                    {
+                        <span class="text-muted small">
+                            -> @transition.ToProcessTemplateTask.Title
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge bg-danger">End of process</span>
+                    }
+
+                    @if (!string.IsNullOrEmpty(transition.ConditionExpression))
+                    {
+                        <code class="small bg-white border rounded px-2 py-1">
+                            @transition.ConditionExpression
+                        </code>
+                    }
+                    <div class="ms-auto d-flex gap-1">
+                        <a asp-controller="ProcessTemplateTransitions" 
+                            asp-action="Edit"
+                            asp-route-id="@transition.Id" 
+                            class="btn btn-sm btn-outline-primary">
+                            Edit
+                        </a>
+                        <a asp-controller="ProcessTemplateTransitions"
+                           asp-action="Edit"
+                           asp-route-id="@transition.Id"
+                           class="btn btn-sm btn-outline-danger">
+                           Delete
+                       </a>
+                    </div>
+                </div>
+                }
             }
-    else
-    {
-        <p class="text-muted mb-0">No transitions added yet.</p>
-    }
+            else
+            {
+                <p class="text-muted small fst-italic mb-0">
+                    No transitions yet - task follows sort order automatically.
+                </p>
+            }
         </div>
+       
+    }
+    
     
 
    }
