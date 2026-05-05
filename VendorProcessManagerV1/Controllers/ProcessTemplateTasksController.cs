@@ -17,7 +17,7 @@ namespace VendorProcessManagerV1.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
 
-        public ProcessTemplateTasksController(ApplicationDbContext context, 
+        public ProcessTemplateTasksController(ApplicationDbContext context,
                                                UserManager<AppUser> userManager)
         {
             _context = context;
@@ -49,18 +49,18 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessTemplateTasks/Create
-        public async Task <IActionResult> Create(Guid templateId)
+        public async Task<IActionResult> Create(Guid templateId)
         {
             var template = await _context.ProcessTemplates.FindAsync(templateId);
-            
-            if (template == null) 
+
+            if (template == null)
                 return NotFound();
 
             var vm = new CreateProcessTemplateTaskViewModel
             {
                 ProcessTemplateId = templateId,
                 TemplateName = template.Name,
-                ApprovalRequired = false, 
+                ApprovalRequired = false,
                 SortOrder = 0,
                 ApproverTeamOptions = await BuildTeamOptions()
 
@@ -89,18 +89,18 @@ namespace VendorProcessManagerV1.Controllers
                 Description = vm.Description,
                 ProcessTemplateId = vm.ProcessTemplateId,
                 //ApproverId = vm.ApproverId, 
-                ApproverTeam = vm.ApproverTeam, 
-                ApprovalRequired = vm.ApprovalRequired, 
-                SortOrder = vm.SortOrder, 
+                ApproverTeam = vm.ApproverTeam,
+                ApprovalRequired = vm.ApprovalRequired,
+                SortOrder = vm.SortOrder,
                 DefaultOwnerRole = vm.DefaultOwnerRole
-            }; 
+            };
 
             _context.ProcessTemplatesTasks.Add(task);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction("Details", "ProcessTemplates", 
-                new { id = vm.ProcessTemplateId }); 
-                        
+            return RedirectToAction("Details", "ProcessTemplates",
+                new { id = vm.ProcessTemplateId });
+
         }
 
         // GET: ProcessTemplateTasks/Edit/5
@@ -111,12 +111,28 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processTemplateTask = await _context.ProcessTemplatesTasks.FindAsync(id);
+            var processTemplateTask = await _context.ProcessTemplatesTasks
+                .FirstOrDefaultAsync(t => t.Id == id);
+
             if (processTemplateTask == null)
             {
                 return NotFound();
             }
-            return View(processTemplateTask);
+
+            var vm = new EditProcessTemplateTaskViewModel
+            {
+                Id = processTemplateTask.Id,
+                ProcessTemplateId = processTemplateTask.ProcessTemplateId,
+                Title = processTemplateTask.Title,
+                Description = processTemplateTask.Description,
+                ApproverTeam = processTemplateTask.ApproverTeam,
+                ApprovalRequired = processTemplateTask.ApprovalRequired,
+                SortOrder = processTemplateTask.SortOrder,
+                DefaultOwnerRole = processTemplateTask.DefaultOwnerRole,
+                ApproverTeamOptions = await BuildTeamOptions(processTemplateTask.ApproverTeam)
+            };
+
+            return View(vm);
         }
 
         // POST: ProcessTemplateTasks/Edit/5
@@ -124,35 +140,48 @@ namespace VendorProcessManagerV1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,TemplateID,TaskId,Title,Description,ApproverId,ApproverTeam,ApprovalRequired,SortOrder,DefaultOwnerRole")] ProcessTemplateTask processTemplateTask)
+        public async Task<IActionResult> Edit(
+            Guid id, EditProcessTemplateTaskViewModel vm)
+                           
         {
-            if (id != processTemplateTask.Id)
+            if (id != vm.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(processTemplateTask);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProcessTemplateTaskExists(processTemplateTask.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                vm.ApproverTeamOptions = await BuildTeamOptions(vm.ApproverTeam);
+                return View(vm);
             }
-            return View(processTemplateTask);
-        }
+             
+            var task = await _context.ProcessTemplatesTasks.FindAsync(id);
+            if (task == null)
+                return NotFound();
+
+            task.Title = vm.Title;
+            task.Description = vm.Description;
+            task.ApproverTeam  = vm.ApproverTeam;
+            task.ApprovalRequired = vm.ApprovalRequired;
+            task.SortOrder = vm.SortOrder;
+            task.DefaultOwnerRole = vm.DefaultOwnerRole;
+
+            try
+            {
+                _context.Update(task);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.ProcessTemplatesTasks.Any(t => t.Id == vm.Id))
+                    return NotFound();
+                throw;
+            }
+            
+            return RedirectToAction("Details", "ProcessTemplates",
+                new { id = vm.ProcessTemplateId });
+}
+
 
         // GET: ProcessTemplateTasks/Delete/5
         public async Task<IActionResult> Delete(Guid? id)

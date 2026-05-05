@@ -196,8 +196,8 @@
                            class="btn btn-sm btn-outline-danger">
                            Delete
                        </a>
-                    </div>
-                </div>
+                    </div>                    
+                </div>               
                 }
             }
             else
@@ -214,4 +214,13 @@ else
 {
     <p class="text-muted">No tasks added yet.</p>
 }
+<div id="mermaid-view">
+    @await Html.PartialAsync(
+        "_MermaidDiagram",
+        ViewBag.MermaidDiagram as string)
+</div>
 <a asp-action="Index" class="btn btn-secondary mt-3">Back to list</a> 
+<pre style="font-size:11px; background:#f1efe8; padding:1rem;
+            border-radius:8px; overflow:auto;">
+        @ViewBag.MermaidDiagram
+        </pre>

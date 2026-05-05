@@ -48,6 +48,7 @@ namespace VendorProcessManagerV1.Controllers
                 .Include(t => t.Creator)
                 .Include(t => t.Tasks)
                     .ThenInclude(task => task.Transitions)
+                        .ThenInclude(tr => tr.ToProcessTemplateTask)
                 .FirstOrDefaultAsync(t => t.Id == id);
 
             if (processTemplate == null)
@@ -56,8 +57,10 @@ namespace VendorProcessManagerV1.Controllers
             }
 
             //adding mermaid flowchart capability. Uses MermaidDotNet
-            var diagram = BuildTemplateDiagram(processTemplate);
-            ViewBag.MermaidDiagram = diagram;
+            //var diagram = BuildTemplateDiagram(processTemplate);
+            //ViewBag.MermaidDiagram = diagram;
+            ViewBag.MermaidDiagram = BuildTemplateDiagram(processTemplate);
+            ViewBag.CurrentUserTeam = (await _userManager.GetUserAsync(User))?.Team;
 
             return View(processTemplate);
         }
@@ -76,7 +79,7 @@ namespace VendorProcessManagerV1.Controllers
 
             var vm = new CreateProcessTemplateViewModel
             {
-                CreateDate = DateTime.UtcNow, //check the default timezone later
+                CreateDate = DateTime.Now, //check the default timezone later
                 IsActive = true,
                 CreatorName = currentUser.FirstName + " " + currentUser.LastName
 
@@ -241,6 +244,7 @@ namespace VendorProcessManagerV1.Controllers
         {
             var sb = new System.Text.StringBuilder();
             sb.AppendLine("flowchart TD");
+            sb.AppendLine();
 
             var sortedTasks = template.Tasks.OrderBy(t => t.SortOrder).ToList();
 
@@ -254,28 +258,32 @@ namespace VendorProcessManagerV1.Controllers
             foreach (var task in sortedTasks)
             {
                 var taskRef = "T" + task.Id.ToString("N").Substring(0, 8);
-                var safeTitle = task.Title.Replace("\"", "'")
-                                            .Replace("\n", " ");
+                var safeTitle = task.Title
+                    .Replace("\"", "'")
+                    .Replace("\n", " ")
+                    .Trim();
 
                 sb.AppendLine($"    {taskRef}[\"{task.SortOrder}.{safeTitle}\"]");
                 
                     if (task.Transitions != null && task.Transitions.Any())
                     {
-                        foreach(var tr in task.Transitions.OrderBy(t => task.SortOrder))
+                        foreach(var tr in task.Transitions.OrderBy(t => t.SortOrder))
                         {
-                            var safeLabel = tr.DisplayLabel.Replace("\"", "'");
+                            var safeLabel = tr.DisplayLabel
+                                .Replace("\"", "'")
+                                .Trim();
 
                             if (tr.ToProcessTemplateTaskId.HasValue)
                             {
                                 var targetRef = "T" + tr.ToProcessTemplateTaskId.Value
                                     .ToString("N").Substring(0, 8);
                                 sb.AppendLine(
-                                    $"  {taskRef} -->|\"{safeLabel}\"| {targetRef}");
+                                    $"    {taskRef} -->|\"{safeLabel}\"| {targetRef}");
                             }
                             else
                             {
                                 sb.AppendLine(
-                                    $"  {taskRef} -->|\"{safeLabel}\"| " +
+                                    $"    {taskRef} -->|\"{safeLabel}\"| " +
                                     $"END([End of process])");
                             }
                         }
@@ -286,6 +294,7 @@ namespace VendorProcessManagerV1.Controllers
                             .SkipWhile(t => t.Id != task.Id)
                             .Skip(1)
                             .FirstOrDefault(); 
+
                         if (next != null)
                         {
                             var nextRef = "T" + next.Id.ToString("N").Substring(0, 8);
