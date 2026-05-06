@@ -219,7 +219,7 @@ else
     <button class="btn btn-sm btn-outline-primary view-btn" 
     onclick="showView('diagram', this)">Flow diagram</button>
 </div>
- <div id="mermaid-view" style="display:none;">
+ <div id="mermaid-view">
      <div id="mermaid-container" 
         style="background:#fff;border:0.5px; min-height:200px;">
     <p class="text-muted small">
@@ -262,14 +262,20 @@ else
         }); 
 
         
-        const diagram = `@Html.Raw(
-            ((string)ViewBag.MermaidDiagram ?? "flowchart TD\n    A([No data])")
-            .Replace("\r\n", "\n") 
-            .Replace("`", "'"))`; 
+        const diagram =@Html.Raw(System.Text.Json.JsonSerializer.Serialize(
+    ViewBag.MermaidDiagram ?? "flowchart TD\nA[No data]"));
+
+    
+
+        await mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base', 
+            flowchart: { curve: 'basis'}
+        });
 
         window._renderMermaid = async function () {
             const container = document.getElementById('mermaid-container'); 
-            if (container.dataset.rendered) return; 
+                         
             try {
                 const { svg } = await mermaid.render('flow-svg', diagram); 
                 container.innerHTML = svg; 
@@ -282,7 +288,14 @@ else
         };
         
     </script>
-    <script> 
+    <script>
+        function showView(){
+            if (window._renderMermaid) {
+                window._renderMermaid(); 
+            }
+        }
+    </script>
+   @*  <script> 
         function showView(view, btn){
             document.querySelectorAll('.view-btn')
                 .forEach(b => b.classList.remove('active'));
@@ -300,7 +313,7 @@ else
                 if (window._renderMermaid) window._renderMermaid();
             }
         }
-    </script>
+    </script> *@
 
 }
     
