@@ -1,57 +1,99 @@
-﻿@model VendorProcessManagerV1.Models.ProcessTemplateTransition
+﻿@model VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Transition";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Edit</h1>
 
-<h4>ProcessTemplateTransition</h4>
+<h4>Edit Transition for task: <em>@Model.TaskTitle</em></h4>
+<p class="test-muted"> Template: @Model.TemplateName</p>
+@if (Model.HasExistingDefault)
+{
+    <div class="alert alert-warning">
+        This task already has a default transition 
+        (<strong>@Model.ExistingDefaultLabel</strong>).
+        Setting this as default will replace it.
+    </div>
+}
+
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />           
-            <div class="form-group">
-                <label asp-for="FromProcessTemplateTaskId" class="control-label"></label>
-                <input asp-for="FromProcessTemplateTaskId" class="form-control" />
-                <span asp-validation-for="FromProcessTemplateTaskId" class="text-danger"></span>
+            
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="FromProcessTemplateTaskId" />
+            <input type="hidden" asp-for="TaskTitle" />
+            <input type="hidden" asp-for="TemplateName" />
+            <input type="hidden" asp-for="HasExistingDefault" />
+            <input type="hidden" asp-for="ExistingDefaultLabel" />
+
+            <div class = "form-group mb-3">
+                <label asp-for="DisplayLabel" class="control-label">
+                    Transition label
+                </label>
+                <input asp-for="DisplayLabel"
+                        class="form-control"
+                        placeholder="e.g. Approved, Rejected, Escalate" />
+                 <span asp-validation-for="DisplayLabel" 
+                 class="form-control"
+                 placeholder="e.g. Approved, Rejected, Escalate" />
+                 <span asp-validation-for="DisplayLabel" class="text-danger">
+                 </span>
             </div>
-            <div class="form-group">
-                <label asp-for="ToProcessTemplateTaskId" class="control-label"></label>
-                <input asp-for="ToProcessTemplateTaskId" class="form-control" />
-                <span asp-validation-for="ToProcessTemplateTaskId" class="text-danger"></span>
+            
+            <div class="form-group mb-3">
+                <label asp-for= "ToProcessTemplateTaskId" class="control-label">
+                    Goes to task
+                </label>
+                <select asp-for="ToProcessTemplateTaskId"
+                        asp-items="Model.TargetTaskOptions"
+                        class="form-control">
+                    <option value="">--End or process--</option>
+                </select>
+                <span asp-validation-for="SortOrder" class="text-danger">
+                </span>
+
             </div>
-            <div class="form-group">
-                <label asp-for="DisplayLabel" class="control-label"></label>
-                <input asp-for="DisplayLabel" class="form-control" />
-                <span asp-validation-for="DisplayLabel" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SortOrder" class="control-label"></label>
-                <input asp-for="SortOrder" class="form-control" />
-                <span asp-validation-for="SortOrder" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConditionType" class="control-label"></label>
-                <input asp-for="ConditionType" class="form-control" />
-                <span asp-validation-for="ConditionType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConditionExpression" class="control-label"></label>
+
+            <div class="form-group mb-3">
+                <label asp-for="ConditionExpression" class="control-label">
+                    Condition expression
+                </label>
                 <input asp-for="ConditionExpression" class="form-control" />
-                <span asp-validation-for="ConditionExpression" class="text-danger"></span>
+                <small class="form-text text-muted">
+                    Transition Condition
+                </small>
+                <span asp-validation-for="ConditionExpression" 
+                        class="text-danger"></span>
             </div>
+
+            <div class="form-group mb-3">
+                <input asp-for="IsDefault"
+                class="form-check-input"
+                type="checkbox" />
+
+                <label asp-for="IsDefault" class="form-check-label">
+                    Default transition
+                    <small class="text-muted">
+                        (take if no condition met)
+                    </small>
+                </label>               
+            </div>
+
             <div class="form-group">
-                <label asp-for="IsDefault" class="control-label"></label>
-                <input asp-for="IsDefault" class="form-control" />
-                <span asp-validation-for="IsDefault" class="text-danger"></span>
+                <input type="submit" 
+                       value="Save changes"
+                       class="btn btn-primary" />
+                <a asp-action="Details"
+                    asp-controller="ProcessTemplates"
+                    asp-route-id="@Model.ProcessTemplateId"
+                    class= "btn btn-secondary">Cancel</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
+           
         </form>
     </div>
 </div>

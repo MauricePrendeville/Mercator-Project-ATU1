@@ -133,17 +133,50 @@ namespace VendorProcessManagerV1.Controllers
         // GET: ProcessTemplateTransitions/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
         {
-            if (id == null)
+            var transition = await _context.ProcessTemplateTransitions
+                .Include(t => t.FromProcessTemplateTask)
+                    .ThenInclude(t => t.ProcessTemplate)
+                .FirstOrDefaultAsync(t => t.Id == id);
+            
+            if (transition == null)
             {
                 return NotFound();
             }
 
-            var processTemplateTransition = await _context.ProcessTemplateTransitions.FindAsync(id);
-            if (processTemplateTransition == null)
+            //cehceks that there is an existing default transition
+            var existingDefault = await _context.ProcessTemplateTransitions
+                .FirstOrDefaultAsync(t =>
+                    t.FromProcessTemplateTaskId ==
+                        transition.FromProcessTemplateTaskId &&
+                        t.IsDefault &&
+                        t.Id != id);
+
+            var vm = new EditProcessTemplateTransitionViewModel
             {
-                return NotFound();
-            }
-            return View(processTemplateTransition);
+                Id = transition.Id,
+                FromProcessTemplateTaskId = transition.FromProcessTemplateTaskId,
+                ProcessTemplateId = transition.FromProcessTemplateTask
+                                        .ProcessTemplateId,
+                TaskTitle = transition.FromProcessTemplateTask.Title,
+                TemplateName = transition.FromProcessTemplateTask
+                                    .ProcessTemplate.Name,
+                DisplayLabel = transition.DisplayLabel,
+                ToProcessTemplateTaskId = transition.ToProcessTemplateTaskId,
+                SortOrder = transition.SortOrder,
+                ConditionType = transition.ConditionType,
+                ConditionExpression = transition.ConditionExpression,
+                IsDefault = transition.IsDefault,
+                HasExistingDefault = existingDefault != null,
+                ExistingDefaultLabel = existingDefault?.DisplayLabel,
+                TargetTaskOptions = await BuildTargetTaskOptions(
+                    transition.FromProcessTemplateTask
+                    .ProcessTemplateId,
+                    transition.FromProcessTemplateTaskId,
+                    transition.ToProcessTemplateTaskId),
+                ConditionTypeOptions = BuildConditionTypeOptions(
+                    transition.ConditionType)
+            };
+            return View(vm);             
         }
 
         // POST: ProcessTemplateTransitions/Edit/5
@@ -151,34 +184,59 @@ namespace VendorProcessManagerV1.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,ProcessTemplateId,FromProcessTemplateTaskId,ToProcessTemplateTaskId,DisplayLabel,SortOrder,ConditionType,ConditionExpression,IsDefault")] ProcessTemplateTransition processTemplateTransition)
+        public async Task<IActionResult> Edit(
+            Guid id, EditProcessTemplateTransitionViewModel vm)
         {
-            if (id != processTemplateTransition.Id)
+            if (id != vm.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(processTemplateTransition);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProcessTemplateTransitionExists(processTemplateTransition.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                vm.TargetTaskOptions = await BuildTargetTaskOptions(
+                                            vm.ProcessTemplateId,
+                                            vm.FromProcessTemplateTaskId,
+                                            vm.ToProcessTemplateTaskId);
+
+                vm.ConditionTypeOptions = BuildConditionTypeOptions(vm.ConditionType);
+                return View(vm);
             }
-            return View(processTemplateTransition);
+
+            var transition = await _context.ProcessTemplateTransitions.FindAsync(id);
+            if (transition == null)
+                return NotFound();
+
+            if(vm.IsDefault && !transition.IsDefault) 
+            {
+                var existingDefault = await _context.ProcessTemplateTransitions
+                    .FirstOrDefaultAsync(t =>
+                        t.FromProcessTemplateTaskId ==
+                            vm.FromProcessTemplateTaskId &&
+                            t.IsDefault &&
+                            t.Id != id);
+
+                if(existingDefault != null) 
+                {
+                    existingDefault.IsDefault = false;
+                    _context.Update(existingDefault);
+                }
+            }
+
+
+
+            transition.DisplayLabel = vm.DisplayLabel;
+            transition.ToProcessTemplateTaskId = vm.ToProcessTemplateTaskId;
+            transition.SortOrder = vm.SortOrder;
+            transition.ConditionType = vm.ConditionType;
+            transition.ConditionExpression = vm.ConditionExpression;
+            transition.IsDefault = vm.IsDefault;
+
+            _context.Update(transition);
+            await _context.SaveChangesAsync();
+            
+            return RedirectToAction("Details", "ProcessTemplates", 
+                new { id = vm.ProcessTemplateId });             
         }
 
         // GET: ProcessTemplateTransitions/Delete/5
