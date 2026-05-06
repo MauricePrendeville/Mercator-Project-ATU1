@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using MermaidDotNet;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VendorProcessManagerV1.Data;
 using VendorProcessManagerV1.Models;
+using VendorProcessManagerV1.Services;
 using VendorProcessManagerV1.ViewModels;
 
 namespace VendorProcessManagerV1.Controllers
@@ -16,12 +19,15 @@ namespace VendorProcessManagerV1.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IProcessInstanceService _processInstanceService;
 
-        public ProcessTemplatesController(ApplicationDbContext context, 
-                UserManager<AppUser> userManager)
+        public ProcessTemplatesController(ApplicationDbContext context,
+                UserManager<AppUser> userManager,
+                IProcessInstanceService processInstanceService)
         {
             _context = context;
             _userManager = userManager;
+            _processInstanceService = processInstanceService;
         }
 
         // GET: ProcessTemplates
@@ -38,16 +44,23 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processTemplate = await _context.ProcessTemplates 
+            var processTemplate = await _context.ProcessTemplates
                 .Include(t => t.Creator)
                 .Include(t => t.Tasks)
                     .ThenInclude(task => task.Transitions)
+                        .ThenInclude(tr => tr.ToProcessTemplateTask)
                 .FirstOrDefaultAsync(t => t.Id == id);
 
             if (processTemplate == null)
             {
                 return NotFound();
             }
+
+            //adding mermaid flowchart capability. Uses MermaidDotNet
+            //var diagram = BuildTemplateDiagram(processTemplate);
+            //ViewBag.MermaidDiagram = diagram;
+            ViewBag.MermaidDiagram = BuildTemplateDiagram(processTemplate);
+            ViewBag.CurrentUserTeam = (await _userManager.GetUserAsync(User))?.Team;
 
             return View(processTemplate);
         }
@@ -66,10 +79,10 @@ namespace VendorProcessManagerV1.Controllers
 
             var vm = new CreateProcessTemplateViewModel
             {
-                CreateDate = DateTime.UtcNow, //check the default timezone later
+                CreateDate = DateTime.Now, //check the default timezone later
                 IsActive = true,
                 CreatorName = currentUser.FirstName + " " + currentUser.LastName
-                
+
                 /*
                 CreatorOptions = new SelectList(
                     await _context.Users
@@ -106,20 +119,20 @@ namespace VendorProcessManagerV1.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create (
+        public async Task<IActionResult> Create(
             CreateProcessTemplateViewModel vm)
         {
             if (!ModelState.IsValid)
             {
                 //await PopulateCreatorDropdown(vm);
-                    return View(vm);
+                return View(vm);
             }
 
             var currentUser = await _userManager.GetUserAsync(User);
             if (currentUser == null)
                 return Unauthorized();
 
-            var processTemplate = new ProcessTemplate  
+            var processTemplate = new ProcessTemplate
             {
                 Id = Guid.NewGuid(),
                 Name = vm.Name,
@@ -136,7 +149,7 @@ namespace VendorProcessManagerV1.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-       
+
 
         // GET: ProcessTemplates/Edit/5
         public async Task<IActionResult> Edit(Guid? id)
@@ -227,6 +240,77 @@ namespace VendorProcessManagerV1.Controllers
             return _context.ProcessTemplates.Any(e => e.Id == id);
         }
 
+        private string BuildTemplateDiagram(ProcessTemplate template)
+        {
+            var sb = new System.Text.StringBuilder();
+            sb.AppendLine("flowchart TD");
+            sb.AppendLine();
+
+            var sortedTasks = template.Tasks.OrderBy(t => t.SortOrder).ToList();
+
+            var firstTask = sortedTasks.FirstOrDefault();
+            if (firstTask != null)
+            {
+                var firstRef = "T" + firstTask.Id.ToString("N").Substring(0, 8);
+                sb.AppendLine($"    START([Start]) --> {firstRef}");
+            }
+
+            foreach (var task in sortedTasks)
+            {
+                var taskRef = "T" + task.Id.ToString("N").Substring(0, 8);
+                var safeTitle = task.Title
+                    .Replace("\"", "'")
+                    .Replace("\n", " ")
+                    .Trim();
+
+                sb.AppendLine($"    {taskRef}[\"{task.SortOrder}.{safeTitle}\"]");
+                
+                    if (task.Transitions != null && task.Transitions.Any())
+                    {
+                        foreach(var tr in task.Transitions.OrderBy(t => t.SortOrder))
+                        {
+                            var safeLabel = tr.DisplayLabel
+                                .Replace("\"", "'")
+                                .Trim();
+
+                            if (tr.ToProcessTemplateTaskId.HasValue)
+                            {
+                                var targetRef = "T" + tr.ToProcessTemplateTaskId.Value
+                                    .ToString("N").Substring(0, 8);
+                                sb.AppendLine(
+                                    $"    {taskRef} -->|\"{safeLabel}\"| {targetRef}");
+                            }
+                            else
+                            {
+                                sb.AppendLine(
+                                    $"    {taskRef} -->|\"{safeLabel}\"| " +
+                                    $"END([End of process])");
+                            }
+                        }
+                    }
+                    else
+                    { 
+                        var next = sortedTasks
+                            .SkipWhile(t => t.Id != task.Id)
+                            .Skip(1)
+                            .FirstOrDefault(); 
+
+                        if (next != null)
+                        {
+                            var nextRef = "T" + next.Id.ToString("N").Substring(0, 8);
+                            sb.AppendLine($"    {taskRef} --> {nextRef}");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"    {taskRef} --> COMPLETE([Complete])");
+                        }
+
+                    }
+
+            }
+            return sb.ToString();
+        }
+
         //private async Task PopulateCreatorDropdown(CreateProcessTemplateViewModel vm)
         //{
         //    vm.CreatorOptions = new SelectList(
@@ -244,5 +328,65 @@ namespace VendorProcessManagerV1.Controllers
 
         //    );
         //}
+
+       /* //GET: ProcessTemplates/StartInstance/templateId
+        public async Task<IActionResult> StartInstance(Guid id)
+        {
+            var template = await _context.ProcessTemplates
+                .Include(t => t.Tasks)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (template == null)
+                return NotFound(); 
+
+            if (!template.Tasks.Any())
+            {
+                TempData["Error"] = "Cannot start an instance this template has no tasks.";
+                return RedirectToAction("Details", new { id });
+            }
+
+            var vm = new StartProcessInstanceViewModel
+            {
+                ProcessTemplateId = template.Id,
+                TemplateName = template.Name,
+                TaskCount = template.Tasks.Count,
+                SuggestedName = template.Name + "-" +
+                                DateTime.Now.ToString("dd MM yyyy")
+            };
+
+            return View(vm);
+        }
+
+        //POST ProcessTemplates/StartInstance
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> StartInstance(StartProcessInstanceViewModel vm)
+        {
+            if (!ModelState.IsValid)
+                return View(vm);
+
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+                return Unauthorized();
+
+            try
+            {
+                var instance = await _processInstanceService.StartInstanceAsync(
+                    vm.ProcessTemplateId,
+                    currentUser.Id);
+
+                TempData["Success"] = "Process instance started successfully.";
+
+                //redirect
+                return RedirectToAction("Details", "ProcessInstances",
+                    new { id = instance.Id });
+            }
+
+            catch (InvalidOperationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(vm);
+            }
+        }*/
     }
 }

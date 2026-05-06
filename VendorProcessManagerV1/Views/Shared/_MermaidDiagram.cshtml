@@ -1,0 +1,53 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model string 
+
+<div id="mermaid-container"
+    style="background:#fff; border:0.5px solid #d3d1c7; 
+        border-radius:12px; padding:1.5rem; min-height:200px;">
+    <p class="text-muted small">Loading diagram...</p>
+</div>
+
+@* @section Scripts {
+    <script type="module">
+        import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+    
+        const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+        await document.fonts.ready; 
+
+        mermaid.initialize({
+            startOnLoad: false, 
+            theme: 'base', 
+            fontFamily: '"Segoe UI", sans-serif', 
+            themeVariables: {
+                darkMode: dark, 
+                fontSize: '13px',
+                lineColor: dark ? '#9c9a92' : '#73726c', 
+                textColor: dark ? '#c2c0b6' : '#3d3d3a', 
+                primaryColor: dark ? '#2a2a28' : '#f1efe8', 
+                primaryBorderColor: dark ? '#5f5e5a' : '#b4b2a9', 
+                primaryTextColor: dark ? '#c2c0b6' : '#3d3d3a'
+            }, 
+            flowchart: {curve: 'basis', padding: 20}
+        }); 
+
+        const diagram = `@Html.Raw(Model)`; 
+
+        window._renderMermaid = async function () {
+            const container = document.getElementById('mermaid-container'); 
+            if (container.dataset.rendered) return; 
+            try {
+                const { svg } = await mermaid.render('flow-svg', diagram); 
+                container.innerHTML = svg; 
+                container.dataset.rendered = '1'; 
+            } catch (e) {
+                container.innerHTML = 
+                    '<p style="color:#a32d2d;font-size:13px">' + 
+                    'Could not render: ' + e.message + '</p>';
+            }
+        };
+        window._renderMermaid();
+    </script>
+} *@
+

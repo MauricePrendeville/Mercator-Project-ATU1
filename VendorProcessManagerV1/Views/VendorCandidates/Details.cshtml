@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h2>@Model.Name</h2>
 
 <div>
     <h4>VendorCandidate</h4>
@@ -48,6 +48,76 @@
             @Html.DisplayFor(model => model.PaymentTerms)
         </dd>
     </dl>
+    <hr />
+    <div class="d-flex justify-content-between align-items-center mb-2">
+        <h4>ProcessInstances</h4>
+
+        @if (Model.ProcessInstances.Any())
+        {
+            <span class="text-muted">
+                @Model.ProcessInstances.Count(i => 
+                    i.Status == ProcessInstanceStatus.InProgress) active, 
+                @Model.ProcessInstances.Count(i => 
+                    i.Status == ProcessInstanceStatus.Completed) completed
+            </span>
+        }
+    </div>
+
+    @if (Model.ProcessInstances != null && Model.ProcessInstances.Any())
+    {
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Instance Name</th>
+                    <th>Template</th>
+                    <th>Started By</th>
+                    <th>Created</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+        
+            <tbody>
+                @foreach (var instance in Model.ProcessInstances
+                                .OrderByDescending(i => i.CreatedDate))
+                {
+                    <tr>
+                        <td>@instance.InstanceName</td>
+                        <td>@instance.ProcessTemplate?.Name</td>
+                        <td>
+                            @instance.CreatedDate.ToShortDateString()</td>
+                        <td>
+                            <span class="badge
+                                @(instance.Status == ProcessInstanceStatus.NotStarted 
+                                    ? "bg-secondary" :
+                                instance.Status == ProcessInstanceStatus.InProgress
+                                    ? "bg-secondary" :
+                                instance.Status == ProcessInstanceStatus.Completed 
+                                    ? "bg-secondary" :
+                                      "bg-danger")">
+                                @instance.Status
+                              </span>  
+                        </td>
+                        <td>
+                            <a asp-controller="ProcessInstances"
+                                asp-action="Details"
+                                asp-route-id="@instance.Id"
+                                class="btn btn-sm btn-outline-primary">
+                                View
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            No process instances for this vendor yet. 
+        </div>
+    }
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |

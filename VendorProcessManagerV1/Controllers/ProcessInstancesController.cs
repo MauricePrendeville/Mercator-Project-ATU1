@@ -1,28 +1,71 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using VendorProcessManagerV1.Data;
 using VendorProcessManagerV1.Models;
+using VendorProcessManagerV1.Services;
+using VendorProcessManagerV1.ViewModels;
 
 namespace VendorProcessManagerV1.Controllers
 {
     public class ProcessInstancesController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IProcessInstanceService _processInstanceService;
 
-        public ProcessInstancesController(ApplicationDbContext context)
+        public ProcessInstancesController(ApplicationDbContext context,
+            UserManager<AppUser> userManager,
+            IProcessInstanceService processInstanceService)
         {
             _context = context;
+            _userManager = userManager;
+            _processInstanceService = processInstanceService;
         }
 
         // GET: ProcessInstances
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string sortOrder)
         {
-            return View(await _context.ProcessInstances.ToListAsync());
+            ViewData["CurrentSort"] = sortOrder;
+
+            ViewData["InstanceNameSort"] = sortOrder == "name_asc" ? "name_desc" : "name_asc";
+            ViewData["TemplateSort"] = sortOrder == "template_asc" ? "template_desc" : "template_asc";
+            ViewData["VendorSort"] = sortOrder == "vendor_asc" ? "vendor_desc" : "vendor_asc";
+            ViewData["DateSort"] = sortOrder == "date_asc" ? "date_desc" : "date_asc";
+            ViewData["InitiatorSort"] = sortOrder == "initiator_asc" ? "initiator_desc" : "initiator_asc";
+            ViewData["StatusSort"] = sortOrder == "status_asc" ? "status_desc" : "status_asc";
+
+            var instances = _context.ProcessInstances
+                .Include(i => i.ProcessTemplate)
+                .Include(i => i.InitiatedBy)
+                .Include(i => i.VendorCandidate)
+                .OrderByDescending(i => i.CreatedDate)
+                .AsQueryable();
+
+            instances = sortOrder switch
+            {
+                "name_asc" => instances.OrderBy(p => p.InstanceName),
+                "name_desc" => instances.OrderByDescending(p => p.InstanceName),
+                "template_asc" => instances.OrderBy(p => p.ProcessTemplate.Name),
+                "template_desc" => instances.OrderByDescending(p => p.ProcessTemplate.Name),
+                "vendor_asc" => instances.OrderBy(p => p.VendorCandidate.Name),
+                "vendor_desc" => instances.OrderByDescending(p => p.VendorCandidate.Name),
+                "date_asc" => instances.OrderBy(p => p.CreatedDate),
+                "date_desc" => instances.OrderByDescending(p => p.CreatedDate),
+                "initiator_asc" => instances.OrderBy(p => p.InitiatedBy.LastName),
+                "initiator_desc" => instances.OrderByDescending(p => p.InitiatedBy.LastName),
+                "status_asc" => instances.OrderBy(p => p.Status),
+                "status_desc" => instances.OrderByDescending(p => p.Status),
+                _ => instances.OrderBy(p => p.InstanceName)
+            };
+            
+            return View(await instances.ToListAsync());
         }
 
         // GET: ProcessInstances/Details/5
@@ -34,7 +77,16 @@ namespace VendorProcessManagerV1.Controllers
             }
 
             var processInstance = await _context.ProcessInstances
+                .Include(i => i.ProcessTemplate)
+                .Include(i => i.VendorCandidate)
+                .Include(i => i.InitiatedBy)
+                .Include(i => i.Tasks.OrderBy(t => t.SortOrder))
+                    .ThenInclude(t =>t.Owner)
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            var currentUser = await _userManager.GetUserAsync(User);
+            ViewBag.CurrentUserTeam = currentUser?.Team; 
+
             if (processInstance == null)
             {
                 return NotFound();
@@ -44,9 +96,30 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessInstances/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create(Guid id)
         {
-            return View();
+            var template = await _context.ProcessTemplates
+                .Include(t => t.Tasks)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (template == null)
+                return NotFound();
+
+            if (!template.Tasks.Any())
+            {
+                TempData["Error"] = "Cannot start an instance. Template has no tasks";
+                return RedirectToAction("Details", new { id });
+            }
+
+            var vm = new StartProcessInstanceViewModel
+            {
+                ProcessTemplateId = template.Id,
+                TemplateName = template.Name,
+                TaskCount = template.Tasks.Count,
+                InstanceName = template.Name + "-" + DateTime.Now.ToString("dd MMM yyyy")
+            };
+
+            return View(vm);
         }
 
         // POST: ProcessInstances/Create
@@ -74,48 +147,158 @@ namespace VendorProcessManagerV1.Controllers
                 return NotFound();
             }
 
-            var processInstance = await _context.ProcessInstances.FindAsync(id);
+            var processInstance = await _context.ProcessInstances
+                .Include(i => i.ProcessTemplate)
+                .Include(i => i.VendorCandidate)
+                .FirstOrDefaultAsync(i => i.Id == id);
+
             if (processInstance == null)
             {
                 return NotFound();
             }
-            return View(processInstance);
+
+            var vm = new EditProcessInstanceViewModel
+            {
+                Id = processInstance.Id,
+                Name = processInstance.InstanceName,
+                TemplateName = processInstance.ProcessTemplate?.Name,
+                VendorName = processInstance.VendorCandidate?.Name,
+                CreatedDate = processInstance.CreatedDate,
+                StartDate = processInstance.StartDate,
+                TargetEndDate = processInstance.TargetEndDate,
+                ActualEndDate = processInstance.ActualEndDate,
+                Status = processInstance.Status,
+                StatusOptions = BuildStatusOptions(processInstance.Status)
+            }; 
+
+            return View(vm);
         }
 
+        //GET: ProcessTemplates/StartInstance/templateId
+        public async Task<IActionResult> StartInstance(Guid id)
+        {
+            var template = await _context.ProcessTemplates
+                .Include(t => t.Tasks)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (template == null)
+                return NotFound();
+
+            if (!template.Tasks.Any())
+            {
+                TempData["Error"] = "Cannot start an instance this template has no tasks.";
+                return RedirectToAction("Details", new { id });
+            }
+
+            var vm = new StartProcessInstanceViewModel
+            {
+                ProcessTemplateId = template.Id,
+                TemplateName = template.Name,
+                TaskCount = template.Tasks.Count,
+                SuggestedName = template.Name + "-" +
+                                DateTime.Now.ToString("dd MM yyyy"), 
+                VendorCandidateOptions = new SelectList(
+                    await _context.VendorCandidates
+                        .OrderBy(v => v.Name)
+                        .ToListAsync(),
+                    "Id", 
+                    "Name"
+                 )
+            };
+
+            return View(vm);
+        }
+
+        //POST ProcessTemplates/StartInstance
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> StartInstance(StartProcessInstanceViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {   
+                vm.VendorCandidateOptions = new SelectList(
+                    await _context.VendorCandidates
+                    .OrderBy(v => v.Name)
+                    .ToListAsync(), 
+                    "Id", 
+                    "Name"
+                    );
+                return View(vm);
+            }
+
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+                return Unauthorized();
+
+            try
+            {
+                var instance = await _processInstanceService.StartInstanceAsync(
+                    vm.ProcessTemplateId,
+                    vm.InstanceName, 
+                    vm.VendorCandidateId,
+                    currentUser.Id);
+
+                TempData["Success"] = "Process instance started successfully.";
+
+                //redirect
+                return RedirectToAction("Details", 
+                    new { id = instance.Id });
+            }
+
+            catch (InvalidOperationException ex)
+            {
+                ModelState.AddModelError(string.Empty, ex.Message);
+                return View(vm);
+            }
+        }
         // POST: ProcessInstances/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,TemplateId,VendorCandidateId,InitiatedBy,StartDate,TargetEndDate,ActualEndDate,Status")] ProcessInstance processInstance)
+        public async Task<IActionResult> Edit(Guid id, EditProcessInstanceViewModel vm)
         {
-            if (id != processInstance.Id)
+            if (id != vm.Id)
             {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(processInstance);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ProcessInstanceExists(processInstance.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                vm.StatusOptions = BuildStatusOptions(vm.Status);
+                return View(vm); 
             }
-            return View(processInstance);
+
+            var processInstance = await _context.ProcessInstances.FindAsync(id);
+            if (processInstance == null)
+                return NotFound();
+
+            processInstance.StartDate       = vm.StartDate;
+            processInstance.TargetEndDate   = vm.TargetEndDate;
+            processInstance.ActualEndDate   = vm.ActualEndDate;
+            processInstance.Status          = vm.Status;
+
+            if (vm.Status == ProcessInstanceStatus.Completed &&
+                processInstance.ActualEndDate == null)
+                processInstance.ActualEndDate = DateTime.Now; 
+
+            try
+            {
+                _context.Update(processInstance);
+                await _context.SaveChangesAsync();
+            }
+            
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_context.ProcessInstances.Any(i => i.Id == vm.Id))
+                    return NotFound();
+                throw;                
+            }
+            
+            return RedirectToAction(nameof(Index));
+                        
         }
+       
 
         // GET: ProcessInstances/Delete/5
         public async Task<IActionResult> Delete(Guid? id)
@@ -153,6 +336,17 @@ namespace VendorProcessManagerV1.Controllers
         private bool ProcessInstanceExists(Guid id)
         {
             return _context.ProcessInstances.Any(e => e.Id == id);
+        }
+
+        private SelectList BuildStatusOptions(
+            ProcessInstanceStatus? selected = null)
+        {
+            var statuses = Enum.GetValues(typeof(ProcessInstanceStatus))
+                .Cast<ProcessInstanceStatus>()
+                .Select(s => new { Value = (int)s, Text = s.ToString() })
+                .ToList();
+
+            return new SelectList(statuses, "Value", "Text", (int?)selected); 
         }
     }
 }

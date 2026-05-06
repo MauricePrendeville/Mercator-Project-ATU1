@@ -17,7 +17,7 @@ namespace VendorProcessManagerV1.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.6")
+                .HasAnnotation("ProductVersion", "10.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -155,21 +155,6 @@ namespace VendorProcessManagerV1.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ProcessTaskProcessTask", b =>
-                {
-                    b.Property<Guid>("DependsOnId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("SuccessorTasksId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("DependsOnId", "SuccessorTasksId");
-
-                    b.HasIndex("SuccessorTasksId");
-
-                    b.ToTable("ProcessTaskProcessTask");
-                });
-
             modelBuilder.Entity("ProcessTemplateTaskProcessTemplateTask", b =>
                 {
                     b.Property<Guid>("DependsOnId")
@@ -209,11 +194,13 @@ namespace VendorProcessManagerV1.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -339,29 +326,42 @@ namespace VendorProcessManagerV1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("ActualEndDate")
+                    b.Property<DateTime?>("ActualEndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("InitiatedBy")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("StartDate")
+                    b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
+                    b.Property<string>("InitiatedById")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("InstanceName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("TargetEndDate")
+                    b.Property<Guid>("ProcessTemplateId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("TemplateId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("TargetEndDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("VendorCandidateId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("InitiatedById");
+
+                    b.HasIndex("ProcessTemplateId");
+
+                    b.HasIndex("VendorCandidateId");
 
                     b.ToTable("ProcessInstances");
                 });
@@ -372,14 +372,20 @@ namespace VendorProcessManagerV1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<Guid?>("ActivatedByTransitionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("ApprovalRequired")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("ApproveDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("ApproveStatus")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("ApproveStatus")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("Approver")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("ApproverId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ApproverTeam")
                         .HasColumnType("nvarchar(max)");
@@ -387,41 +393,60 @@ namespace VendorProcessManagerV1.Migrations
                     b.Property<DateTime?>("CompletedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid>("Creator")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("CreatorId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsCompleted")
                         .HasColumnType("bit");
 
-                    b.Property<Guid>("Owner")
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("ProcessInstanceId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("RequiresApproval")
-                        .HasColumnType("bit");
+                    b.Property<int>("ProcessTaskStatus")
+                        .HasColumnType("int");
 
-                    b.Property<string>("TaskStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("ProcessTemplateTaskId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Task_Id")
-                        .IsRequired()
+                    b.Property<Guid?>("SelectedTransitionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("SortOrder")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("StartedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("TaskNotes")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("UpdatedDate")
+                    b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ApproverId");
+
+                    b.HasIndex("CreatorId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.HasIndex("ProcessInstanceId");
+
+                    b.HasIndex("ProcessTemplateTaskId");
 
                     b.ToTable("ProcessTasks");
                 });
@@ -456,7 +481,7 @@ namespace VendorProcessManagerV1.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProcessTaskTransition");
+                    b.ToTable("ProcessTaskTransitions");
                 });
 
             modelBuilder.Entity("VendorProcessManagerV1.Models.ProcessTemplate", b =>
@@ -506,11 +531,7 @@ namespace VendorProcessManagerV1.Migrations
                     b.Property<bool>("ApprovalRequired")
                         .HasColumnType("bit");
 
-                    b.Property<string>("ApproverIdId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("ApproverTeam")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DefaultOwnerRole")
@@ -518,7 +539,6 @@ namespace VendorProcessManagerV1.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("ProcessTemplateId")
@@ -533,8 +553,6 @@ namespace VendorProcessManagerV1.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApproverIdId");
-
                     b.HasIndex("ProcessTemplateId");
 
                     b.ToTable("ProcessTemplatesTasks");
@@ -546,8 +564,8 @@ namespace VendorProcessManagerV1.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("ConditionExpression")
-                        .HasColumnType("int");
+                    b.Property<string>("ConditionExpression")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ConditionType")
                         .HasColumnType("nvarchar(max)");
@@ -559,23 +577,24 @@ namespace VendorProcessManagerV1.Migrations
                     b.Property<Guid>("FromProcessTemplateTaskId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool?>("IsDefault")
+                    b.Property<bool>("IsDefault")
                         .HasColumnType("bit");
-
-                    b.Property<Guid>("ProcessTemplateId")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("SortOrder")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("ToProcessTemplateTaskId")
+                    b.Property<Guid?>("ToProcessTemplateTaskId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FromProcessTemplateTaskId");
+                    b.HasIndex("ToProcessTemplateTaskId");
 
-                    b.ToTable("ProcessTemplateTransition");
+                    b.HasIndex("FromProcessTemplateTaskId", "IsDefault")
+                        .IsUnique()
+                        .HasFilter("[IsDefault] =1");
+
+                    b.ToTable("ProcessTemplateTransitions");
                 });
 
             modelBuilder.Entity("VendorProcessManagerV1.Models.TemplateDependency", b =>
@@ -639,7 +658,7 @@ namespace VendorProcessManagerV1.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -648,7 +667,7 @@ namespace VendorProcessManagerV1.Migrations
                     b.HasOne("VendorProcessManagerV1.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -657,7 +676,7 @@ namespace VendorProcessManagerV1.Migrations
                     b.HasOne("VendorProcessManagerV1.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -666,13 +685,13 @@ namespace VendorProcessManagerV1.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VendorProcessManagerV1.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -681,22 +700,7 @@ namespace VendorProcessManagerV1.Migrations
                     b.HasOne("VendorProcessManagerV1.Models.AppUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("ProcessTaskProcessTask", b =>
-                {
-                    b.HasOne("VendorProcessManagerV1.Models.ProcessTask", null)
-                        .WithMany()
-                        .HasForeignKey("DependsOnId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("VendorProcessManagerV1.Models.ProcessTask", null)
-                        .WithMany()
-                        .HasForeignKey("SuccessorTasksId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });
 
@@ -705,7 +709,7 @@ namespace VendorProcessManagerV1.Migrations
                     b.HasOne("VendorProcessManagerV1.Models.ProcessTemplateTask", null)
                         .WithMany()
                         .HasForeignKey("DependsOnId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("VendorProcessManagerV1.Models.ProcessTemplateTask", null)
@@ -715,12 +719,79 @@ namespace VendorProcessManagerV1.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("VendorProcessManagerV1.Models.ProcessInstance", b =>
+                {
+                    b.HasOne("VendorProcessManagerV1.Models.AppUser", "InitiatedBy")
+                        .WithMany()
+                        .HasForeignKey("InitiatedById")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("VendorProcessManagerV1.Models.ProcessTemplate", "ProcessTemplate")
+                        .WithMany()
+                        .HasForeignKey("ProcessTemplateId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("VendorProcessManagerV1.Models.VendorCandidate", "VendorCandidate")
+                        .WithMany("ProcessInstances")
+                        .HasForeignKey("VendorCandidateId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("InitiatedBy");
+
+                    b.Navigation("ProcessTemplate");
+
+                    b.Navigation("VendorCandidate");
+                });
+
+            modelBuilder.Entity("VendorProcessManagerV1.Models.ProcessTask", b =>
+                {
+                    b.HasOne("VendorProcessManagerV1.Models.AppUser", "Approver")
+                        .WithMany()
+                        .HasForeignKey("ApproverId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("VendorProcessManagerV1.Models.AppUser", "Creator")
+                        .WithMany()
+                        .HasForeignKey("CreatorId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("VendorProcessManagerV1.Models.AppUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("VendorProcessManagerV1.Models.ProcessInstance", "ProcessInstance")
+                        .WithMany("Tasks")
+                        .HasForeignKey("ProcessInstanceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("VendorProcessManagerV1.Models.ProcessTemplateTask", "ProcessTemplateTask")
+                        .WithMany()
+                        .HasForeignKey("ProcessTemplateTaskId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Approver");
+
+                    b.Navigation("Creator");
+
+                    b.Navigation("Owner");
+
+                    b.Navigation("ProcessInstance");
+
+                    b.Navigation("ProcessTemplateTask");
+                });
+
             modelBuilder.Entity("VendorProcessManagerV1.Models.ProcessTemplate", b =>
                 {
                     b.HasOne("VendorProcessManagerV1.Models.AppUser", "Creator")
                         .WithMany()
                         .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Creator");
@@ -728,17 +799,11 @@ namespace VendorProcessManagerV1.Migrations
 
             modelBuilder.Entity("VendorProcessManagerV1.Models.ProcessTemplateTask", b =>
                 {
-                    b.HasOne("VendorProcessManagerV1.Models.AppUser", "ApproverId")
-                        .WithMany()
-                        .HasForeignKey("ApproverIdId");
-
                     b.HasOne("VendorProcessManagerV1.Models.ProcessTemplate", "ProcessTemplate")
                         .WithMany("Tasks")
                         .HasForeignKey("ProcessTemplateId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ApproverId");
 
                     b.Navigation("ProcessTemplate");
                 });
@@ -751,7 +816,19 @@ namespace VendorProcessManagerV1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("VendorProcessManagerV1.Models.ProcessTemplateTask", "ToProcessTemplateTask")
+                        .WithMany()
+                        .HasForeignKey("ToProcessTemplateTaskId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
                     b.Navigation("FromProcessTemplateTask");
+
+                    b.Navigation("ToProcessTemplateTask");
+                });
+
+            modelBuilder.Entity("VendorProcessManagerV1.Models.ProcessInstance", b =>
+                {
+                    b.Navigation("Tasks");
                 });
 
             modelBuilder.Entity("VendorProcessManagerV1.Models.ProcessTemplate", b =>
@@ -762,6 +839,11 @@ namespace VendorProcessManagerV1.Migrations
             modelBuilder.Entity("VendorProcessManagerV1.Models.ProcessTemplateTask", b =>
                 {
                     b.Navigation("Transitions");
+                });
+
+            modelBuilder.Entity("VendorProcessManagerV1.Models.VendorCandidate", b =>
+                {
+                    b.Navigation("ProcessInstances");
                 });
 #pragma warning restore 612, 618
         }
