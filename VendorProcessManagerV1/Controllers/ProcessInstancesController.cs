@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using VendorProcessManagerV1.Data;
+using VendorProcessManagerV1.DTO;
 using VendorProcessManagerV1.Models;
 using VendorProcessManagerV1.Services;
 using VendorProcessManagerV1.ViewModels;
@@ -75,24 +76,31 @@ namespace VendorProcessManagerV1.Controllers
             {
                 return NotFound();
             }
+                       
 
             var processInstance = await _context.ProcessInstances
                 .Include(i => i.ProcessTemplate)
                 .Include(i => i.VendorCandidate)
                 .Include(i => i.InitiatedBy)
                 .Include(i => i.Tasks.OrderBy(t => t.SortOrder))
-                    .ThenInclude(t =>t.Owner)
+                    .ThenInclude(t =>t.Owner)                
                 .FirstOrDefaultAsync(m => m.Id == id);
 
             var currentUser = await _userManager.GetUserAsync(User);
-            ViewBag.CurrentUserTeam = currentUser?.Team; 
+            ViewBag.CurrentUserTeam = currentUser?.Team;
 
             if (processInstance == null)
             {
                 return NotFound();
             }
 
-            return View(processInstance);
+            var vm = new DetailsProcessInstanceViewModel
+            {
+                ProcessInstance = processInstance,
+                GanttTasks = BuildInstanceGannt(processInstance)
+            };
+                        
+            return View(vm);
         }
 
         // GET: ProcessInstances/Create
@@ -347,6 +355,52 @@ namespace VendorProcessManagerV1.Controllers
                 .ToList();
 
             return new SelectList(statuses, "Value", "Text", (int?)selected); 
+        }
+
+        private List<GanttDTO> BuildInstanceGannt(ProcessInstance instance)
+        {
+            var result = new List<GanttDTO>();
+
+            var orderedTasks = instance.Tasks
+                .OrderBy(t => t.SortOrder)
+                .ToList();
+
+            foreach (var task in orderedTasks)
+            {
+                var start = task.StartedDate ?? instance.StartDate ?? 
+                    DateTime.Now;
+                var end = task.CompletedDate ?? start.AddDays(1);
+
+                result.Add(new GanttDTO
+                {
+                    Id = task.Id.ToString(),
+                    Name = $"{task.SortOrder}.   {task.Title}",
+                    Start = start.ToString("yyyy-MM-dd"),
+                    End = end.ToString("yyyy-MM-dd"),
+                    Progress = GetProgress(task),
+                    CustomClass = GetCssClass(task),
+                    Dependencies = null
+                    
+                });
+            }
+            return result; 
+        }
+
+        private int GetProgress(ProcessTask task)
+        {
+            if (task.CompletedDate.HasValue)
+                return 100;
+            if (task.StartedDate.HasValue)
+                return 50;
+            
+            return 0;
+        }
+       
+        private string GetCssClass(ProcessTask task) 
+        {
+            if (task.CompletedDate.HasValue) return "task-complete"; 
+            if (task.StartedDate.HasValue) return "task-active";
+                return "task-pending"; 
         }
     }
 }
