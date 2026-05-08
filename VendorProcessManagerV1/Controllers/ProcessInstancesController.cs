@@ -373,13 +373,13 @@ namespace VendorProcessManagerV1.Controllers
 
                 result.Add(new GanttDTO
                 {
-                    Id = task.Id.ToString(),
-                    Name = $"{task.SortOrder}.   {task.Title}",
-                    Start = start.ToString("yyyy-MM-dd"),
-                    End = end.ToString("yyyy-MM-dd"),
-                    Progress = GetProgress(task),
-                    CustomClass = GetCssClass(task),
-                    Dependencies = null
+                    id = task.Id.ToString(),
+                    name = $"{task.SortOrder}.   {task.Title}",
+                    start = start.ToString("yyyy-MM-dd"),
+                    end = end.ToString("yyyy-MM-dd"),
+                    progress = GetProgress(task),
+                    customClass = GetCssClass(task),
+                    dependencies = null
                     
                 });
             }
