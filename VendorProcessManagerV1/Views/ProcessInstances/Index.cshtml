@@ -1,4 +1,5 @@
-﻿@model IEnumerable<VendorProcessManagerV1.Models.ProcessInstance>
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model IEnumerable<VendorProcessManagerV1.Models.ProcessInstance>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,11 +8,46 @@
 
 <h2>Process Instances</h2>
 
+<form asp-action="Index" method="get" class="row g-2 align-items-center mb-3">
+    <input type="hidden" name="sortOrder" value="@ViewData["CurrentSort"]" />
+        
+    <div class="col-auto">
+        <label class="col-form-label fw-bold">Filter by Approver Team:</label>
+    </div>
+    <div class="col-auto">
+        <select name="teamFilter" class="form-select">
+            <option value="">--AllTeams--</option>
+            @foreach (var team in (SelectList)ViewData["TeamList"])
+                {
+                    if (team.Value == ViewData["CurrentFilter"]?.ToString())
+                    {
+                        <option value="@team.Value" selected>@team.Text</option>
+                    }
+                    else
+                    {
+                        <option value="@team.Value">@team.Text</option>
+                    }
+                }
+            </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        @if (!string.IsNullOrEmpty(ViewData["CurrentFilter"]?.ToString()))
+            {
+                <a asp-action="Index"
+                    asp-route-sortOrder="@ViewData["CurrentSort"]"
+                    class="btn btn-outline-secondary ms-2">Clear</a>
+            }
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["InstanceNameSort"]">Instance Name
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["InstanceNameSort"]"
+                       asp-route-teamFilter="@ViewData["CurrentFilter"]">
+                            Instance Name
                     @if(ViewData["CurrentSort"]?.ToString() == "name_asc")
                     {
                         <span>upicon</span>
@@ -23,19 +59,24 @@
                 </a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["TemplateSort"]">Template</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TemplateSort"]"
+                   asp-route-teamFilter="@ViewData["CurrentFilter"]">Template</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["VendorSort"]">Vendor</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["VendorSort"]"
+                   asp-route-teamFilter="@ViewData["CurrentFilter"]">Vendor</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedSort"]">Initiated By</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedSort"]"
+                   asp-route-teamFilter="@ViewData["CurrentFilter"]">Initiated By</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedSort"]">Created</a>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedSort"]"
+                   asp-route-teamFilter="@ViewData["CurrentFilter"]">Created</a>
             </th>            
             <th>
-               <a asp-action="Index" asp-route-sortOrder="@ViewData["StatusSort"]">Status</a>
+               <a asp-action="Index" asp-route-sortOrder="@ViewData["StatusSort"]"
+                   asp-route-teamFilter="@ViewData["CurrentFilter"]">Status</a>
             </th>
             <th></th>
         </tr>

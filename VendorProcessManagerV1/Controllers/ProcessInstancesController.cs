@@ -31,9 +31,10 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessInstances
-        public async Task<IActionResult> Index(string sortOrder)
+        public async Task<IActionResult> Index(string sortOrder, string teamFilter)
         {
             ViewData["CurrentSort"] = sortOrder;
+            ViewData["CurrentFilter"] = teamFilter;
 
             ViewData["InstanceNameSort"] = sortOrder == "name_asc" ? "name_desc" : "name_asc";
             ViewData["TemplateSort"] = sortOrder == "template_asc" ? "template_desc" : "template_asc";
@@ -42,12 +43,28 @@ namespace VendorProcessManagerV1.Controllers
             ViewData["InitiatorSort"] = sortOrder == "initiator_asc" ? "initiator_desc" : "initiator_asc";
             ViewData["StatusSort"] = sortOrder == "status_asc" ? "status_desc" : "status_asc";
 
+            var teams = await _context.ProcessTasks
+                .Where(t => !string.IsNullOrEmpty(t.ApproverTeam))
+                .Select(t => t.ApproverTeam)
+                .Distinct()
+                .OrderBy(t => t)
+                .ToListAsync();
+
+            ViewData["TeamList"] = new SelectList(teams); 
+
             var instances = _context.ProcessInstances
                 .Include(i => i.ProcessTemplate)
                 .Include(i => i.InitiatedBy)
                 .Include(i => i.VendorCandidate)
+                .Include(i => i.Tasks)
                 .OrderByDescending(i => i.CreatedDate)
                 .AsQueryable();
+
+            if (!string.IsNullOrEmpty(teamFilter))
+            {
+                instances = instances.Where(i =>
+                i.Tasks.Any(t => t.ApproverTeam == teamFilter));
+            }
 
             instances = sortOrder switch
             {
