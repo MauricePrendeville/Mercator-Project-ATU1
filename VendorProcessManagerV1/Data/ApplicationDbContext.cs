@@ -117,6 +117,12 @@ namespace VendorProcessManagerV1.Data
                 .HasForeignKey(t => t.FromProcessTemplateTaskId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            modelBuilder.Entity<VendorCandidate>()
+                .HasOne(v => v.Owner)
+                .WithMany()
+                .HasForeignKey(v => v.OwnerId)
+                .OnDelete(DeleteBehavior.NoAction); 
+
             foreach (var fk in modelBuilder.Model
                 .GetEntityTypes()
                 .SelectMany(e => e.GetForeignKeys())
