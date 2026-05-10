@@ -20,6 +20,12 @@ namespace VendorProcessManagerV1.Services
             _userManager = userManager;
         }
 
+        /// <summary>
+        /// Checks to see if the Task can be started be checking preceeding task 
+        /// is completed or skipped.
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
         public async Task<bool> CanStartTaskAsync(Guid taskId)
         {
             var task = await _context.ProcessTasks
@@ -40,10 +46,15 @@ namespace VendorProcessManagerV1.Services
 
             return predecessors.All(t =>
                 t.ProcessTaskStatus == ProcessTaskStatus.Completed ||
-                t.ProcessTaskStatus == ProcessTaskStatus.Approved ||
+                //t.ProcessTaskStatus == ProcessTaskStatus.Approved ||//
                 t.ProcessTaskStatus == ProcessTaskStatus.Skipped); 
         }
 
+        /// <summary>
+        /// Gets the different options for the next step in the flowchart. 
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
         public async Task<List<ProcessTemplateTransition>> GetAvailableTransitionsAsync(
             Guid taskId)
         {
@@ -60,7 +71,14 @@ namespace VendorProcessManagerV1.Services
                 .OrderBy(t => t.SortOrder)
                 .ToListAsync();
         }
-
+        /// <summary>
+        /// Sets Task to Completed. Selects next task in process by checking for transition. 
+        /// Sets next selected task to In Progress. 
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="selectedTransitionId"></param>
+        /// <param name="completedById"></param>
+        /// <returns></returns>
         public async Task<CompleteTaskResult> CompleteTaskAsync(
             Guid taskId, 
             Guid? selectedTransitionId, 
@@ -216,6 +234,15 @@ namespace VendorProcessManagerV1.Services
                 StringComparison.OrdinalIgnoreCase); 
         }
 
+        /// <summary>
+        /// checks to see if user has permission to Approve task. User must 
+        /// be member of Approver Team before setting task to approved. 
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <param name="userId"></param>
+        /// <param name="decision"></param>
+        /// <param name="notes"></param>
+        /// <returns></returns>
         public async Task<ApproveTaskResult> ApproveTaskAsync(
             Guid taskId, 
             string userId, 
@@ -259,6 +286,13 @@ namespace VendorProcessManagerV1.Services
             return new ApproveTaskResult { Succeeded = true }; 
         }
 
+        /// <summary>
+        /// Sets unselected task option in process to Skipped
+        /// </summary>
+        /// <param name="completedTask"></param>
+        /// <param name="selectedTransition"></param>
+        /// <param name="allTransitions"></param>
+        /// <returns></returns>
         private async Task DeactivateUnselectedBranchesAsync(
             ProcessTask completedTask, 
             ProcessTemplateTransition selectedTransition, 
@@ -285,6 +319,11 @@ namespace VendorProcessManagerV1.Services
             }
         }
 
+        /// <summary>
+        /// Sets process instance status to Completed and actual end date to now. 
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <returns></returns>
         private async Task CompleteInstanceAsync(ProcessInstance instance)
         {
             instance.Status = ProcessInstanceStatus.Completed;
