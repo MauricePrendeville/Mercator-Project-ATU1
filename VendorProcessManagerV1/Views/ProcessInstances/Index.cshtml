@@ -1,5 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Mvc.Rendering
-@model IEnumerable<VendorProcessManagerV1.Models.ProcessInstance>
+@model VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -14,39 +14,51 @@
     <div class="col-auto">
         <label class="col-form-label fw-bold">Filter by Approver Team:</label>
     </div>
+
     <div class="col-auto">
+        <select asp-for="TeamFilter"
+                asp-items="Model.TeamList"
+                class="form-select">
+            <option value="">--AllTeams--</option>
+            </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filter</button>
+   
+        <a asp-action="Index"
+           asp-route-sortOrder="@Model.TeamFilter"
+           class="btn btn-outline-secondary ms-2">Clear</a>
+    </div>
+
+   @*  <div class="col-auto">
         <select name="teamFilter" class="form-select">
             <option value="">--AllTeams--</option>
             @foreach (var team in (SelectList)ViewData["TeamList"])
                 {
-                    if (team.Value == ViewData["CurrentFilter"]?.ToString())
-                    {
-                        <option value="@team.Value" selected>@team.Text</option>
-                    }
-                    else
-                    {
-                        <option value="@team.Value">@team.Text</option>
-                    }
+                    <option value="@team.Value" 
+                            selected="@(team.Value ==
+                            ViewData["CurrentFilter"]?.ToString())">
+                            @team.Text</option>                                              
                 }
-            </select>
+        </select>
     </div>
     <div class="col-auto">
         <button type="submit" class="btn btn-primary">Filter</button>
         @if (!string.IsNullOrEmpty(ViewData["CurrentFilter"]?.ToString()))
             {
                 <a asp-action="Index"
-                    asp-route-sortOrder="@ViewData["CurrentSort"]"
+                    asp-route-sortOrder="@Model.TeamFilter"
                     class="btn btn-outline-secondary ms-2">Clear</a>
             }
-    </div>
+    </div> *@
 </form>
 
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["InstanceNameSort"]"
-                       asp-route-teamFilter="@ViewData["CurrentFilter"]">
+                <a asp-action="Index" asp-route-sortOrder="@Model.InstanceNameSort"
+                       asp-route-teamFilter="@Model.TeamFilter">
                             Instance Name
                     @if(ViewData["CurrentSort"]?.ToString() == "name_asc")
                     {
@@ -59,30 +71,30 @@
                 </a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["TemplateSort"]"
-                   asp-route-teamFilter="@ViewData["CurrentFilter"]">Template</a>
+                <a asp-action="Index" asp-route-sortOrder="@Model.TemplateSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Template</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["VendorSort"]"
-                   asp-route-teamFilter="@ViewData["CurrentFilter"]">Vendor</a>
+                <a asp-action="Index" asp-route-sortOrder="@Model.VendorSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Vendor</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedSort"]"
-                   asp-route-teamFilter="@ViewData["CurrentFilter"]">Initiated By</a>
+                <a asp-action="Index" asp-route-sortOrder="@Model.InitiatorSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Initiated By</a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedSort"]"
-                   asp-route-teamFilter="@ViewData["CurrentFilter"]">Created</a>
+                <a asp-action="Index" asp-route-sortOrder="@Model.DateSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Created</a>
             </th>            
             <th>
-               <a asp-action="Index" asp-route-sortOrder="@ViewData["StatusSort"]"
-                   asp-route-teamFilter="@ViewData["CurrentFilter"]">Status</a>
+               <a asp-action="Index" asp-route-sortOrder="@Model.StatusSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Status</a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) 
+@foreach (var item in Model.Instances) 
 {
         <tr>                
             <td>

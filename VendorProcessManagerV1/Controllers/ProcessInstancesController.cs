@@ -31,8 +31,69 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessInstances
-        public async Task<IActionResult> Index(string sortOrder, string teamFilter)
+        public async Task<IActionResult> Index(ProcessInstanceIndexViewModel vm)
         {
+            vm.SortOrder ??= "name_asc";
+
+            vm.InstanceNameSort = vm.SortOrder == "name_asc" ? "name_desc" : "name_asc";
+            vm.TemplateSort = vm.SortOrder == "template_asc" ? "template_desc" : "template_asc";
+            vm.VendorSort = vm.SortOrder == "vendor_asc" ? "vendor_desc" : "vendor_asc";
+            vm.DateSort = vm.SortOrder == "date_asc" ? "date_desc" : "date_asc";
+            vm.InitiatorSort = vm.SortOrder == "initiator_asc" ? "initiator_desc" : "initiator_asc";
+            vm.StatusSort = vm.SortOrder == "status_asc" ? "status_desc" : "status_asc";
+
+            var teams = await _context.ProcessTasks
+                .Where(t => !string.IsNullOrEmpty(t.ApproverTeam))
+                .Select(t => t.ApproverTeam)
+                .Distinct()
+                .OrderBy(t => t)
+                .ToListAsync();
+
+            vm.TeamList = teams.Select(t => new SelectListItem
+            {
+                Value = t, 
+                Text = t,
+                Selected = t == vm.TeamFilter
+            });
+
+            var instances = _context.ProcessInstances
+                .Include(i => i.ProcessTemplate)
+                .Include(i => i.InitiatedBy)
+                .Include(i => i.VendorCandidate)
+                .Include(i => i.Tasks)
+                .AsQueryable();
+
+
+            if (!string.IsNullOrEmpty(vm.TeamFilter))
+            {
+                instances = instances
+                    .Where(i => i.Tasks.Any(t => t.ApproverTeam ==
+                    vm.TeamFilter));
+            }
+
+            instances = vm.SortOrder switch
+            {
+                "name_asc" => instances.OrderBy(p => p.InstanceName),
+                "name_desc" => instances.OrderByDescending(p => p.InstanceName),
+                "template_asc" => instances.OrderBy(p => p.ProcessTemplate.Name),
+                "template_desc" => instances.OrderByDescending(p => p.ProcessTemplate.Name),
+                "vendor_asc" => instances.OrderBy(p => p.VendorCandidate.Name),
+                "vendor_desc" => instances.OrderByDescending(p => p.VendorCandidate.Name),
+                "date_asc" => instances.OrderBy(p => p.CreatedDate),
+                "date_desc" => instances.OrderByDescending(p => p.CreatedDate),
+                "initiator_asc" => instances.OrderBy(p => p.InitiatedBy.LastName),
+                "initiator_desc" => instances.OrderByDescending(p => p.InitiatedBy.LastName),
+                "status_asc" => instances.OrderBy(p => p.Status),
+                "status_desc" => instances.OrderByDescending(p => p.Status),
+                _ => instances.OrderBy(p => p.InstanceName)
+            };
+
+            vm.Instances = instances.ToList();
+
+
+            return View(vm);
+
+            /*
             ViewData["CurrentSort"] = sortOrder;
             ViewData["CurrentFilter"] = teamFilter;
 
@@ -52,13 +113,7 @@ namespace VendorProcessManagerV1.Controllers
 
             ViewData["TeamList"] = new SelectList(teams); 
 
-            var instances = _context.ProcessInstances
-                .Include(i => i.ProcessTemplate)
-                .Include(i => i.InitiatedBy)
-                .Include(i => i.VendorCandidate)
-                .Include(i => i.Tasks)
-                .OrderByDescending(i => i.CreatedDate)
-                .AsQueryable();
+            
 
             if (!string.IsNullOrEmpty(teamFilter))
             {
@@ -84,6 +139,7 @@ namespace VendorProcessManagerV1.Controllers
             };
             
             return View(await instances.ToListAsync());
+            */
         }
 
         // GET: ProcessInstances/Details/5
