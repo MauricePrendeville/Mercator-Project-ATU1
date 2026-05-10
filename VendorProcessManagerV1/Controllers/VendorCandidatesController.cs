@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VendorProcessManagerV1.Data;
 using VendorProcessManagerV1.Models;
+using VendorProcessManagerV1.ViewModels;
 
 namespace VendorProcessManagerV1.Controllers
 {
@@ -27,22 +28,12 @@ namespace VendorProcessManagerV1.Controllers
         // GET: VendorCandidates
         public async Task<IActionResult> Index(string sortOrder)
         {
-            ViewData["CurrentSort"] = sortOrder;
-
-            ViewData["VendorNameSort"] = sortOrder == "name_asc" ? "name_desc" : "name_asc";
-            ViewData["CategorySort"] = sortOrder == "category_asc" ? "category_desc" : "category_asc";
-            ViewData["CreateDateSort"] = sortOrder == "date_asc" ? "date_desc" : "date_asc";
-            ViewData["OwnerSort"] = sortOrder == "owner_asc" ? "owner_desc" : "owner_asc";
-            ViewData["TermsSort"] = sortOrder == "terms_asc" ? "terms_desc" : "terms_asc";
-
-
             var vendors = _context.VendorCandidates
                 .Include(v => v.ProcessInstances)
                 .Include(v => v.Owner)
                 .OrderByDescending(v => v.Name)
                 .AsQueryable();
 
-            
             vendors = sortOrder switch
             {
                 "name_asc" => vendors.OrderBy(v => v.Name),
@@ -58,7 +49,20 @@ namespace VendorProcessManagerV1.Controllers
                 _ => vendors.OrderBy(v => v.Name)
             };
 
-            return View(await vendors.ToListAsync());
+            var vm = new VendorCandidateIndexViewModel
+            {
+                VendorCandidates = await vendors.ToListAsync(),
+                CurrentSort = sortOrder,
+                //vm.sortOrder ??= "name_asc";
+                //ViewData["CurrentSort"] = SortOrder;
+                VendorNameSort = sortOrder == "name_asc" ? "name_desc" : "name_asc",
+                CategorySort = sortOrder == "category_asc" ? "category_desc" : "category_asc",
+                DateSort = sortOrder == "date_asc" ? "date_desc" : "date_asc",
+                OwnerSort = sortOrder == "owner_asc" ? "owner_desc" : "owner_asc",
+                TermsSort = sortOrder == "terms_asc" ? "terms_desc" : "terms_asc"
+            };
+            
+            return View(vm);
 
         }
 

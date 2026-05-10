@@ -58,37 +58,83 @@
         <tr>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@Model.InstanceNameSort"
-                       asp-route-teamFilter="@Model.TeamFilter">
-                            Instance Name
-                    @if(ViewData["CurrentSort"]?.ToString() == "name_asc")
+                       asp-route-teamFilter="@Model.TeamFilter">Instance Name
+                    @if(@Model.SortOrder == "name_asc")
                     {
-                        <span>upicon</span>
+                        <span><i class="bi bi-arrow-up-square"></i></span>
                     }
-                    else if (ViewData["CurrentSort"]?.ToString() == "name.desc")
+                    else if (@Model.SortOrder == "name_desc")
                     {
-                        <span>downicon</span>
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+                </a>
+               
+                
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@Model.TemplateSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Template               
+                    @if (@Model.SortOrder == "template_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "template_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+               </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@Model.VendorSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Vendor
+                    @if (@Model.SortOrder == "vendor_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "vendor_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
                     }
                 </a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@Model.TemplateSort"
-                   asp-route-teamFilter="@Model.TeamFilter">Template</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@Model.VendorSort"
-                   asp-route-teamFilter="@Model.TeamFilter">Vendor</a>
-            </th>
-            <th>
                 <a asp-action="Index" asp-route-sortOrder="@Model.InitiatorSort"
-                   asp-route-teamFilter="@Model.TeamFilter">Initiated By</a>
+                   asp-route-teamFilter="@Model.TeamFilter">Initiated By
+                    @if (@Model.SortOrder == "initiator_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "initiator_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+                </a>
             </th>
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@Model.DateSort"
-                   asp-route-teamFilter="@Model.TeamFilter">Created</a>
+                   asp-route-teamFilter="@Model.TeamFilter">Created
+                    @if (@Model.SortOrder == "date_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "date_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+               </a>
             </th>            
             <th>
                <a asp-action="Index" asp-route-sortOrder="@Model.StatusSort"
-                   asp-route-teamFilter="@Model.TeamFilter">Status</a>
+                   asp-route-teamFilter="@Model.TeamFilter">Status
+                    @if (@Model.SortOrder == "status_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "status_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+               </a>
             </th>
             <th></th>
         </tr>
@@ -98,13 +144,17 @@
 {
         <tr>                
             <td>
-                @item.InstanceName
+                <a asp-action="Details" asp-route-id="@item.Id">@item.InstanceName</a>
             </td>
             <td>
-                @item.ProcessTemplate?.Name
+                <a asp-controller="ProcessTemplates"
+                   asp-action="Details" asp-route-id="@item.ProcessTemplateId">
+                    @item.ProcessTemplate?.Name</a>
             </td>
             <td>
-                @item.VendorCandidate?.Name
+                <a asp-controller="VendorCandidates" 
+                    asp-action="Details" asp-route-id="@item.VendorCandidateId">
+                    @item.VendorCandidate?.Name</a>
             </td>
             
             <td>
