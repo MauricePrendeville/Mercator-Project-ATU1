@@ -15,6 +15,10 @@ using VendorProcessManagerV1.ViewModels;
 
 namespace VendorProcessManagerV1.Controllers
 {
+    /// <summary>
+    /// Provides actions for viewing, creating, editing, deleting process instances within the 
+    /// application. 
+    /// </summary>
     public class ProcessInstancesController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -30,8 +34,13 @@ namespace VendorProcessManagerV1.Controllers
             _processInstanceService = processInstanceService;
         }
 
-        // GET: ProcessInstances
-        public async Task<IActionResult> Index(ProcessInstanceIndexViewModel vm)
+        /// <summary>
+        /// GET method for showing list of Process Instances. Sorting and filtering 
+        /// functionality are included
+        /// </summary>
+        /// <param name="vm"> The viewmodel that is passed to the method.</param>
+        /// <returns>A view for display taking filters and sorting into account.</returns>
+        public async Task<IActionResult> Index (ProcessInstanceIndexViewModel vm)
         {
             vm.SortOrder ??= "name_asc";
 
@@ -143,6 +152,12 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessInstances/Details/5
+        /// <summary>
+        /// GET method for displaying details of a process instance.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>View for display that includes associated tasks, vendor candidates, 
+        /// and the gantt chart details. </returns>
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)

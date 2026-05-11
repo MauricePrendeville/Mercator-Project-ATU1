@@ -93,8 +93,21 @@ namespace VendorProcessManagerV1.Services
                 return new CompleteTaskResult
                 {
                     Succeeded = false,
-                    ErrorMessage = "This task requires approval before it can be completed."
+                    ErrorMessage = "Task not found."
                 };
+
+            if(task.ApprovalRequired && task.ApproveStatus != ApproveStatus.Approved)
+            {
+                return new CompleteTaskResult
+                {
+                    Succeeded = false,
+                    ErrorMessage = task.ApproveStatus == ApproveStatus.Rejected ?
+                        "This task has been rejected and cannot be completed." :
+                        "This task requires approval before it can be comlpeted"
+
+                };
+            }
+
 
             task.ProcessTaskStatus = ProcessTaskStatus.Completed;
             task.IsCompleted = true;

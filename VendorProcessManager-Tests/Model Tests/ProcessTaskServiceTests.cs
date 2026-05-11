@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -78,10 +79,17 @@ namespace VendorProcessManager_Tests.Model_Tests
             {
                 Id = Guid.NewGuid().ToString(),
                 UserName = "test@voltron.com",
+                NormalizedUserName = "TEST@VOLTRON.COM",
                 Email = "test@voltron.com",
+                NormalizedEmail = "TEST@VOLTRON.COM",
                 FirstName = "Test",
                 LastName = "User",
-                Team = team
+                Team = team, 
+                EmailConfirmed = true, 
+                SecurityStamp = Guid.NewGuid().ToString(), 
+                ConcurrencyStamp = Guid.NewGuid().ToString(), 
+                CreatedDate = DateTime.Now, 
+                UpdatedDate = DateTime.Now
             };
 
             configure?.Invoke(user);
@@ -108,7 +116,7 @@ namespace VendorProcessManager_Tests.Model_Tests
 
         [Fact]
         public async Task CanStartTask_WhenPredecessorNotComplete_ReturnsFalse()
-        {
+        {   //Arrange
             var instance = MakeInstance();
 
             var task1 = MakeTask(instance.Id, sortOrder: 1, configure: t =>
@@ -133,7 +141,107 @@ namespace VendorProcessManager_Tests.Model_Tests
             //Assert 
             Xunit.Assert.False(result);
         }
+
+        [Fact]
+        public async Task CanStartTask_WhenPredecessorComplete_ReturnsTrue()
+        {   //arrange
+            var instance = MakeInstance();
+
+            var task1 = MakeTask(instance.Id, sortOrder: 1, configure: t =>
+                t.ProcessTaskStatus = ProcessTaskStatus.Completed);
+            var task2 = MakeTask(instance.Id, sortOrder: 2, configure: t =>
+            {
+                t.ProcessTaskStatus = ProcessTaskStatus.NotStarted;
+                t.IsActive = false;
+            });
+
+            _context.ProcessInstances.Add(instance);
+            _context.ProcessTasks.AddRange(task1, task2);
+            await _context.SaveChangesAsync();
+            //act
+            var result = await _service.CanStartTaskAsync(task2.Id);
+            //assert
+            Xunit.Assert.True(result);
+        }
+
+        [Fact]
+        public async Task CanApproveTask_WhenUserTeamDoesNotMatch_ReturnsFalse()
+        {
+            var user = MakeUser(team: "R&D");
+            var instance = MakeInstance();
+
+            var task = MakeTask(instance.Id, configure: t =>
+            {
+                t.ApprovalRequired = true;
+                t.ApproveStatus = ApproveStatus.Pending;
+                t.ApproverTeam = "Legal";
+                t.ProcessTaskStatus = ProcessTaskStatus.InProgress;
+            });
+
+            _context.Users.Add(user);
+            _context.ProcessInstances.Add(instance);
+            _context.ProcessTasks.Add(task);
+            await _context.SaveChangesAsync();
+
+            //act
+            var result = await _service.CanApproveTaskAsync(task.Id, user.Id);
+
+            //Assert
+            Xunit.Assert.False(result);
+
+        }
+
+        [Fact]
+        public async Task CanApproveTask_WhenUserTeamDoesMatch_ReturnsTrue()
+        {
+            var user = MakeUser(team: "Legal");
+            var instance = MakeInstance();
+
+            var task = MakeTask(instance.Id, configure: t =>
+            {
+                t.ApprovalRequired = true;
+                t.ApproveStatus = ApproveStatus.Pending;
+                t.ApproverTeam = "Legal";
+                t.ProcessTaskStatus = ProcessTaskStatus.InProgress;
+            });
+
+            _context.Users.Add(user);
+            _context.ProcessInstances.Add(instance);
+            _context.ProcessTasks.Add(task);
+            await _context.SaveChangesAsync();
+
+            //act
+            var result = await _service.CanApproveTaskAsync(task.Id, user.Id);
+
+            //Assert
+            Xunit.Assert.True(result);
+        }
         
-        
+        [Theory]
+        [InlineData(ProcessTaskStatus.Completed)]
+        [InlineData(ProcessTaskStatus.Approved)]
+        [InlineData(ProcessTaskStatus.Skipped)]
+        public async Task CanStartTask_WhenAllPrecessorsTerminal_ReturnsTrue(
+            ProcessTaskStatus predecessorStatus)
+        {
+            var instance = MakeInstance();
+            
+            var task1 = MakeTask(instance.Id, sortOrder: 1, configure: t =>
+                t.ProcessTaskStatus = predecessorStatus);
+
+            var task2 = MakeTask(instance.Id, sortOrder: 2, configure: t =>
+            {
+                t.ProcessTaskStatus = ProcessTaskStatus.NotStarted;
+                t.IsActive = false;
+            });
+
+            _context.ProcessInstances.Add(instance);
+            _context.ProcessTasks.AddRange(task1, task2);
+            await _context.SaveChangesAsync();
+
+            var result = await _service.CanStartTaskAsync(task2.Id);
+
+            Xunit.Assert.True(result);
+        }
     }
 }
