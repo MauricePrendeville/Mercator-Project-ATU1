@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Build.Framework;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Moq;
@@ -336,5 +337,128 @@ namespace VendorProcessManager_Tests.Model_Tests
             //assert
             Xunit.Assert.True(result.Succeeded);
         }
-    }
+        
+        [Fact]
+        public async Task CanStartTask_WhenTaskNotFound_ReturnsFalse()
+        {
+            var nonExistentId = Guid.NewGuid();  
+
+            var result = await _service.CanStartTaskAsync(nonExistentId);
+
+            Xunit.Assert.False(result);
+        }
+
+        [Fact]
+        public async Task CanStartTask_WhenNoPredecessors_ReturnsTrue()
+        {
+            var instance = MakeInstance();
+            var task1 = MakeTask(instance.Id, sortOrder: 1, configure: t =>
+            {
+                t.IsActive = false;
+                t.ProcessTaskStatus = ProcessTaskStatus.Skipped;                
+            });
+
+            var task2 = MakeTask(instance.Id, sortOrder: 2, configure: t =>
+            {
+                t.IsActive = false;
+                t.ProcessTaskStatus = ProcessTaskStatus.NotStarted;                
+            });
+
+            _context.ProcessInstances.Add(instance);
+            _context.ProcessTasks.AddRange(task1,task2);
+            await _context.SaveChangesAsync();
+
+            var result = await _service.CanStartTaskAsync(task2.Id);
+
+            Xunit.Assert.True(result);
+        }
+
+        [Fact]
+        public async Task CanStartTask_WhenActivePredecessorsExist_ReturnsFalse()
+        {
+            var instance = MakeInstance();
+            var task1 = MakeTask(instance.Id, sortOrder: 1, configure: t =>
+            {
+                t.IsActive = true;
+                t.ProcessTaskStatus = ProcessTaskStatus.InProgress;
+            });
+
+            var task2 = MakeTask(instance.Id, sortOrder: 2, configure: t =>
+            {
+                t.IsActive = false;
+                t.ProcessTaskStatus = ProcessTaskStatus.NotStarted;
+            });
+
+            _context.ProcessInstances.Add(instance);
+            _context.ProcessTasks.AddRange(task1, task2);
+            await _context.SaveChangesAsync();
+
+            var result = await _service.CanStartTaskAsync(task2.Id);
+
+            Xunit.Assert.False(result);
+        }
+
+        [Fact]
+        public async Task CanStartTask_WhenPredecessorApproved_ReturnsTrue()
+        {
+            var instance = MakeInstance();
+            var task1 = MakeTask(instance.Id, sortOrder: 1, configure: t =>
+            {
+                t.IsActive = true;
+                t.ProcessTaskStatus = ProcessTaskStatus.Approved;
+                t.ApprovalRequired = true;
+                t.ApproveStatus = ApproveStatus.Approved;
+            });
+
+            var task2 = MakeTask(instance.Id, sortOrder: 2, configure: t =>
+            {
+                t.IsActive = false;
+                t.ProcessTaskStatus = ProcessTaskStatus.NotStarted;
+            });
+
+            _context.ProcessInstances.Add(instance);
+            _context.ProcessTasks.AddRange(task1, task2);
+            await _context.SaveChangesAsync();
+
+            var result = await _service.CanStartTaskAsync(task2.Id);
+
+            Xunit.Assert.True(result);
+        }
+
+        [Fact]
+        public async Task CanApproveTask_WhenTaskNotFound_ReturnsFalse()
+        {
+            //arramge
+            var nonExistentId = Guid.NewGuid();
+           
+            //act
+            var result = await _service.CanApproveTaskAsync(
+                nonExistentId,
+                userId: "user1");
+            
+            //Assert
+            Xunit.Assert.False(result);
+        }
+
+        ///GetAvailableTransitions
+        [Fact]
+        public async Task GetAvailableTransitions_ReturnsTransitionsForCorrectTask()
+        {
+
+        }
+        [Fact]
+        public async Task GetAvailableTransitions_ReturnedInSortOrder()
+        {
+
+        }
+
+        ///ApproveTaskAsync 
+        [Fact]
+        public async Task ApproveTaskAsync_WhenApproved_SetsApproverIdAndDate()
+        {
+
+        }
+
+
+    }    
 }
