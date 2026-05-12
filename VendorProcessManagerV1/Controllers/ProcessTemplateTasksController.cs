@@ -92,7 +92,7 @@ namespace VendorProcessManagerV1.Controllers
                 ApproverTeam = vm.ApproverTeam,
                 ApprovalRequired = vm.ApprovalRequired,
                 SortOrder = vm.SortOrder,
-                DefaultOwnerRole = vm.DefaultOwnerRole
+                DefaultOwnerRole = "Role Text" //vm.DefaultOwnerRole
             };
 
             _context.ProcessTemplatesTasks.Add(task);

@@ -1,4 +1,5 @@
-﻿@model IEnumerable<VendorProcessManagerV1.Models.ProcessInstance>
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -7,54 +8,153 @@
 
 <h2>Process Instances</h2>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+<form asp-action="Index" method="get" class="row g-2 align-items-center mb-3">
+    <input type="hidden" name="sortOrder" value="@ViewData["CurrentSort"]" />
+        
+    <div class="col-auto">
+        <label class="col-form-label fw-bold">Filter by Approver Team:</label>
+    </div>
+
+    <div class="col-auto">
+        <select asp-for="TeamFilter"
+                asp-items="Model.TeamList"
+                class="form-select">
+            <option value="">--AllTeams--</option>
+            </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filter</button>
+   
+        <a asp-action="Index"
+           asp-route-sortOrder="@Model.TeamFilter"
+           class="btn btn-outline-secondary ms-2">Clear</a>
+    </div>
+
+   @*  <div class="col-auto">
+        <select name="teamFilter" class="form-select">
+            <option value="">--AllTeams--</option>
+            @foreach (var team in (SelectList)ViewData["TeamList"])
+                {
+                    <option value="@team.Value" 
+                            selected="@(team.Value ==
+                            ViewData["CurrentFilter"]?.ToString())">
+                            @team.Text</option>                                              
+                }
+        </select>
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary">Filter</button>
+        @if (!string.IsNullOrEmpty(ViewData["CurrentFilter"]?.ToString()))
+            {
+                <a asp-action="Index"
+                    asp-route-sortOrder="@Model.TeamFilter"
+                    class="btn btn-outline-secondary ms-2">Clear</a>
+            }
+    </div> *@
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["InstanceNameSort"]">Instance Name
-                    @if(ViewData["CurrentSort"]?.ToString() == "name_asc")
+                <a asp-action="Index" asp-route-sortOrder="@Model.InstanceNameSort"
+                       asp-route-teamFilter="@Model.TeamFilter">Instance Name
+                    @if(@Model.SortOrder == "name_asc")
                     {
-                        <span>upicon</span>
+                        <span><i class="bi bi-arrow-up-square"></i></span>
                     }
-                    else if (ViewData["CurrentSort"]?.ToString() == "name.desc")
+                    else if (@Model.SortOrder == "name_desc")
                     {
-                        <span>downicon</span>
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+                </a>
+               
+                
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@Model.TemplateSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Template               
+                    @if (@Model.SortOrder == "template_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "template_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+               </a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@Model.VendorSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Vendor
+                    @if (@Model.SortOrder == "vendor_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "vendor_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
                     }
                 </a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["TemplateSort"]">Template</a>
+                <a asp-action="Index" asp-route-sortOrder="@Model.InitiatorSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Initiated By
+                    @if (@Model.SortOrder == "initiator_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "initiator_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+                </a>
             </th>
             <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["VendorSort"]">Vendor</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedSort"]">Initiated By</a>
-            </th>
-            <th>
-                <a asp-action="Index" asp-route-sortOrder="@ViewData["CreatedSort"]">Created</a>
+                <a asp-action="Index" asp-route-sortOrder="@Model.DateSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Created
+                    @if (@Model.SortOrder == "date_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "date_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+               </a>
             </th>            
             <th>
-               <a asp-action="Index" asp-route-sortOrder="@ViewData["StatusSort"]">Status</a>
+               <a asp-action="Index" asp-route-sortOrder="@Model.StatusSort"
+                   asp-route-teamFilter="@Model.TeamFilter">Status
+                    @if (@Model.SortOrder == "status_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "status_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+               </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) 
+@foreach (var item in Model.Instances) 
 {
         <tr>                
             <td>
-                @item.InstanceName
+                <a asp-action="Details" asp-route-id="@item.Id">@item.InstanceName</a>
             </td>
             <td>
-                @item.ProcessTemplate?.Name
+                <a asp-controller="ProcessTemplates"
+                   asp-action="Details" asp-route-id="@item.ProcessTemplateId">
+                    @item.ProcessTemplate?.Name</a>
             </td>
             <td>
-                @item.VendorCandidate?.Name
+                <a asp-controller="VendorCandidates" 
+                    asp-action="Details" asp-route-id="@item.VendorCandidateId">
+                    @item.VendorCandidate?.Name</a>
             </td>
             
             <td>
@@ -74,10 +174,10 @@
                     @item.Status 
                 </span>
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <td width="130px">
+                <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi bi-pencil-fill"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-card-checklist"></i></a> |
+                <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi bi-trash3-fill"></i></a>
             </td>
         </tr>
 }

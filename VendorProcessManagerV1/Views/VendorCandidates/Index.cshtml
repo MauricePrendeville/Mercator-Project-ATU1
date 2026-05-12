@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VendorProcessManagerV1.Models.VendorCandidate>
+﻿@model VendorProcessManagerV1.ViewModels.VendorCandidateIndexViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -15,65 +15,77 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a asp-action="Index" asp-route-sortOrder="@Model.VendorNameSort">Vendor Name
+                    <i class="bi @(Model.CurrentSort =="name_asc" ? "bi-arrow-up-square" :
+                                    Model.CurrentSort == "name_desc" ? "bi-arrow-down-square" :
+                                    "bi-arrow-down-up text-muted")"></i></a>
             </th>
             <th>
                 Active Instances
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                <a asp-action="Index" asp-route-sortOrder="@Model.CategorySort">Category
+                    <i class="bi @(Model.CurrentSort =="category_asc" ? "bi-arrow-up-square" :
+                                   Model.CurrentSort == "category_desc" ? "bi-arrow-down-square" :
+                                   "bi-arrow-down-up text-muted")"></i></a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
+                <a asp-action="Index" asp-route-sortOrder="@Model.DateSort">Create Date
+                    <i class="bi @(Model.CurrentSort =="date_asc" ? "bi-arrow-up-square" :
+                                   Model.CurrentSort == "date_desc" ? "bi-arrow-down-square" :
+                                   "bi-arrow-down-up text-muted")"></i></a>
+            </th>            
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@Model.OwnerSort">Owner
+                    <i class="bi @(Model.CurrentSort =="owner_asc" ? "bi-arrow-up-square" :
+                                   Model.CurrentSort == "owner_desc" ? "bi-arrow-down-square" :
+                                   "bi-arrow-down-up text-muted")"></i></a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastModifiedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Creator)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PaymentTerms)
+                <a asp-action="Index" asp-route-sortOrder="@Model.TermsSort">
+                    Payment Terms
+                    <i class="bi @(Model.CurrentSort =="terms_asc" ? "bi-arrow-up-square" :
+                                   Model.CurrentSort == "terms_desc" ? "bi-arrow-down-square" :
+                                   "bi-arrow-down-up text-muted")"></i>
+                </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.VendorCandidates) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                <a asp-action="Details" asp-route-id="@item.Id">@item.Name</a>
             </td>
             <td>
-                    @{
+                    @if (item.ProcessInstances != null && item.ProcessInstances.Any())
+                    {
                         var activeCount = item.ProcessInstances
                         .Count(i => i.Status == ProcessInstanceStatus.InProgress);
                         var totalCount = item.ProcessInstances.Count; 
-                    }
-                    else
+                        <span class="text-muted">@activeCount active / @totalCount total</span>
+                    }else
                     {
                         <span class="text-muted">No instances</span>
                     }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category)
+                @item.Category
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
+                @item.CreateDate
+            </td>            
+            <td>
+                @item.Owner?.FirstName @item.Owner?.LastName
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LastModifiedDate)
+                @item.PaymentTerms
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Creator)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PaymentTerms)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            <td width="130px">
+               <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi bi-pencil-fill"></i></a> |
+               <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-card-checklist"></i></a> |
+               <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi bi-trash3-fill"></i></a>
             </td>
         </tr>
 }

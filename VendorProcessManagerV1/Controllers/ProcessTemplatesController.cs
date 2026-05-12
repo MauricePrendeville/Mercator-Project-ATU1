@@ -65,13 +65,7 @@ namespace VendorProcessManagerV1.Controllers
             return View(processTemplate);
         }
 
-        // GET: ProcessTemplates/Create
-        /*
-        public IActionResult Create()
-        {
-            return View();
-        }*/
-
+       
         //GET ProcessTemplates/Create with dropdown list
         public async Task<IActionResult> Create()
         {
@@ -101,22 +95,7 @@ namespace VendorProcessManagerV1.Controllers
 
         // POST: ProcessTemplates/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        /*
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description,Category,Creator,CreateDate,IsActive,Version")] ProcessTemplate processTemplate)
-        {
-            if (ModelState.IsValid)
-            {
-                processTemplate.Id = Guid.NewGuid();
-                _context.Add(processTemplate);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(processTemplate);
-        }*/
-
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(

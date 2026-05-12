@@ -19,6 +19,8 @@
         class="btn btn-primary btn-sm mb-3">Add Task</a>
 </div>
 <div>
+
+
     <h4>Process Template</h4>
     <hr />
     <dl class="row">
@@ -66,6 +68,16 @@
             @Html.DisplayFor(model => model.Version)
         </dd>
     </dl>
+</div>
+
+
+<div id="mermaid-view">
+    <div id="mermaid-container"
+         style="background:#fff;border:0.5px; min-height:200px;">
+        <p class="text-muted small">
+            Click the Flow diagram button to render.
+        </p>
+    </div>
 </div>
 <div> 
     <a asp-action="StartInstance" 
@@ -215,25 +227,14 @@ else
     <p class="text-muted">No tasks added yet.</p>
 }
 
-<div class="d-flex gap-2 mb-3">
-    <button class="btn btn-sm btn-outline-primary view-btn" 
-    onclick="showView('diagram', this)">Flow diagram</button>
-</div>
- <div id="mermaid-view">
-     <div id="mermaid-container" 
-        style="background:#fff;border:0.5px; min-height:200px;">
-    <p class="text-muted small">
-        Click the Flow diagram button to render.
-    </p>
-    </div>
-</div>
+
 
 
 <a asp-action="Index" class="btn btn-secondary mt-3">Back to list</a> 
-<pre style="font-size:11px; background:#f1efe8; padding:1rem;
+@* <pre style="font-size:11px; background:#f1efe8; padding:1rem;
             border-radius:8px; overflow:auto;">
         @ViewBag.MermaidDiagram
-        </pre>
+        </pre> *@
 
 @section Scripts {
 @{
@@ -273,7 +274,7 @@ else
             flowchart: { curve: 'basis'}
         });
 
-        window._renderMermaid = async function () {
+        
             const container = document.getElementById('mermaid-container'); 
                          
             try {
@@ -285,7 +286,7 @@ else
                     '<p style="color:#a32d2d;font-size:13px">' + 
                     'Could not render: ' + e.message + '</p>';
             }
-        };
+        
         
     </script>
     <script>
@@ -294,26 +295,8 @@ else
                 window._renderMermaid(); 
             }
         }
-    </script>
-   @*  <script> 
-        function showView(view, btn){
-            document.querySelectorAll('.view-btn')
-                .forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-
-            const cardView = document.getElementById('card-view');
-            const diagView = document.getElementById('mermaid-view');
-
-            if(view === 'cards') {
-                cardView.style.display = 'block';
-                diagView.style.display = 'none';
-            } else {
-                 cardView.style.display = 'none';
-                diagView.style.display = 'block';
-                if (window._renderMermaid) window._renderMermaid();
-            }
-        }
-    </script> *@
+    </script> 
+  
 
 }
     

@@ -9,6 +9,10 @@
     <link rel="stylesheet" href="~/lib/bootswatch/lux/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/VendorProcessManagerV1.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+   
+
+    @await RenderSectionAsync("Styles", required: false)
 </head>
 <body>
     <header>
@@ -27,30 +31,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-bg-dark" type="button" data-bs-toggle="dropdown" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                                    aria-expanded="false" aria-label="Process Templates">Process Templates</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="ProcessTemplates" asp-action="Index">List Process Templates</a>
-                                    <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="ProcessTemplates" asp-action="Create">Create Process Templates</a>
-                            </div>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="ProcessInstances" asp-action="Index">Process Instances</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-bg-dark" type="button" data-bs-toggle="dropdown" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                               aria-expanded="false" aria-label="Process Instances">Process Instances</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="ProcessInstances" asp-action="Index">List Process Instances</a>
-                                <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="ProcessInstances" asp-action="Create">Create Process Instances</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-bg-dark" type="button" data-bs-toggle="dropdown" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                               aria-expanded="false" aria-label="Vendor Candidates">Vendor Candidates</a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="VendorCandidates" asp-action="Index">List Vendors</a>
-                                <a class="dropdown-item text-bg-dark" asp-area="" asp-controller="VendorCandidates" asp-action="Create">Create Vendor Candidate</a>
-                            </div>
-                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="ProcessTemplates" asp-action="Index">Process Templates</a>
+                        </li>                  
+                        <li class="nav-item">
+                            <a class="nav-link text-light" asp-area="" asp-controller="VendorCandidates" asp-action="Index">Vendor Candidates</a>
+                        </li>                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-bg-dark" type="button" data-bs-toggle="dropdown" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                                aria-expanded="false" aria-label="AppUsers">AppUsers</a>

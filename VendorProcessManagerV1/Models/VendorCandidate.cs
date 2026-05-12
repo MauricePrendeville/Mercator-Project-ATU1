@@ -8,7 +8,8 @@
                                              //so a vendor can have more than one category
         public DateTime CreateDate { get; set; }
         public DateTime? LastModifiedDate { get; set; } = DateTime.MinValue;
-        public Guid Creator {  get; set; }
+        public string? OwnerId {  get; set; }
+        public AppUser? Owner { get; set; }
         public string PaymentTerms { get; set; } //update to ENUM
 
         public ICollection<ProcessInstance> ProcessInstances { get; set; }
