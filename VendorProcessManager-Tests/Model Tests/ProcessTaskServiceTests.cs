@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Moq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,7 +16,7 @@ namespace VendorProcessManager_Tests.Model_Tests
     {
         private readonly ApplicationDbContext _context;
         private readonly ProcessTaskService _service;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly Mock<UserManager<AppUser>> _userManagerMock;
 
         public ProcessTaskServiceTests()
         {
@@ -24,8 +25,14 @@ namespace VendorProcessManager_Tests.Model_Tests
                 .Options;
 
             _context = new ApplicationDbContext(options);
-            //_userManager = userManager;
-            _service = new ProcessTaskService(_context, _userManager);
+            
+            _userManagerMock = new Mock<UserManager<AppUser>>(
+               Mock.Of<IUserStore<AppUser>>(),
+               null, null, null, null,
+               null, null, null, null);
+
+            _service = new ProcessTaskService(_context, _userManagerMock.Object); 
+                       
         }
 
         public void Dispose()
@@ -178,7 +185,10 @@ namespace VendorProcessManager_Tests.Model_Tests
                 t.ProcessTaskStatus = ProcessTaskStatus.InProgress;
             });
 
-            _context.Users.Add(user);
+            _userManagerMock
+                .Setup(m => m.FindByIdAsync(user.Id))
+                .ReturnsAsync(user);
+
             _context.ProcessInstances.Add(instance);
             _context.ProcessTasks.Add(task);
             await _context.SaveChangesAsync();
@@ -205,7 +215,10 @@ namespace VendorProcessManager_Tests.Model_Tests
                 t.ProcessTaskStatus = ProcessTaskStatus.InProgress;
             });
 
-            _context.Users.Add(user);
+            _userManagerMock
+                .Setup(m => m.FindByIdAsync(user.Id))
+                .ReturnsAsync(user); 
+
             _context.ProcessInstances.Add(instance);
             _context.ProcessTasks.Add(task);
             await _context.SaveChangesAsync();
@@ -223,7 +236,8 @@ namespace VendorProcessManager_Tests.Model_Tests
         [InlineData(ProcessTaskStatus.Skipped)]
         public async Task CanStartTask_WhenAllPrecessorsTerminal_ReturnsTrue(
             ProcessTaskStatus predecessorStatus)
-        {
+        {   
+            //arrange
             var instance = MakeInstance();
             
             var task1 = MakeTask(instance.Id, sortOrder: 1, configure: t =>
@@ -239,9 +253,88 @@ namespace VendorProcessManager_Tests.Model_Tests
             _context.ProcessTasks.AddRange(task1, task2);
             await _context.SaveChangesAsync();
 
+            //act
             var result = await _service.CanStartTaskAsync(task2.Id);
 
+            //assert
             Xunit.Assert.True(result);
+        }
+
+        [Fact]
+        public async Task CompleteTask_WhenTaskNotFound_ReturnsFailedResult()
+        {
+            var nonExistentID = Guid.NewGuid();
+
+            var result = await _service.CompleteTaskAsync(
+                nonExistentID,
+                selectedTransitionId: null,
+                completedById: "user1");
+
+            Xunit.Assert.False(result.Succeeded);
+            Xunit.Assert.NotNull(result.ErrorMessage); 
+        }
+
+        [Fact]
+        public async Task CompleteTask_WhenApprovalRequiredButNotApproved_ReturnsFailure()
+        {
+            var instance = MakeInstance();
+
+            var task = MakeTask(instance.Id, sortOrder: 1, configure: t =>
+            {
+                t.ApprovalRequired = true;
+                t.ApproveStatus = ApproveStatus.Pending;
+                t.ProcessTaskStatus = ProcessTaskStatus.InProgress;
+                t.IsActive = true;
+            });
+
+            _context.ProcessInstances.Add(instance);
+            _context.ProcessTasks.Add(task);
+            await _context.SaveChangesAsync();
+
+            //act
+            var result = await _service.CompleteTaskAsync(
+                task.Id,
+                selectedTransitionId: null,
+                completedById: "testuser1"
+                );
+            
+            Xunit.Assert.False(result.Succeeded);
+            Xunit.Assert.Contains("approval", result.ErrorMessage,
+                StringComparison.OrdinalIgnoreCase);
+        }
+
+        [Fact]
+        public async Task CompleteTask_WhenApprovalRequiredAndApproved_Succeeds()
+        {
+            //arrange
+            var instance = MakeInstance();            
+
+            var task1 = MakeTask(instance.Id, sortOrder: 1, configure: t =>
+            {
+                t.IsActive = true;
+                t.ProcessTaskStatus = ProcessTaskStatus.InProgress;
+                t.ApprovalRequired = true;
+                t.ApproveStatus = ApproveStatus.Approved;
+            });
+
+            var task2 = MakeTask(instance.Id, sortOrder: 2, configure: t =>
+            {
+                t.IsActive = false;
+                t.ProcessTaskStatus = ProcessTaskStatus.NotStarted;
+            });
+
+            _context.ProcessInstances.Add(instance); 
+            _context.ProcessTasks.AddRange(task1, task2);
+            await _context.SaveChangesAsync();
+
+            //act
+            var result = await _service.CompleteTaskAsync(
+                task1.Id,
+                selectedTransitionId: null,
+                completedById: "testuser1");
+
+            //assert
+            Xunit.Assert.True(result.Succeeded);
         }
     }
 }

@@ -46,7 +46,7 @@ namespace VendorProcessManagerV1.Services
 
             return predecessors.All(t =>
                 t.ProcessTaskStatus == ProcessTaskStatus.Completed ||
-                //t.ProcessTaskStatus == ProcessTaskStatus.Approved ||//
+                t.ProcessTaskStatus == ProcessTaskStatus.Approved ||
                 t.ProcessTaskStatus == ProcessTaskStatus.Skipped); 
         }
 
