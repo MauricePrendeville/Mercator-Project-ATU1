@@ -12,6 +12,7 @@
 name: "CodeQL Advanced"
 
 on:
+  workflow_call: 
   push:
     branches: [ "master" ]
   pull_request:
@@ -19,7 +20,25 @@ on:
   schedule:
     - cron: '25 12 * * 4'
 
-jobs:
+jobs: 
+#------------Build workflow-----------
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      
+#-------------CodeQL workflow------------      
   analyze:
     name: Analyze (${{ matrix.language }})
     # Runner size impacts CodeQL analysis time. To learn more, please see:
