@@ -37,6 +37,23 @@ jobs:
       run: dotnet build --no-restore
     - name: Test
       run: dotnet test --no-build --verbosity normal
+
+#------------SBOM flow---------
+sbom: 
+          runs-on: ubuntu-latest
+      
+          steps:
+            - uses: actions/checkout@v3
+      
+            - uses: advanced-security/sbom-generator-action@v0.0.1
+              id: sbom
+              env: 
+                GITHUB_TOKEN: ${{ github.token }}
+            - uses: actions/upload-artifact@v3.1.0
+              with: 
+                path: ${{steps.sbom.outputs.fileName }}
+                name: "SBOM"
+      
       
 #-------------CodeQL workflow------------      
   analyze:
@@ -120,3 +137,5 @@ jobs:
       uses: github/codeql-action/analyze@v4
       with:
         category: "/language:${{matrix.language}}"
+
+
