@@ -1,0 +1,72 @@
+﻿@model List<VendorProcessManagerV1.Services.PendingApprovalItem>
+
+@if(Model != null && Model.Any())
+{
+    <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle position-relative"
+            href="#"
+            id="approvalAlertDropdown"
+            aria-expanded="false">
+            <i class="bi bi-bell-fill"></i>
+
+            <span class="position-absolute top-0 start-100
+                        translate-middle badge rounded-pill bg-danger"
+                    style="font-size: 10px;">
+                @Model.Count 
+                <span class="visually-hidden">pending approvals</span>
+                </span>    
+        </a>
+
+        <ul class="dropdown-menu dropdown-menu-end shadow" 
+            style="min-width: 320px;" 
+            aria-labelledby="approvalAlertDropdown">
+
+            <li>
+                <h6 class="dropdown-header">
+                    Pending approvals (@Model.Count)</h6>
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+
+            @foreach (var item in Model.Take(5))
+            {
+                <li>
+                    <a class="dropdown-item py-2"
+                        asp-controller="ProcessTasks"
+                        asp-action="Approve"
+                        asp-route-id="@item.TaskId">
+                        <div class="d-flex justify-content-between 
+                                    align-items-start">
+                            <div>
+                                <div class="text-muted"
+                                    style="font-size:11px;">
+                                    @item.InstanceName - @item.VendorName
+                                </div>
+                            </div>
+                            @if (item.StartedDate.HasValue)
+                                {
+                                    <span class="text-muted m-sm-2"
+                                        style="font-size:11px;
+                                                white-space:nowrap;">
+                                            @item.StartedDate.Value
+                                                .ToShortDateString()
+                                    </span>
+                                }
+                            </div>
+                    </a>
+                </li>
+            }
+            @if (Model.Count > 5)
+            {
+                <li><hr class="dropdown-divider" /></li>
+                <li>
+                    <a class="dropdown-item text-center small text-primary"
+                        asp-controller="ProcessTasks"
+                        asp-action="PendingApprovals">
+                            View all @Model.Count pending approvals
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>  
+    
+}
