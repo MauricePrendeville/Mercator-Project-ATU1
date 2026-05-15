@@ -34,9 +34,9 @@
             {
                 <li>
                     <a class="dropdown-item py-2"
-                        asp-controller="ProcessTasks"
-                        asp-action="Edit"
-                        asp-route-id="@item.TaskId">
+                        asp-controller="ProcessInstances"
+                        asp-action="Details"
+                        asp-route-id="@item.ProcessInstanceId">
                         <div class="d-flex justify-content-between 
                                     align-items-start">
                             <div>
@@ -58,7 +58,7 @@
                     </a>
                 </li>
             }
-            @if (Model.Count > 5)
+           @*  @if (Model.Count > 5)
             {
                 <li><hr class="dropdown-divider" /></li>
                 <li>
@@ -68,7 +68,7 @@
                             View all @Model.Count pending approvals
                     </a>
                 </li>
-            }
+            } *@
         </ul>
     </li>  
     

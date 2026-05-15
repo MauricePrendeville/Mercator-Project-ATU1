@@ -247,7 +247,48 @@ namespace VendorProcessManagerV1.Controllers
             return RedirectToAction("Details", "ProcessInstances",
                 new { id = vm.ProcessInstanceId });
         }
+        //GET Approve Task
+        public async Task<IActionResult> Approve(Guid id)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            if (currentUser == null)
+                return Unauthorized();
 
+            var canApprove = await _processTaskService
+                .CanApproveTaskAsync(id, currentUser.Id);
+
+            if (!canApprove)
+            {
+                TempData["Error"] = "You do not have permission to approve this task.";
+
+                var deniedTask = await _context.ProcessTasks.FindAsync(id);
+                if(deniedTask != null)
+                {
+                    return RedirectToAction("Details", "ProcessInstance",
+                        new { id = deniedTask.ProcessInstanceId });
+                }
+                return RedirectToAction("Index", "ProcessInstances");
+            }
+
+            var task = await _context.ProcessTasks
+                .Include(t => t.ProcessInstance)
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (task == null)
+                return NotFound();
+
+            var vm = new ApproveTaskViewModel
+            {
+                TaskId = task.Id,
+                TaskTitle = task.Title,
+                ApproverTeam = task.ApproverTeam,
+                ProcessInstanceId = task.ProcessInstanceId,
+                Decision = ApproveStatus.Approved,
+                DecisionOptions = BuildApproveStatusOptions()
+            };
+
+            return View(vm);
+        }
         //POST Approve Task
         [HttpPost]
         [ValidateAntiForgeryToken]

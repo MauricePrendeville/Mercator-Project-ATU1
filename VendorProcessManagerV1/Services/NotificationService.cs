@@ -41,49 +41,49 @@ namespace VendorProcessManagerV1.Services
             if (user == null || string.IsNullOrEmpty(user.Team))
                 return new List<PendingApprovalItem>();
 
-            var allActive = await _context.ProcessTasks
-                .Include(t => t.ProcessInstance)
-                .Where(t => t.IsActive)
-                .ToListAsync();
+            //var allActive = await _context.ProcessTasks
+            //    .Include(t => t.ProcessInstance)
+            //    .Where(t => t.IsActive)
+            //    .ToListAsync();
 
-            Debug.WriteLine($"====Filter 1 is Active {allActive.Count} tasks====");
+            //Debug.WriteLine($"====Filter 1 is Active {allActive.Count} tasks====");
 
-            var requireApproval = allActive
-                .Where(t => t.ApprovalRequired)
-                .ToList();
-            Debug.WriteLine($"====Filter 2 is Active {requireApproval.Count} tasks===");
+            ////var requireApproval = allActive
+            ////    .Where(t => t.ApprovalRequired)
+            ////    .ToList();
+            ////Debug.WriteLine($"====Filter 2 is Active {requireApproval.Count} tasks===");
 
-            var pendingStatus = requireApproval
-                .Where(t => t.ApproveStatus == ApproveStatus.Pending)
-                .ToList();
-            Debug.WriteLine($"====Filter 3 is Active {pendingStatus.Count} tasks===");
+            //var pendingStatus = requireApproval
+            //    .Where(t => t.ApproveStatus == ApproveStatus.Pending)
+            //    .ToList();
+            //Debug.WriteLine($"====Filter 3 is Active {pendingStatus.Count} tasks===");
 
-            var nullStatus = requireApproval
-                .Where(t => t.ApproveStatus == null)
-                .ToList();
-            Debug.WriteLine($"====Filter 3b is Active {nullStatus.Count} tasks===");
+            //var nullStatus = requireApproval
+            //    .Where(t => t.ApproveStatus == null)
+            //    .ToList();
+            //Debug.WriteLine($"====Filter 3b is Active {nullStatus.Count} tasks===");
 
-            var teamMatch = requireApproval
-                .Where(t => string.Equals(
-                    t.ApproverTeam, user.Team, StringComparison.OrdinalIgnoreCase))
-                .ToList();
-            Debug.WriteLine($"====Filter 4 is Active {user.Team}: {teamMatch.Count} tasks===");
+            //var teamMatch = requireApproval
+            //    .Where(t => string.Equals(
+            //        t.ApproverTeam, user.Team, StringComparison.OrdinalIgnoreCase))
+            //    .ToList();
+            //Debug.WriteLine($"====Filter 4 is Active {user.Team}: {teamMatch.Count} tasks===");
 
-            var liveInstance = requireApproval
-                .Where(t => t.ProcessInstance?.Status ==
-                                ProcessInstanceStatus.InProgress)
-                .ToList();
-            Debug.WriteLine($"====Filter 5 is Active {liveInstance.Count} tasks===");
+            //var liveInstance = requireApproval
+            //    .Where(t => t.ProcessInstance?.Status ==
+            //                    ProcessInstanceStatus.InProgress)
+            //    .ToList();
+            ////Debug.WriteLine($"====Filter 5 is Active {liveInstance.Count} tasks===");
 
-            foreach (var t in requireApproval)
-            {
-                Debug.WriteLine(
-                    $"====Task: {t.Title}"+
-                    $"ApproveStatus={t.ApproveStatus}"+
-                    $"ApproverTeam='{t.ApproverTeam}"+
-                    $"UserTeam='{user.Team}' " +
-                    $"InstanceStatus= {t.ProcessInstance?.Status}===");
-            }
+            //foreach (var t in requireApproval)
+            //{
+            //    Debug.WriteLine(
+            //        $"====Task: {t.Title}"+
+            //        $"ApproveStatus={t.ApproveStatus}"+
+            //        $"ApproverTeam='{t.ApproverTeam}"+
+            //        $"UserTeam='{user.Team}' " +
+            //        $"InstanceStatus= {t.ProcessInstance?.Status}===");
+            //}
             var results = await _context.ProcessTasks
                 .Include(t => t.ProcessInstance)
                     .ThenInclude(i => i.VendorCandidate)
@@ -106,7 +106,7 @@ namespace VendorProcessManagerV1.Services
                     StartedDate = t.StartedDate
                 })
                 .ToListAsync();
-            Debug.WriteLine($"====Final result {results.Count} tasks===");
+           // Debug.WriteLine($"====Final result {results.Count} tasks===");
             return results;
         }    
     }    
