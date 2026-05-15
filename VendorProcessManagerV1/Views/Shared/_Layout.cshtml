@@ -52,16 +52,14 @@
                             </div>
                         </li>
                                                
-                                <ul class="navbar-nav align-items-center">
+                        <ul class="nav-item dropdown">
+                             
+                             @if (User.Identity != null && User.Identity.IsAuthenticated)
+                             {
+                               @await Component.InvokeAsync("ApprovalAlert")
+                             }
                                     
-                                        <div class="nav-item dropdown">
-                                    @if (User.Identity != null && User.Identity.IsAuthenticated)
-                                        {
-                                            @await Component.InvokeAsync("ApprovalAlert")
-                                        }</div>
-                                    
-                                </ul>
-                           
+                        </ul>                       
                        
                         
                     </ul>
