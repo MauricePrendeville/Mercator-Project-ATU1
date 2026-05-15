@@ -39,7 +39,7 @@ namespace VendorProcessManagerV1.Services
                 InitiatedById = initiatedById, 
                 VendorCandidateId = vendorCandidateId,
                 CreatedDate = DateTime.Now, 
-                Status = ProcessInstanceStatus.NotStarted
+                Status = ProcessInstanceStatus.InProgress
             };
 
             var sortedTasks = template.Tasks.OrderBy(t => t.SortOrder).ToList();
@@ -65,7 +65,10 @@ namespace VendorProcessManagerV1.Services
                     StartedDate = null,
                     CompletedDate = null, 
                     CreatorId = initiatedById, 
-                    OwnerId = initiatedById
+                    OwnerId = initiatedById, 
+                    ApproveStatus = templateTask.ApprovalRequired
+                                    ? ApproveStatus.Pending 
+                                    : ApproveStatus.NotRequired
                 };
 
                 instance.Tasks.Add(instanceTask); 
