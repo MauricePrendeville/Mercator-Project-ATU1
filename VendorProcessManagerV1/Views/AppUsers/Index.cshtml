@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>User List</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -62,10 +62,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => user.CreatedDate)
                 </td>               
-                <td>
-                    <a asp-action="Edit" asp-route-id="@user.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@user.Id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@user.Id">Delete</a>
+                <td width="130px">
+                        <a asp-action="Edit" asp-route-id="@user.Id" title="Edit"><i class="bi bi-pencil-fill"></i></a> |
+                        <a asp-action="Details" asp-route-id="@user.Id" title="Details"><i class="bi bi-card-checklist"></i></a> |
+                        <a asp-action="Delete" asp-route-id="@user.Id" title="Delete"><i class="bi bi-trash3-fill"></i></a>
                 </td>
             </tr>
         }

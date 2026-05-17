@@ -241,8 +241,11 @@ namespace VendorProcessManagerV1.Controllers
                     .Replace("\"", "'")
                     .Replace("\n", " ")
                     .Trim();
-
-                sb.AppendLine($"    {taskRef}[\"{task.SortOrder}.{safeTitle}\"]");
+                
+                //wrapped title added to make the node text more readable
+                var wrappedTitle = WrapText(safeTitle, 22); 
+                
+                sb.AppendLine($"    {taskRef}[\"{task.SortOrder}.{wrappedTitle}\"]");
                 
                     if (task.Transitions != null && task.Transitions.Any())
                     {
@@ -290,6 +293,37 @@ namespace VendorProcessManagerV1.Controllers
             return sb.ToString();
         }
 
+        /// <summary>
+        /// Helper method to wrap the text in the 
+        /// Nodes in the Mermaid flowcharts
+        /// </summary>
+        /// <param name="text">Node title text</param>
+        /// <param name="maxWidth">Width of text before wrapping occurs</param>
+        /// <returns>The node title text with line breaks every maxWidth characters</returns>
+        private string WrapText(string text, int maxWidth = 23)
+        {
+            if (text.Length <= maxWidth) 
+                return text;
+
+            var words = text.Split(' ');
+            var lines = new List<string>();
+            var current = new System.Text.StringBuilder();
+
+            foreach(var word in words)
+            {
+                if (current.Length + word.Length + 1> maxWidth 
+                    && current.Length >0)
+                {
+                    lines.Add(current.ToString().Trim());
+                    current.Clear();
+                }
+                current.Append(word + " ");
+            }
+            if (current.Length > 0)
+                lines.Add(current.ToString().Trim());
+
+            return string.Join("<br/>", lines);
+        }
         //private async Task PopulateCreatorDropdown(CreateProcessTemplateViewModel vm)
         //{
         //    vm.CreatorOptions = new SelectList(
