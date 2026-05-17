@@ -1,0 +1,245 @@
+### YamlMime:TableOfContent
+items:
+- uid: VendorProcessManagerV1.Controllers
+  name: VendorProcessManagerV1.Controllers
+  type: Namespace
+  items:
+  - uid: VendorProcessManagerV1.Controllers.AppUsersController
+    name: AppUsersController
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.AuditLogsController
+    name: AuditLogsController
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.HomeController
+    name: HomeController
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.NotificationsController
+    name: NotificationsController
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.ProcessInstancesController
+    name: ProcessInstancesController
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.ProcessTaskTransitionsController
+    name: ProcessTaskTransitionsController
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.ProcessTasks1Controller
+    name: ProcessTasks1Controller
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.ProcessTasksController
+    name: ProcessTasksController
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.ProcessTemplateTasksController
+    name: ProcessTemplateTasksController
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.ProcessTemplateTransitionsController
+    name: ProcessTemplateTransitionsController
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.ProcessTemplatesController
+    name: ProcessTemplatesController
+    type: Class
+  - uid: VendorProcessManagerV1.Controllers.VendorCandidatesController
+    name: VendorCandidatesController
+    type: Class
+- uid: VendorProcessManagerV1.DTO
+  name: VendorProcessManagerV1.DTO
+  type: Namespace
+  items:
+  - uid: VendorProcessManagerV1.DTO.GanttDTO
+    name: GanttDTO
+    type: Class
+- uid: VendorProcessManagerV1.Data
+  name: VendorProcessManagerV1.Data
+  type: Namespace
+  items:
+  - uid: VendorProcessManagerV1.Data.ApplicationDbContext
+    name: ApplicationDbContext
+    type: Class
+- uid: VendorProcessManagerV1.Migrations
+  name: VendorProcessManagerV1.Migrations
+  type: Namespace
+  items:
+  - uid: VendorProcessManagerV1.Migrations.AddAppUserFields
+    name: AddAppUserFields
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.ApplicationDbContextUserChange
+    name: ApplicationDbContextUserChange
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.ChangeToAppUserInDbContext
+    name: ChangeToAppUserInDbContext
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.FixTemplateTaskFields
+    name: FixTemplateTaskFields
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.InitialCreate
+    name: InitialCreate
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.InitialCreate1
+    name: InitialCreate1
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.PaymentTermsadded
+    name: PaymentTermsadded
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.SwitchToApproverTeam
+    name: SwitchToApproverTeam
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.TemplateTaskTransitionsUpdate
+    name: TemplateTaskTransitionsUpdate
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.ToTemplateTaskNullable
+    name: ToTemplateTaskNullable
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.TransitionTaskUpdate
+    name: TransitionTaskUpdate
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.TransitionsTables3
+    name: TransitionsTables3
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.UpdateProcessInstanceAndTask
+    name: UpdateProcessInstanceAndTask
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.UpdateProcessTemplateTaskModel
+    name: UpdateProcessTemplateTaskModel
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.VendorNavigation
+    name: VendorNavigation
+    type: Class
+  - uid: VendorProcessManagerV1.Migrations.VendorOwnerUpdate2
+    name: VendorOwnerUpdate2
+    type: Class
+- uid: VendorProcessManagerV1.Models
+  name: VendorProcessManagerV1.Models
+  type: Namespace
+  items:
+  - uid: VendorProcessManagerV1.Models.AppUser
+    name: AppUser
+    type: Class
+  - uid: VendorProcessManagerV1.Models.ApproveStatus
+    name: ApproveStatus
+    type: Enum
+  - uid: VendorProcessManagerV1.Models.AuditLog
+    name: AuditLog
+    type: Class
+  - uid: VendorProcessManagerV1.Models.ErrorViewModel
+    name: ErrorViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.Models.Notification
+    name: Notification
+    type: Class
+  - uid: VendorProcessManagerV1.Models.ProcessInstance
+    name: ProcessInstance
+    type: Class
+  - uid: VendorProcessManagerV1.Models.ProcessInstanceStatus
+    name: ProcessInstanceStatus
+    type: Enum
+  - uid: VendorProcessManagerV1.Models.ProcessTask
+    name: ProcessTask
+    type: Class
+  - uid: VendorProcessManagerV1.Models.ProcessTaskStatus
+    name: ProcessTaskStatus
+    type: Enum
+  - uid: VendorProcessManagerV1.Models.ProcessTaskTransition
+    name: ProcessTaskTransition
+    type: Class
+  - uid: VendorProcessManagerV1.Models.ProcessTemplate
+    name: ProcessTemplate
+    type: Class
+  - uid: VendorProcessManagerV1.Models.ProcessTemplateTask
+    name: ProcessTemplateTask
+    type: Class
+  - uid: VendorProcessManagerV1.Models.ProcessTemplateTransition
+    name: ProcessTemplateTransition
+    type: Class
+  - uid: VendorProcessManagerV1.Models.TemplateDependency
+    name: TemplateDependency
+    type: Class
+  - uid: VendorProcessManagerV1.Models.VendorCandidate
+    name: VendorCandidate
+    type: Class
+- uid: VendorProcessManagerV1.Services
+  name: VendorProcessManagerV1.Services
+  type: Namespace
+  items:
+  - uid: VendorProcessManagerV1.Services.ApproveTaskResult
+    name: ApproveTaskResult
+    type: Class
+  - uid: VendorProcessManagerV1.Services.CompleteTaskResult
+    name: CompleteTaskResult
+    type: Class
+  - uid: VendorProcessManagerV1.Services.INotificationService
+    name: INotificationService
+    type: Interface
+  - uid: VendorProcessManagerV1.Services.IProcessInstanceService
+    name: IProcessInstanceService
+    type: Interface
+  - uid: VendorProcessManagerV1.Services.IProcessTaskService
+    name: IProcessTaskService
+    type: Interface
+  - uid: VendorProcessManagerV1.Services.NotificationService
+    name: NotificationService
+    type: Class
+  - uid: VendorProcessManagerV1.Services.PendingApprovalItem
+    name: PendingApprovalItem
+    type: Class
+  - uid: VendorProcessManagerV1.Services.ProcessInstanceService
+    name: ProcessInstanceService
+    type: Class
+  - uid: VendorProcessManagerV1.Services.ProcessTaskService
+    name: ProcessTaskService
+    type: Class
+- uid: VendorProcessManagerV1.ViewComponents
+  name: VendorProcessManagerV1.ViewComponents
+  type: Namespace
+  items:
+  - uid: VendorProcessManagerV1.ViewComponents.ApprovalAlertViewComponent
+    name: ApprovalAlertViewComponent
+    type: Class
+- uid: VendorProcessManagerV1.ViewModels
+  name: VendorProcessManagerV1.ViewModels
+  type: Namespace
+  items:
+  - uid: VendorProcessManagerV1.ViewModels.ApproveTaskViewModel
+    name: ApproveTaskViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.CompleteTaskViewModel
+    name: CompleteTaskViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.CreateAppUserViewModel
+    name: CreateAppUserViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.CreateProcessTemplateTaskViewModel
+    name: CreateProcessTemplateTaskViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel
+    name: CreateProcessTemplateTransitionViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.CreateProcessTemplateViewModel
+    name: CreateProcessTemplateViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.DetailsProcessInstanceViewModel
+    name: DetailsProcessInstanceViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.EditAppUserViewModel
+    name: EditAppUserViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.EditProcessInstanceViewModel
+    name: EditProcessInstanceViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.EditProcessTaskViewModel
+    name: EditProcessTaskViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTaskViewModel
+    name: EditProcessTemplateTaskViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+    name: EditProcessTemplateTransitionViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel
+    name: ProcessInstanceIndexViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.StartProcessInstanceViewModel
+    name: StartProcessInstanceViewModel
+    type: Class
+  - uid: VendorProcessManagerV1.ViewModels.VendorCandidateIndexViewModel
+    name: VendorCandidateIndexViewModel
+    type: Class
+memberLayout: SamePage

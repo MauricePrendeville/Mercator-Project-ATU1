@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>Class ProcessTaskService | VendorProcessManagerV1 </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="Class ProcessTaskService | VendorProcessManagerV1 ">
+      
+      <meta name="description" content="Service class for operations on process tasks such as starting and completing.">
+      <link rel="icon" href="../favicon.ico">
+      <link rel="stylesheet" href="../public/docfx.min.css">
+      <link rel="stylesheet" href="../public/main.css">
+      <meta name="docfx:navrel" content="../toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="../">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/MauricePrendeville/Mercator-Project-ATU1/new/Filters-and-search/apiSpec/new?filename=VendorProcessManagerV1_Services_ProcessTaskService.md&amp;value=---%0Auid%3A%20VendorProcessManagerV1.Services.ProcessTaskService%0Asummary%3A%20&#39;*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax&#39;%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./../public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="ManagedReference">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="../index.html">
+            <img id="logo" class="svg" src="../logo.svg" alt="VendorProcessManagerV1">
+            VendorProcessManagerV1
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+      <div class="toc-offcanvas">
+        <div class="offcanvas-md offcanvas-start" tabindex="-1" id="tocOffcanvas" aria-labelledby="tocOffcanvasLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="tocOffcanvasLabel">Table of Contents</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#tocOffcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <nav class="toc" id="toc"></nav>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="actionbar">
+          <button class="btn btn-lg border-0 d-md-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#tocOffcanvas" aria-controls="tocOffcanvas" aria-expanded="false" aria-label="Show table of contents">
+            <i class="bi bi-list"></i>
+          </button>
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="VendorProcessManagerV1.Services.ProcessTaskService">
+
+
+
+  <h1 id="VendorProcessManagerV1_Services_ProcessTaskService" data-uid="VendorProcessManagerV1.Services.ProcessTaskService" class="text-break">
+Class ProcessTaskService  <a class="header-action link-secondary" title="View source" href="https://github.com/MauricePrendeville/Mercator-Project-ATU1/blob/Filters-and-search/VendorProcessManagerV1/Services/ProcessTaskService.cs/#L14"><i class="bi bi-code-slash"></i></a>
+  </h1>
+
+  <div class="facts text-secondary">
+    <dl><dt>Namespace</dt><dd><a class="xref" href="VendorProcessManagerV1.html">VendorProcessManagerV1</a>.<a class="xref" href="VendorProcessManagerV1.Services.html">Services</a></dd></dl>
+  <dl><dt>Assembly</dt><dd>VendorProcessManagerV1.dll</dd></dl>
+  </div>
+
+  <div class="markdown summary"><p>Service class for operations on process tasks such as starting and completing.</p>
+</div>
+  <div class="markdown conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ProcessTaskService : IProcessTaskService</code></pre>
+  </div>
+
+
+
+
+  <dl class="typelist inheritance">
+    <dt>Inheritance</dt>
+    <dd>
+      <div><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object">object</a></div>
+      <div><span class="xref">ProcessTaskService</span></div>
+    </dd>
+  </dl>
+
+  <dl class="typelist implements">
+    <dt>Implements</dt>
+    <dd>
+      <div><a class="xref" href="VendorProcessManagerV1.Services.IProcessTaskService.html">IProcessTaskService</a></div>
+    </dd>
+  </dl>
+
+
+  <dl class="typelist inheritedMembers">
+    <dt>Inherited Members</dt>
+    <dd>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)">object.Equals(object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)">object.Equals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gethashcode">object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.gettype">object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone">object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.referenceequals">object.ReferenceEquals(object, object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.object.tostring">object.ToString()</a>
+    </div>
+  </dd></dl>
+
+
+
+
+
+
+  <h2 class="section" id="constructors">Constructors
+</h2>
+
+
+  <a id="VendorProcessManagerV1_Services_ProcessTaskService__ctor_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.#ctor*"></a>
+
+  <h3 id="VendorProcessManagerV1_Services_ProcessTaskService__ctor_VendorProcessManagerV1_Data_ApplicationDbContext_Microsoft_AspNetCore_Identity_UserManager_VendorProcessManagerV1_Models_AppUser__" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.#ctor(VendorProcessManagerV1.Data.ApplicationDbContext,Microsoft.AspNetCore.Identity.UserManager{VendorProcessManagerV1.Models.AppUser})">
+  ProcessTaskService(ApplicationDbContext, UserManager&lt;AppUser&gt;)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/MauricePrendeville/Mercator-Project-ATU1/blob/Filters-and-search/VendorProcessManagerV1/Services/ProcessTaskService.cs/#L24"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Constructor method for the service class.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ProcessTaskService(ApplicationDbContext context, UserManager&lt;AppUser&gt; userManager)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>context</code> <a class="xref" href="VendorProcessManagerV1.Data.ApplicationDbContext.html">ApplicationDbContext</a></dt>
+    <dd><p>Bridge to the database</p>
+</dd>
+    <dt><code>userManager</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.identity.usermanager-1">UserManager</a>&lt;<a class="xref" href="VendorProcessManagerV1.Models.AppUser.html">AppUser</a>&gt;</dt>
+    <dd><p>Bridge to the user details in the database</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+  <h2 class="section" id="methods">Methods
+</h2>
+
+
+  <a id="VendorProcessManagerV1_Services_ProcessTaskService_ApproveTaskAsync_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.ApproveTaskAsync*"></a>
+
+  <h3 id="VendorProcessManagerV1_Services_ProcessTaskService_ApproveTaskAsync_System_Guid_System_String_VendorProcessManagerV1_Models_ApproveStatus_System_String_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.ApproveTaskAsync(System.Guid,System.String,VendorProcessManagerV1.Models.ApproveStatus,System.String)">
+  ApproveTaskAsync(Guid, string, ApproveStatus, string?)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/MauricePrendeville/Mercator-Project-ATU1/blob/Filters-and-search/VendorProcessManagerV1/Services/ProcessTaskService.cs/#L267"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>checks to see if user has permission to Approve task. User must
+be member of Approver Team before setting task to approved.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;ApproveTaskResult&gt; ApproveTaskAsync(Guid taskId, string userId, ApproveStatus decision, string? notes)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>taskId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The identifier for the task.</p>
+</dd>
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The identifier for the user.</p>
+</dd>
+    <dt><code>decision</code> <a class="xref" href="VendorProcessManagerV1.Models.ApproveStatus.html">ApproveStatus</a></dt>
+    <dd><p>The approval decision.</p>
+</dd>
+    <dt><code>notes</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>Approval notes.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="VendorProcessManagerV1.Services.ApproveTaskResult.html">ApproveTaskResult</a>&gt;</dt>
+    <dd><p>True if approval is possible, otherwise False</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="VendorProcessManagerV1_Services_ProcessTaskService_CanApproveTaskAsync_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.CanApproveTaskAsync*"></a>
+
+  <h3 id="VendorProcessManagerV1_Services_ProcessTaskService_CanApproveTaskAsync_System_Guid_System_String_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.CanApproveTaskAsync(System.Guid,System.String)">
+  CanApproveTaskAsync(Guid, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/MauricePrendeville/Mercator-Project-ATU1/blob/Filters-and-search/VendorProcessManagerV1/Services/ProcessTaskService.cs/#L224"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks the User's Team to see if they can approve the task</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;bool&gt; CanApproveTaskAsync(Guid taskId, string userId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>taskId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The identifier for the task.</p>
+</dd>
+    <dt><code>userId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The identifier for the user.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd><p>True is user can approve task. False if otherwise.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="VendorProcessManagerV1_Services_ProcessTaskService_CanStartTaskAsync_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.CanStartTaskAsync*"></a>
+
+  <h3 id="VendorProcessManagerV1_Services_ProcessTaskService_CanStartTaskAsync_System_Guid_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.CanStartTaskAsync(System.Guid)">
+  CanStartTaskAsync(Guid)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/MauricePrendeville/Mercator-Project-ATU1/blob/Filters-and-search/VendorProcessManagerV1/Services/ProcessTaskService.cs/#L37"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Checks to see if the Task can be started be checking preceeding task
+is completed or skipped.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;bool&gt; CanStartTaskAsync(Guid taskId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>taskId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The identifier for the task</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.boolean">bool</a>&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="VendorProcessManagerV1_Services_ProcessTaskService_CompleteTaskAsync_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.CompleteTaskAsync*"></a>
+
+  <h3 id="VendorProcessManagerV1_Services_ProcessTaskService_CompleteTaskAsync_System_Guid_System_Nullable_System_Guid__System_String_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.CompleteTaskAsync(System.Guid,System.Nullable{System.Guid},System.String)">
+  CompleteTaskAsync(Guid, Guid?, string)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/MauricePrendeville/Mercator-Project-ATU1/blob/Filters-and-search/VendorProcessManagerV1/Services/ProcessTaskService.cs/#L90"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Sets Task to Completed. Selects next task in process by checking for transition.
+Sets next selected task to In Progress.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;CompleteTaskResult&gt; CompleteTaskAsync(Guid taskId, Guid? selectedTransitionId, string completedById)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>taskId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd><p>The identifier for the task.</p>
+</dd>
+    <dt><code>selectedTransitionId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a>?</dt>
+    <dd><p>Teh selected transition.</p>
+</dd>
+    <dt><code>completedById</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.string">string</a></dt>
+    <dd><p>The identifier for the user.</p>
+</dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="VendorProcessManagerV1.Services.CompleteTaskResult.html">CompleteTaskResult</a>&gt;</dt>
+    <dd><p>Completed task result of true if successful, otherwise false.</p>
+</dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+  <a id="VendorProcessManagerV1_Services_ProcessTaskService_GetAvailableTransitionsAsync_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.GetAvailableTransitionsAsync*"></a>
+
+  <h3 id="VendorProcessManagerV1_Services_ProcessTaskService_GetAvailableTransitionsAsync_System_Guid_" data-uid="VendorProcessManagerV1.Services.ProcessTaskService.GetAvailableTransitionsAsync(System.Guid)">
+  GetAvailableTransitionsAsync(Guid)
+  <a class="header-action link-secondary" title="View source" href="https://github.com/MauricePrendeville/Mercator-Project-ATU1/blob/Filters-and-search/VendorProcessManagerV1/Services/ProcessTaskService.cs/#L66"><i class="bi bi-code-slash"></i></a>
+  </h3>
+
+  <div class="markdown level1 summary"><p>Gets the different options for the next step in the flowchart.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Task&lt;List&lt;ProcessTemplateTransition&gt;&gt; GetAvailableTransitionsAsync(Guid taskId)</code></pre>
+  </div>
+
+  <h4 class="section">Parameters</h4>
+  <dl class="parameters">
+    <dt><code>taskId</code> <a class="xref" href="https://learn.microsoft.com/dotnet/api/system.guid">Guid</a></dt>
+    <dd></dd>
+  </dl>
+
+  <h4 class="section">Returns</h4>
+  <dl class="parameters">
+    <dt><a class="xref" href="https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1">Task</a>&lt;<a class="xref" href="https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="VendorProcessManagerV1.Models.ProcessTemplateTransition.html">ProcessTemplateTransition</a>&gt;&gt;</dt>
+    <dd></dd>
+  </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/MauricePrendeville/Mercator-Project-ATU1/blob/Filters-and-search/VendorProcessManagerV1/Services/ProcessTaskService.cs/#L14" class="edit-link">Edit this page</a>
+        </div>
+
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <span>Made with <a href="https://dotnet.github.io/docfx">docfx</a></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,1190 @@
+{
+  "source_base_path": "C:/Users/james/source/repos/VendorProcessManagerV1/VendorProcessManagerV1",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.AppUsersController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.AppUsersController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.AppUsersController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.AuditLogsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.AuditLogsController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.AuditLogsController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.HomeController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.HomeController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.HomeController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.NotificationsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.NotificationsController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.NotificationsController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.ProcessInstancesController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.ProcessInstancesController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.ProcessInstancesController",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Controllers.ProcessInstancesController.yml\" sourcestartlinenumber=\"1\">Provides actions for viewing, creating, editing, deleting process instances within the\napplication.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTaskTransitionsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTaskTransitionsController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.ProcessTaskTransitionsController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTasks1Controller.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTasks1Controller.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.ProcessTasks1Controller",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTasksController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTasksController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.ProcessTasksController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTemplateTasksController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTemplateTasksController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.ProcessTemplateTasksController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTemplateTransitionsController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTemplateTransitionsController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.ProcessTemplateTransitionsController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTemplatesController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.ProcessTemplatesController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.ProcessTemplatesController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.VendorCandidatesController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.VendorCandidatesController.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers.VendorCandidatesController",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Controllers.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Controllers",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.DTO.GanttDTO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.DTO.GanttDTO.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.DTO.GanttDTO",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.DTO.GanttDTO.yml\" sourcestartlinenumber=\"1\">A data transfer object to pass information to the Frappe Gantt chart system.\nparameters are in camelCase as PascalCase doesn't work with Frappe</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.DTO.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.DTO.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.DTO",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Data.ApplicationDbContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Data.ApplicationDbContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Data.ApplicationDbContext",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Data.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Data.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Data",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.AddAppUserFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.AddAppUserFields.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.AddAppUserFields",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.AddAppUserFields.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.ApplicationDbContextUserChange.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.ApplicationDbContextUserChange.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.ApplicationDbContextUserChange",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.ApplicationDbContextUserChange.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.ChangeToAppUserInDbContext.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.ChangeToAppUserInDbContext.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.ChangeToAppUserInDbContext",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.ChangeToAppUserInDbContext.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.FixTemplateTaskFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.FixTemplateTaskFields.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.FixTemplateTaskFields",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.FixTemplateTaskFields.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.InitialCreate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.InitialCreate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.InitialCreate",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.InitialCreate.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.InitialCreate1.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.InitialCreate1.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.InitialCreate1",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.InitialCreate1.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.PaymentTermsadded.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.PaymentTermsadded.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.PaymentTermsadded",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.PaymentTermsadded.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.SwitchToApproverTeam.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.SwitchToApproverTeam.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.SwitchToApproverTeam",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.SwitchToApproverTeam.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.TemplateTaskTransitionsUpdate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.TemplateTaskTransitionsUpdate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.TemplateTaskTransitionsUpdate",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.TemplateTaskTransitionsUpdate.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.ToTemplateTaskNullable.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.ToTemplateTaskNullable.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.ToTemplateTaskNullable",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.ToTemplateTaskNullable.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.TransitionTaskUpdate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.TransitionTaskUpdate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.TransitionTaskUpdate",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.TransitionTaskUpdate.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.TransitionsTables3.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.TransitionsTables3.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.TransitionsTables3",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.TransitionsTables3.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.UpdateProcessInstanceAndTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.UpdateProcessInstanceAndTask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.UpdateProcessInstanceAndTask",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.UpdateProcessInstanceAndTask.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.UpdateProcessTemplateTaskModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.UpdateProcessTemplateTaskModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.UpdateProcessTemplateTaskModel",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.UpdateProcessTemplateTaskModel.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.VendorNavigation.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.VendorNavigation.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.VendorNavigation",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.VendorNavigation.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.VendorOwnerUpdate2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.VendorOwnerUpdate2.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations.VendorOwnerUpdate2",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Migrations.VendorOwnerUpdate2.yml\" sourcestartlinenumber=\"1\">A base class inherited by each EF Core migration.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Migrations.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Migrations.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Migrations",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.AppUser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.AppUser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.AppUser",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.ApproveStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.ApproveStatus.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.ApproveStatus",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Models.ApproveStatus.yml\" sourcestartlinenumber=\"1\">list of possible approval statuses.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.AuditLog.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.AuditLog.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.AuditLog",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.ErrorViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.ErrorViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.ErrorViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.Notification.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.Notification.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.Notification",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.ProcessInstance.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.ProcessInstance.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.ProcessInstance",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Models.ProcessInstance.yml\" sourcestartlinenumber=\"1\">Represents a single instance of a process generated by choosing an existing template.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.ProcessInstanceStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.ProcessInstanceStatus.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.ProcessInstanceStatus",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Models.ProcessInstanceStatus.yml\" sourcestartlinenumber=\"1\">The list of possible statuses.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.ProcessTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.ProcessTask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.ProcessTask",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Models.ProcessTask.yml\" sourcestartlinenumber=\"1\">Details of a single task that is part of a process instance.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.ProcessTaskStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.ProcessTaskStatus.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.ProcessTaskStatus",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Models.ProcessTaskStatus.yml\" sourcestartlinenumber=\"1\">List of possible task statuses.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.ProcessTaskTransition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.ProcessTaskTransition.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.ProcessTaskTransition",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.ProcessTemplate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.ProcessTemplate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.ProcessTemplate",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Models.ProcessTemplate.yml\" sourcestartlinenumber=\"1\">Represents a template for a process.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.ProcessTemplateTask.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.ProcessTemplateTask.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.ProcessTemplateTask",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Models.ProcessTemplateTask.yml\" sourcestartlinenumber=\"1\">Represents a single task that is associated with a process template</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.ProcessTemplateTransition.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.ProcessTemplateTransition.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.ProcessTemplateTransition",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Models.ProcessTemplateTransition.yml\" sourcestartlinenumber=\"1\">Represents a transition from a template task to the next task. Each task may have one or more transitions.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.TemplateDependency.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.TemplateDependency.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.TemplateDependency",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.VendorCandidate.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.VendorCandidate.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models.VendorCandidate",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Models.VendorCandidate.yml\" sourcestartlinenumber=\"1\">Represents a vendor candidate that can be added to a process instance.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Models.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Models.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Models",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Services.ApproveTaskResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Services.ApproveTaskResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Services.ApproveTaskResult",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Services.CompleteTaskResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Services.CompleteTaskResult.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Services.CompleteTaskResult",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Services.INotificationService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Services.INotificationService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Services.INotificationService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Services.IProcessInstanceService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Services.IProcessInstanceService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Services.IProcessInstanceService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Services.IProcessTaskService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Services.IProcessTaskService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Services.IProcessTaskService",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Services.NotificationService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Services.NotificationService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Services.NotificationService",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Services.NotificationService.yml\" sourcestartlinenumber=\"1\">A service class to count active process instances that are associated with a\nlogged in user.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Services.PendingApprovalItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Services.PendingApprovalItem.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Services.PendingApprovalItem",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Services.ProcessInstanceService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Services.ProcessInstanceService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Services.ProcessInstanceService",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Services.ProcessInstanceService.yml\" sourcestartlinenumber=\"1\">A service class that can start a new process instance based on a template.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Services.ProcessTaskService.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Services.ProcessTaskService.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Services.ProcessTaskService",
+      "Summary": "<p sourcefile=\"api/VendorProcessManagerV1.Services.ProcessTaskService.yml\" sourcestartlinenumber=\"1\">Service class for operations on process tasks such as starting and completing.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.Services.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.Services.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.Services",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewComponents.ApprovalAlertViewComponent.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewComponents.ApprovalAlertViewComponent.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewComponents.ApprovalAlertViewComponent",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewComponents.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewComponents.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewComponents",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.ApproveTaskViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.ApproveTaskViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.ApproveTaskViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.CompleteTaskViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.CompleteTaskViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.CompleteTaskViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.CreateAppUserViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.CreateAppUserViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.CreateAppUserViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.CreateProcessTemplateTaskViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.CreateProcessTemplateTaskViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.CreateProcessTemplateTaskViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.CreateProcessTemplateViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.CreateProcessTemplateViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.CreateProcessTemplateViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.DetailsProcessInstanceViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.DetailsProcessInstanceViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.DetailsProcessInstanceViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.EditAppUserViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.EditAppUserViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.EditAppUserViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.EditProcessInstanceViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.EditProcessInstanceViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.EditProcessInstanceViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.EditProcessTaskViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.EditProcessTaskViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.EditProcessTaskViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.EditProcessTemplateTaskViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.EditProcessTemplateTaskViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.EditProcessTemplateTaskViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.StartProcessInstanceViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.StartProcessInstanceViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.StartProcessInstanceViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.VendorCandidateIndexViewModel.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.VendorCandidateIndexViewModel.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels.VendorCandidateIndexViewModel",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/VendorProcessManagerV1.ViewModels.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/VendorProcessManagerV1.ViewModels.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "VendorProcessManagerV1.ViewModels",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/getting-started.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/getting-started.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "docs/introduction.md",
+      "output": {
+        ".html": {
+          "relative_path": "docs/introduction.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "docs/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "docs/toc.html"
+        },
+        ".json": {
+          "relative_path": "docs/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "wwwroot/lib/jquery-validation/LICENSE.md",
+      "output": {
+        ".html": {
+          "relative_path": "wwwroot/lib/jquery-validation/LICENSE.html"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

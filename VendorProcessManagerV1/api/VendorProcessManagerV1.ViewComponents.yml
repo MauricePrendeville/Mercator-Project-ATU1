@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.ViewComponents
+  commentId: N:VendorProcessManagerV1.ViewComponents
+  id: VendorProcessManagerV1.ViewComponents
+  children:
+  - VendorProcessManagerV1.ViewComponents.ApprovalAlertViewComponent
+  langs:
+  - csharp
+  - vb
+  name: VendorProcessManagerV1.ViewComponents
+  nameWithType: VendorProcessManagerV1.ViewComponents
+  fullName: VendorProcessManagerV1.ViewComponents
+  type: Namespace
+  assemblies:
+  - VendorProcessManagerV1
+references:
+- uid: VendorProcessManagerV1.ViewComponents.ApprovalAlertViewComponent
+  commentId: T:VendorProcessManagerV1.ViewComponents.ApprovalAlertViewComponent
+  href: VendorProcessManagerV1.ViewComponents.ApprovalAlertViewComponent.html
+  name: ApprovalAlertViewComponent
+  nameWithType: ApprovalAlertViewComponent
+  fullName: VendorProcessManagerV1.ViewComponents.ApprovalAlertViewComponent

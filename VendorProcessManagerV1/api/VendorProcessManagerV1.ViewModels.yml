@@ -1,0 +1,156 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.ViewModels
+  commentId: N:VendorProcessManagerV1.ViewModels
+  id: VendorProcessManagerV1.ViewModels
+  children:
+  - VendorProcessManagerV1.ViewModels.ApproveTaskViewModel
+  - VendorProcessManagerV1.ViewModels.CompleteTaskViewModel
+  - VendorProcessManagerV1.ViewModels.CreateAppUserViewModel
+  - VendorProcessManagerV1.ViewModels.CreateProcessTemplateTaskViewModel
+  - VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel
+  - VendorProcessManagerV1.ViewModels.CreateProcessTemplateViewModel
+  - VendorProcessManagerV1.ViewModels.DetailsProcessInstanceViewModel
+  - VendorProcessManagerV1.ViewModels.EditAppUserViewModel
+  - VendorProcessManagerV1.ViewModels.EditProcessInstanceViewModel
+  - VendorProcessManagerV1.ViewModels.EditProcessTaskViewModel
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTaskViewModel
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  - VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel
+  - VendorProcessManagerV1.ViewModels.StartProcessInstanceViewModel
+  - VendorProcessManagerV1.ViewModels.VendorCandidateIndexViewModel
+  langs:
+  - csharp
+  - vb
+  name: VendorProcessManagerV1.ViewModels
+  nameWithType: VendorProcessManagerV1.ViewModels
+  fullName: VendorProcessManagerV1.ViewModels
+  type: Namespace
+  assemblies:
+  - VendorProcessManagerV1
+references:
+- uid: VendorProcessManagerV1.ViewModels.ApproveTaskViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.ApproveTaskViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.ApproveTaskViewModel.html
+  name: ApproveTaskViewModel
+  nameWithType: ApproveTaskViewModel
+  fullName: VendorProcessManagerV1.ViewModels.ApproveTaskViewModel
+- uid: VendorProcessManagerV1.ViewModels.CompleteTaskViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.CompleteTaskViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.CompleteTaskViewModel.html
+  name: CompleteTaskViewModel
+  nameWithType: CompleteTaskViewModel
+  fullName: VendorProcessManagerV1.ViewModels.CompleteTaskViewModel
+- uid: VendorProcessManagerV1.ViewModels.CreateAppUserViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.CreateAppUserViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.CreateAppUserViewModel.html
+  name: CreateAppUserViewModel
+  nameWithType: CreateAppUserViewModel
+  fullName: VendorProcessManagerV1.ViewModels.CreateAppUserViewModel
+- uid: VendorProcessManagerV1.ViewModels.CreateProcessTemplateTaskViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.CreateProcessTemplateTaskViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.CreateProcessTemplateTaskViewModel.html
+  name: CreateProcessTemplateTaskViewModel
+  nameWithType: CreateProcessTemplateTaskViewModel
+  fullName: VendorProcessManagerV1.ViewModels.CreateProcessTemplateTaskViewModel
+- uid: VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel.html
+  name: CreateProcessTemplateTransitionViewModel
+  nameWithType: CreateProcessTemplateTransitionViewModel
+  fullName: VendorProcessManagerV1.ViewModels.CreateProcessTemplateTransitionViewModel
+- uid: VendorProcessManagerV1.ViewModels.CreateProcessTemplateViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.CreateProcessTemplateViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.CreateProcessTemplateViewModel.html
+  name: CreateProcessTemplateViewModel
+  nameWithType: CreateProcessTemplateViewModel
+  fullName: VendorProcessManagerV1.ViewModels.CreateProcessTemplateViewModel
+- uid: VendorProcessManagerV1.ViewModels.DetailsProcessInstanceViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.DetailsProcessInstanceViewModel
+  href: VendorProcessManagerV1.ViewModels.DetailsProcessInstanceViewModel.html
+  name: DetailsProcessInstanceViewModel
+  nameWithType: DetailsProcessInstanceViewModel
+  fullName: VendorProcessManagerV1.ViewModels.DetailsProcessInstanceViewModel
+- uid: VendorProcessManagerV1.ViewModels.EditAppUserViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.EditAppUserViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.EditAppUserViewModel.html
+  name: EditAppUserViewModel
+  nameWithType: EditAppUserViewModel
+  fullName: VendorProcessManagerV1.ViewModels.EditAppUserViewModel
+- uid: VendorProcessManagerV1.ViewModels.EditProcessInstanceViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.EditProcessInstanceViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.EditProcessInstanceViewModel.html
+  name: EditProcessInstanceViewModel
+  nameWithType: EditProcessInstanceViewModel
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessInstanceViewModel
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTaskViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.EditProcessTaskViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.EditProcessTaskViewModel.html
+  name: EditProcessTaskViewModel
+  nameWithType: EditProcessTaskViewModel
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTaskViewModel
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTaskViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.EditProcessTemplateTaskViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTaskViewModel.html
+  name: EditProcessTemplateTaskViewModel
+  nameWithType: EditProcessTemplateTaskViewModel
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTaskViewModel
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html
+  name: EditProcessTemplateTransitionViewModel
+  nameWithType: EditProcessTemplateTransitionViewModel
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+- uid: VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel.html
+  name: ProcessInstanceIndexViewModel
+  nameWithType: ProcessInstanceIndexViewModel
+  fullName: VendorProcessManagerV1.ViewModels.ProcessInstanceIndexViewModel
+- uid: VendorProcessManagerV1.ViewModels.StartProcessInstanceViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.StartProcessInstanceViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.ViewModels.StartProcessInstanceViewModel.html
+  name: StartProcessInstanceViewModel
+  nameWithType: StartProcessInstanceViewModel
+  fullName: VendorProcessManagerV1.ViewModels.StartProcessInstanceViewModel
+- uid: VendorProcessManagerV1.ViewModels.VendorCandidateIndexViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.VendorCandidateIndexViewModel
+  href: VendorProcessManagerV1.ViewModels.VendorCandidateIndexViewModel.html
+  name: VendorCandidateIndexViewModel
+  nameWithType: VendorCandidateIndexViewModel
+  fullName: VendorProcessManagerV1.ViewModels.VendorCandidateIndexViewModel
+- uid: VendorProcessManagerV1.ViewModels
+  commentId: N:VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.html
+  name: VendorProcessManagerV1.ViewModels
+  nameWithType: VendorProcessManagerV1.ViewModels
+  fullName: VendorProcessManagerV1.ViewModels
+  spec.csharp:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.ViewModels
+    name: ViewModels
+    href: VendorProcessManagerV1.ViewModels.html
+  spec.vb:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.ViewModels
+    name: ViewModels
+    href: VendorProcessManagerV1.ViewModels.html

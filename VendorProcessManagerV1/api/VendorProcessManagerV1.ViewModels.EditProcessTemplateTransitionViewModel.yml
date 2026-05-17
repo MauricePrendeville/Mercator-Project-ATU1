@@ -1,0 +1,992 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  commentId: T:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  id: EditProcessTemplateTransitionViewModel
+  parent: VendorProcessManagerV1.ViewModels
+  children:
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionExpression
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionType
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionTypeOptions
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.DisplayLabel
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ExistingDefaultLabel
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.FromProcessTemplateTaskId
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.HasExistingDefault
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.Id
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.IsDefault
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ProcessTemplateId
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.SortOrder
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TargetTaskOptions
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TaskTitle
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TemplateName
+  - VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ToProcessTemplateTaskId
+  langs:
+  - csharp
+  - vb
+  name: EditProcessTemplateTransitionViewModel
+  nameWithType: EditProcessTemplateTransitionViewModel
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  type: Class
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: EditProcessTemplateTransitionViewModel
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 5
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public class EditProcessTemplateTransitionViewModel
+    content.vb: Public Class EditProcessTemplateTransitionViewModel
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.Id
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.Id
+  id: Id
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: EditProcessTemplateTransitionViewModel.Id
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.Id
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: Id
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 7
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public Guid Id { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property Id As Guid
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.Id*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.FromProcessTemplateTaskId
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.FromProcessTemplateTaskId
+  id: FromProcessTemplateTaskId
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: FromProcessTemplateTaskId
+  nameWithType: EditProcessTemplateTransitionViewModel.FromProcessTemplateTaskId
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.FromProcessTemplateTaskId
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: FromProcessTemplateTaskId
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 9
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public Guid FromProcessTemplateTaskId { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property FromProcessTemplateTaskId As Guid
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.FromProcessTemplateTaskId*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ProcessTemplateId
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ProcessTemplateId
+  id: ProcessTemplateId
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: ProcessTemplateId
+  nameWithType: EditProcessTemplateTransitionViewModel.ProcessTemplateId
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ProcessTemplateId
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ProcessTemplateId
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 10
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public Guid ProcessTemplateId { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property ProcessTemplateId As Guid
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ProcessTemplateId*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TaskTitle
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TaskTitle
+  id: TaskTitle
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: TaskTitle
+  nameWithType: EditProcessTemplateTransitionViewModel.TaskTitle
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TaskTitle
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: TaskTitle
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 11
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public string? TaskTitle { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property TaskTitle As String
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TaskTitle*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TemplateName
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TemplateName
+  id: TemplateName
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: TemplateName
+  nameWithType: EditProcessTemplateTransitionViewModel.TemplateName
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TemplateName
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: TemplateName
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 12
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public string? TemplateName { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property TemplateName As String
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TemplateName*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.DisplayLabel
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.DisplayLabel
+  id: DisplayLabel
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: DisplayLabel
+  nameWithType: EditProcessTemplateTransitionViewModel.DisplayLabel
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.DisplayLabel
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: DisplayLabel
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 14
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: >-
+      [Required]
+
+      public string DisplayLabel { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: >-
+      <Required>
+
+      Public Property DisplayLabel As String
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.DisplayLabel*
+  attributes:
+  - type: System.ComponentModel.DataAnnotations.RequiredAttribute
+    ctor: System.ComponentModel.DataAnnotations.RequiredAttribute.#ctor
+    arguments: []
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ToProcessTemplateTaskId
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ToProcessTemplateTaskId
+  id: ToProcessTemplateTaskId
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: ToProcessTemplateTaskId
+  nameWithType: EditProcessTemplateTransitionViewModel.ToProcessTemplateTaskId
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ToProcessTemplateTaskId
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ToProcessTemplateTaskId
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 16
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public Guid? ToProcessTemplateTaskId { get; set; }
+    parameters: []
+    return:
+      type: System.Nullable{System.Guid}
+    content.vb: Public Property ToProcessTemplateTaskId As Guid?
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ToProcessTemplateTaskId*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TargetTaskOptions
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TargetTaskOptions
+  id: TargetTaskOptions
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: TargetTaskOptions
+  nameWithType: EditProcessTemplateTransitionViewModel.TargetTaskOptions
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TargetTaskOptions
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: TargetTaskOptions
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 17
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public SelectList? TargetTaskOptions { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.AspNetCore.Mvc.Rendering.SelectList
+    content.vb: Public Property TargetTaskOptions As SelectList
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TargetTaskOptions*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.SortOrder
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.SortOrder
+  id: SortOrder
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: SortOrder
+  nameWithType: EditProcessTemplateTransitionViewModel.SortOrder
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.SortOrder
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: SortOrder
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 18
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public int SortOrder { get; set; }
+    parameters: []
+    return:
+      type: System.Int32
+    content.vb: Public Property SortOrder As Integer
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.SortOrder*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionType
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionType
+  id: ConditionType
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: ConditionType
+  nameWithType: EditProcessTemplateTransitionViewModel.ConditionType
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionType
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ConditionType
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 19
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public string? ConditionType { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ConditionType As String
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionType*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionTypeOptions
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionTypeOptions
+  id: ConditionTypeOptions
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: ConditionTypeOptions
+  nameWithType: EditProcessTemplateTransitionViewModel.ConditionTypeOptions
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionTypeOptions
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ConditionTypeOptions
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 20
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public SelectList? ConditionTypeOptions { get; set; }
+    parameters: []
+    return:
+      type: Microsoft.AspNetCore.Mvc.Rendering.SelectList
+    content.vb: Public Property ConditionTypeOptions As SelectList
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionTypeOptions*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionExpression
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionExpression
+  id: ConditionExpression
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: ConditionExpression
+  nameWithType: EditProcessTemplateTransitionViewModel.ConditionExpression
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionExpression
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ConditionExpression
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 21
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public string? ConditionExpression { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ConditionExpression As String
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionExpression*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.IsDefault
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.IsDefault
+  id: IsDefault
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: IsDefault
+  nameWithType: EditProcessTemplateTransitionViewModel.IsDefault
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.IsDefault
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: IsDefault
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 23
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public bool IsDefault { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property IsDefault As Boolean
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.IsDefault*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.HasExistingDefault
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.HasExistingDefault
+  id: HasExistingDefault
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: HasExistingDefault
+  nameWithType: EditProcessTemplateTransitionViewModel.HasExistingDefault
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.HasExistingDefault
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: HasExistingDefault
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 25
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public bool HasExistingDefault { get; set; }
+    parameters: []
+    return:
+      type: System.Boolean
+    content.vb: Public Property HasExistingDefault As Boolean
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.HasExistingDefault*
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ExistingDefaultLabel
+  commentId: P:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ExistingDefaultLabel
+  id: ExistingDefaultLabel
+  parent: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel
+  langs:
+  - csharp
+  - vb
+  name: ExistingDefaultLabel
+  nameWithType: EditProcessTemplateTransitionViewModel.ExistingDefaultLabel
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ExistingDefaultLabel
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/ViewModels/EditProcessTemplateTransitionViewModel.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ExistingDefaultLabel
+    path: ViewModels/EditProcessTemplateTransitionViewModel.cs
+    startLine: 26
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.ViewModels
+  syntax:
+    content: public string? ExistingDefaultLabel { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ExistingDefaultLabel As String
+  overload: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ExistingDefaultLabel*
+references:
+- uid: VendorProcessManagerV1.ViewModels
+  commentId: N:VendorProcessManagerV1.ViewModels
+  href: VendorProcessManagerV1.html
+  name: VendorProcessManagerV1.ViewModels
+  nameWithType: VendorProcessManagerV1.ViewModels
+  fullName: VendorProcessManagerV1.ViewModels
+  spec.csharp:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.ViewModels
+    name: ViewModels
+    href: VendorProcessManagerV1.ViewModels.html
+  spec.vb:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.ViewModels
+    name: ViewModels
+    href: VendorProcessManagerV1.ViewModels.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.Id*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.Id
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_Id
+  name: Id
+  nameWithType: EditProcessTemplateTransitionViewModel.Id
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.Id
+- uid: System.Guid
+  commentId: T:System.Guid
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.guid
+  name: Guid
+  nameWithType: Guid
+  fullName: System.Guid
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.FromProcessTemplateTaskId*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.FromProcessTemplateTaskId
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_FromProcessTemplateTaskId
+  name: FromProcessTemplateTaskId
+  nameWithType: EditProcessTemplateTransitionViewModel.FromProcessTemplateTaskId
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.FromProcessTemplateTaskId
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ProcessTemplateId*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ProcessTemplateId
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_ProcessTemplateId
+  name: ProcessTemplateId
+  nameWithType: EditProcessTemplateTransitionViewModel.ProcessTemplateId
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ProcessTemplateId
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TaskTitle*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TaskTitle
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_TaskTitle
+  name: TaskTitle
+  nameWithType: EditProcessTemplateTransitionViewModel.TaskTitle
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TaskTitle
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TemplateName*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TemplateName
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_TemplateName
+  name: TemplateName
+  nameWithType: EditProcessTemplateTransitionViewModel.TemplateName
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TemplateName
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.DisplayLabel*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.DisplayLabel
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_DisplayLabel
+  name: DisplayLabel
+  nameWithType: EditProcessTemplateTransitionViewModel.DisplayLabel
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.DisplayLabel
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ToProcessTemplateTaskId*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ToProcessTemplateTaskId
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_ToProcessTemplateTaskId
+  name: ToProcessTemplateTaskId
+  nameWithType: EditProcessTemplateTransitionViewModel.ToProcessTemplateTaskId
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ToProcessTemplateTaskId
+- uid: System.Nullable{System.Guid}
+  commentId: T:System.Nullable{System.Guid}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.guid
+  name: Guid?
+  nameWithType: Guid?
+  fullName: System.Guid?
+  spec.csharp:
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '?'
+  spec.vb:
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '?'
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TargetTaskOptions*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TargetTaskOptions
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_TargetTaskOptions
+  name: TargetTaskOptions
+  nameWithType: EditProcessTemplateTransitionViewModel.TargetTaskOptions
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.TargetTaskOptions
+- uid: Microsoft.AspNetCore.Mvc.Rendering.SelectList
+  commentId: T:Microsoft.AspNetCore.Mvc.Rendering.SelectList
+  parent: Microsoft.AspNetCore.Mvc.Rendering
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist
+  name: SelectList
+  nameWithType: SelectList
+  fullName: Microsoft.AspNetCore.Mvc.Rendering.SelectList
+- uid: Microsoft.AspNetCore.Mvc.Rendering
+  commentId: N:Microsoft.AspNetCore.Mvc.Rendering
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/microsoft
+  name: Microsoft.AspNetCore.Mvc.Rendering
+  nameWithType: Microsoft.AspNetCore.Mvc.Rendering
+  fullName: Microsoft.AspNetCore.Mvc.Rendering
+  spec.csharp:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Mvc
+    name: Mvc
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc
+  - name: .
+  - uid: Microsoft.AspNetCore.Mvc.Rendering
+    name: Rendering
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.rendering
+  spec.vb:
+  - uid: Microsoft
+    name: Microsoft
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft
+  - name: .
+  - uid: Microsoft.AspNetCore
+    name: AspNetCore
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore
+  - name: .
+  - uid: Microsoft.AspNetCore.Mvc
+    name: Mvc
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc
+  - name: .
+  - uid: Microsoft.AspNetCore.Mvc.Rendering
+    name: Rendering
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/microsoft.aspnetcore.mvc.rendering
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.SortOrder*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.SortOrder
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_SortOrder
+  name: SortOrder
+  nameWithType: EditProcessTemplateTransitionViewModel.SortOrder
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.SortOrder
+- uid: System.Int32
+  commentId: T:System.Int32
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.int32
+  name: int
+  nameWithType: int
+  fullName: int
+  nameWithType.vb: Integer
+  fullName.vb: Integer
+  name.vb: Integer
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionType*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionType
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_ConditionType
+  name: ConditionType
+  nameWithType: EditProcessTemplateTransitionViewModel.ConditionType
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionType
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionTypeOptions*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionTypeOptions
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_ConditionTypeOptions
+  name: ConditionTypeOptions
+  nameWithType: EditProcessTemplateTransitionViewModel.ConditionTypeOptions
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionTypeOptions
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionExpression*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionExpression
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_ConditionExpression
+  name: ConditionExpression
+  nameWithType: EditProcessTemplateTransitionViewModel.ConditionExpression
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ConditionExpression
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.IsDefault*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.IsDefault
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_IsDefault
+  name: IsDefault
+  nameWithType: EditProcessTemplateTransitionViewModel.IsDefault
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.IsDefault
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.boolean
+  name: bool
+  nameWithType: bool
+  fullName: bool
+  nameWithType.vb: Boolean
+  fullName.vb: Boolean
+  name.vb: Boolean
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.HasExistingDefault*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.HasExistingDefault
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_HasExistingDefault
+  name: HasExistingDefault
+  nameWithType: EditProcessTemplateTransitionViewModel.HasExistingDefault
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.HasExistingDefault
+- uid: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ExistingDefaultLabel*
+  commentId: Overload:VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ExistingDefaultLabel
+  href: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.html#VendorProcessManagerV1_ViewModels_EditProcessTemplateTransitionViewModel_ExistingDefaultLabel
+  name: ExistingDefaultLabel
+  nameWithType: EditProcessTemplateTransitionViewModel.ExistingDefaultLabel
+  fullName: VendorProcessManagerV1.ViewModels.EditProcessTemplateTransitionViewModel.ExistingDefaultLabel

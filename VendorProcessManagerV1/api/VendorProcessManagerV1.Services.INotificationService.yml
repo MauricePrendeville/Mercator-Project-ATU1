@@ -1,0 +1,300 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.Services.INotificationService
+  commentId: T:VendorProcessManagerV1.Services.INotificationService
+  id: INotificationService
+  parent: VendorProcessManagerV1.Services
+  children:
+  - VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalCountAsync(System.String)
+  - VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalsAsync(System.String)
+  langs:
+  - csharp
+  - vb
+  name: INotificationService
+  nameWithType: INotificationService
+  fullName: VendorProcessManagerV1.Services.INotificationService
+  type: Interface
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/INotificationService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: INotificationService
+    path: Services/INotificationService.cs
+    startLine: 2
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: public interface INotificationService
+    content.vb: Public Interface INotificationService
+  derivedClasses:
+  - VendorProcessManagerV1.Services.NotificationService
+- uid: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalCountAsync(System.String)
+  commentId: M:VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalCountAsync(System.String)
+  id: GetPendingApprovalCountAsync(System.String)
+  parent: VendorProcessManagerV1.Services.INotificationService
+  langs:
+  - csharp
+  - vb
+  name: GetPendingApprovalCountAsync(string)
+  nameWithType: INotificationService.GetPendingApprovalCountAsync(string)
+  fullName: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalCountAsync(string)
+  type: Method
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/INotificationService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: GetPendingApprovalCountAsync
+    path: Services/INotificationService.cs
+    startLine: 4
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: Task<int> GetPendingApprovalCountAsync(string userId)
+    parameters:
+    - id: userId
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{System.Int32}
+    content.vb: Function GetPendingApprovalCountAsync(userId As String) As Task(Of Integer)
+  overload: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalCountAsync*
+  nameWithType.vb: INotificationService.GetPendingApprovalCountAsync(String)
+  fullName.vb: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalCountAsync(String)
+  name.vb: GetPendingApprovalCountAsync(String)
+- uid: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalsAsync(System.String)
+  commentId: M:VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalsAsync(System.String)
+  id: GetPendingApprovalsAsync(System.String)
+  parent: VendorProcessManagerV1.Services.INotificationService
+  langs:
+  - csharp
+  - vb
+  name: GetPendingApprovalsAsync(string)
+  nameWithType: INotificationService.GetPendingApprovalsAsync(string)
+  fullName: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalsAsync(string)
+  type: Method
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/INotificationService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: GetPendingApprovalsAsync
+    path: Services/INotificationService.cs
+    startLine: 5
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: Task<List<PendingApprovalItem>> GetPendingApprovalsAsync(string userId)
+    parameters:
+    - id: userId
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.List{VendorProcessManagerV1.Services.PendingApprovalItem}}
+    content.vb: Function GetPendingApprovalsAsync(userId As String) As Task(Of List(Of PendingApprovalItem))
+  overload: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalsAsync*
+  nameWithType.vb: INotificationService.GetPendingApprovalsAsync(String)
+  fullName.vb: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalsAsync(String)
+  name.vb: GetPendingApprovalsAsync(String)
+references:
+- uid: VendorProcessManagerV1.Services
+  commentId: N:VendorProcessManagerV1.Services
+  href: VendorProcessManagerV1.html
+  name: VendorProcessManagerV1.Services
+  nameWithType: VendorProcessManagerV1.Services
+  fullName: VendorProcessManagerV1.Services
+  spec.csharp:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Services
+    name: Services
+    href: VendorProcessManagerV1.Services.html
+  spec.vb:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Services
+    name: Services
+    href: VendorProcessManagerV1.Services.html
+- uid: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalCountAsync*
+  commentId: Overload:VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalCountAsync
+  href: VendorProcessManagerV1.Services.INotificationService.html#VendorProcessManagerV1_Services_INotificationService_GetPendingApprovalCountAsync_System_String_
+  name: GetPendingApprovalCountAsync
+  nameWithType: INotificationService.GetPendingApprovalCountAsync
+  fullName: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalCountAsync
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Threading.Tasks.Task{System.Int32}
+  commentId: T:System.Threading.Tasks.Task{System.Int32}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<int>
+  nameWithType: Task<int>
+  fullName: System.Threading.Tasks.Task<int>
+  nameWithType.vb: Task(Of Integer)
+  fullName.vb: System.Threading.Tasks.Task(Of Integer)
+  name.vb: Task(Of Integer)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Int32
+    name: int
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Int32
+    name: Integer
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.int32
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalsAsync*
+  commentId: Overload:VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalsAsync
+  href: VendorProcessManagerV1.Services.INotificationService.html#VendorProcessManagerV1_Services_INotificationService_GetPendingApprovalsAsync_System_String_
+  name: GetPendingApprovalsAsync
+  nameWithType: INotificationService.GetPendingApprovalsAsync
+  fullName: VendorProcessManagerV1.Services.INotificationService.GetPendingApprovalsAsync
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.List{VendorProcessManagerV1.Services.PendingApprovalItem}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.List{VendorProcessManagerV1.Services.PendingApprovalItem}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<List<PendingApprovalItem>>
+  nameWithType: Task<List<PendingApprovalItem>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.List<VendorProcessManagerV1.Services.PendingApprovalItem>>
+  nameWithType.vb: Task(Of List(Of PendingApprovalItem))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.List(Of VendorProcessManagerV1.Services.PendingApprovalItem))
+  name.vb: Task(Of List(Of PendingApprovalItem))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: VendorProcessManagerV1.Services.PendingApprovalItem
+    name: PendingApprovalItem
+    href: VendorProcessManagerV1.Services.PendingApprovalItem.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: VendorProcessManagerV1.Services.PendingApprovalItem
+    name: PendingApprovalItem
+    href: VendorProcessManagerV1.Services.PendingApprovalItem.html
+  - name: )
+  - name: )

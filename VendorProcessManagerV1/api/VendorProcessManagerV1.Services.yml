@@ -1,0 +1,104 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.Services
+  commentId: N:VendorProcessManagerV1.Services
+  id: VendorProcessManagerV1.Services
+  children:
+  - VendorProcessManagerV1.Services.ApproveTaskResult
+  - VendorProcessManagerV1.Services.CompleteTaskResult
+  - VendorProcessManagerV1.Services.INotificationService
+  - VendorProcessManagerV1.Services.IProcessInstanceService
+  - VendorProcessManagerV1.Services.IProcessTaskService
+  - VendorProcessManagerV1.Services.NotificationService
+  - VendorProcessManagerV1.Services.PendingApprovalItem
+  - VendorProcessManagerV1.Services.ProcessInstanceService
+  - VendorProcessManagerV1.Services.ProcessTaskService
+  langs:
+  - csharp
+  - vb
+  name: VendorProcessManagerV1.Services
+  nameWithType: VendorProcessManagerV1.Services
+  fullName: VendorProcessManagerV1.Services
+  type: Namespace
+  assemblies:
+  - VendorProcessManagerV1
+references:
+- uid: VendorProcessManagerV1.Services.INotificationService
+  commentId: T:VendorProcessManagerV1.Services.INotificationService
+  parent: VendorProcessManagerV1.Services
+  href: VendorProcessManagerV1.Services.INotificationService.html
+  name: INotificationService
+  nameWithType: INotificationService
+  fullName: VendorProcessManagerV1.Services.INotificationService
+- uid: VendorProcessManagerV1.Services.PendingApprovalItem
+  commentId: T:VendorProcessManagerV1.Services.PendingApprovalItem
+  href: VendorProcessManagerV1.Services.PendingApprovalItem.html
+  name: PendingApprovalItem
+  nameWithType: PendingApprovalItem
+  fullName: VendorProcessManagerV1.Services.PendingApprovalItem
+- uid: VendorProcessManagerV1.Services.IProcessInstanceService
+  commentId: T:VendorProcessManagerV1.Services.IProcessInstanceService
+  parent: VendorProcessManagerV1.Services
+  href: VendorProcessManagerV1.Services.IProcessInstanceService.html
+  name: IProcessInstanceService
+  nameWithType: IProcessInstanceService
+  fullName: VendorProcessManagerV1.Services.IProcessInstanceService
+- uid: VendorProcessManagerV1.Services.IProcessTaskService
+  commentId: T:VendorProcessManagerV1.Services.IProcessTaskService
+  parent: VendorProcessManagerV1.Services
+  href: VendorProcessManagerV1.Services.IProcessTaskService.html
+  name: IProcessTaskService
+  nameWithType: IProcessTaskService
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService
+- uid: VendorProcessManagerV1.Services.CompleteTaskResult
+  commentId: T:VendorProcessManagerV1.Services.CompleteTaskResult
+  href: VendorProcessManagerV1.Services.CompleteTaskResult.html
+  name: CompleteTaskResult
+  nameWithType: CompleteTaskResult
+  fullName: VendorProcessManagerV1.Services.CompleteTaskResult
+- uid: VendorProcessManagerV1.Services.ApproveTaskResult
+  commentId: T:VendorProcessManagerV1.Services.ApproveTaskResult
+  href: VendorProcessManagerV1.Services.ApproveTaskResult.html
+  name: ApproveTaskResult
+  nameWithType: ApproveTaskResult
+  fullName: VendorProcessManagerV1.Services.ApproveTaskResult
+- uid: VendorProcessManagerV1.Services.NotificationService
+  commentId: T:VendorProcessManagerV1.Services.NotificationService
+  href: VendorProcessManagerV1.Services.NotificationService.html
+  name: NotificationService
+  nameWithType: NotificationService
+  fullName: VendorProcessManagerV1.Services.NotificationService
+- uid: VendorProcessManagerV1.Services.ProcessInstanceService
+  commentId: T:VendorProcessManagerV1.Services.ProcessInstanceService
+  href: VendorProcessManagerV1.Services.ProcessInstanceService.html
+  name: ProcessInstanceService
+  nameWithType: ProcessInstanceService
+  fullName: VendorProcessManagerV1.Services.ProcessInstanceService
+- uid: VendorProcessManagerV1.Services.ProcessTaskService
+  commentId: T:VendorProcessManagerV1.Services.ProcessTaskService
+  href: VendorProcessManagerV1.Services.ProcessTaskService.html
+  name: ProcessTaskService
+  nameWithType: ProcessTaskService
+  fullName: VendorProcessManagerV1.Services.ProcessTaskService
+- uid: VendorProcessManagerV1.Services
+  commentId: N:VendorProcessManagerV1.Services
+  href: VendorProcessManagerV1.html
+  name: VendorProcessManagerV1.Services
+  nameWithType: VendorProcessManagerV1.Services
+  fullName: VendorProcessManagerV1.Services
+  spec.csharp:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Services
+    name: Services
+    href: VendorProcessManagerV1.Services.html
+  spec.vb:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Services
+    name: Services
+    href: VendorProcessManagerV1.Services.html

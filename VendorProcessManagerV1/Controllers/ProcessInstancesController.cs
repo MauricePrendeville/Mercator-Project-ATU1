@@ -185,13 +185,21 @@ namespace VendorProcessManagerV1.Controllers
             var vm = new DetailsProcessInstanceViewModel
             {
                 ProcessInstance = processInstance,
-                GanttTasks = BuildInstanceGannt(processInstance)
+                GanttTasks = BuildInstanceGantt(processInstance)
             };
                         
             return View(vm);
         }
 
         // GET: ProcessInstances/Create
+        /// <summary>
+        /// GET method for creating a ProcessInstance 
+        /// </summary>
+        /// <param name="id">The id number of the Process Template used to create the 
+        /// Instance</param>
+        /// <returns>The viewmodel for the new instance is successful. The details of the Template 
+        /// if there are no tasks associated with it or not found if the template does not 
+        /// exist </returns>
         public async Task<IActionResult> Create(Guid id)
         {
             var template = await _context.ProcessTemplates
@@ -221,6 +229,12 @@ namespace VendorProcessManagerV1.Controllers
         // POST: ProcessInstances/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST action to create a ProcessInstance
+        /// </summary>
+        /// <param name="processInstance"> The details to create a new process instance.</param>
+        /// <returns>A redirect to the Index if successful, otherwise the view with the 
+        /// current viewmodel. </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,TemplateId,VendorCandidateId,InitiatedBy,StartDate,TargetEndDate,ActualEndDate,Status")] ProcessInstance processInstance)
@@ -236,6 +250,12 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessInstances/Edit/5
+        /// <summary>
+        /// The GET action for Editing ProcessInstances
+        /// </summary>
+        /// <param name="id">The Id number of the ProcessInstance</param>
+        /// <returns>The viewmodel with the updated details if successful, otherwise 
+        /// a NotFound result if the Id number or the process instance are null</returns>
         public async Task<IActionResult> Edit(Guid? id)
         {
             if (id == null)
@@ -271,6 +291,14 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         //GET: ProcessTemplates/StartInstance/templateId
+        /// <summary>
+        /// GET method to Start a Process Instance. This is the primary way to create 
+        /// a process instance based on the details of a process template.
+        /// </summary>
+        /// <param name="id">The Id number of the Procee Template</param>
+        /// <returns>The viewmodel for the new instance is successful. 
+        /// The details of the Template if there are no tasks associated 
+        /// with it, or NotFound result if the template does not exist</returns>
         public async Task<IActionResult> StartInstance(Guid id)
         {
             var template = await _context.ProcessTemplates
@@ -306,6 +334,12 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         //POST ProcessTemplates/StartInstance
+        /// <summary>
+        /// POST method for starting a Process Instance.
+        /// </summary>
+        /// <param name="vm">The viewmodel for the new Process Instance</param>
+        /// <returns>A redirect to the details of the instance if successful, otherwise 
+        /// it returns the viewmodel or an unauthorized result. </returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> StartInstance(StartProcessInstanceViewModel vm)
@@ -347,9 +381,17 @@ namespace VendorProcessManagerV1.Controllers
                 return View(vm);
             }
         }
+
         // POST: ProcessInstances/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// POST action for editing process instances.
+        /// </summary>
+        /// <param name="id">The Id of the Process Instance.</param>
+        /// <param name="vm">The viewmodel of the Process Instance</param>
+        /// <returns>A redirect to the Index view if successful, otherwise the viewmodel,
+        /// or a NotFound result.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, EditProcessInstanceViewModel vm)
@@ -397,6 +439,12 @@ namespace VendorProcessManagerV1.Controllers
        
 
         // GET: ProcessInstances/Delete/5
+        /// <summary>
+        /// GET method for deleting process instances. 
+        /// </summary>
+        /// <param name="id">The Id of the Process Instance</param>
+        /// <returns>The processinstance view if successful, otherwise the 
+        /// NotFound result.</returns>
         public async Task<IActionResult> Delete(Guid? id)
         {
             if (id == null)
@@ -415,6 +463,11 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // POST: ProcessInstances/Delete/5
+        /// <summary>
+        /// POST method for deleting process instances.
+        /// </summary>
+        /// <param name="id">The Id of the process instance</param>
+        /// <returns>A redirect to the Index view.</returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
@@ -428,12 +481,22 @@ namespace VendorProcessManagerV1.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
-
+        
+        /// <summary>
+        /// A method to check the existence of a process instance.
+        /// </summary>
+        /// <param name="id">The Id of the process instance.</param>
+        /// <returns>The process instance.</returns>
         private bool ProcessInstanceExists(Guid id)
         {
             return _context.ProcessInstances.Any(e => e.Id == id);
         }
 
+        /// <summary>
+        /// Makes the list of status options. 
+        /// </summary>
+        /// <param name="selected">The selected status</param>
+        /// <returns>The list of available statuses</returns>
         private SelectList BuildStatusOptions(
             ProcessInstanceStatus? selected = null)
         {
@@ -445,7 +508,12 @@ namespace VendorProcessManagerV1.Controllers
             return new SelectList(statuses, "Value", "Text", (int?)selected); 
         }
 
-        private List<GanttDTO> BuildInstanceGannt(ProcessInstance instance)
+        /// <summary>
+        /// Creates data for a Frappe Gantt chart using a data transfer objects (DTOs). 
+        /// </summary>
+        /// <param name="instance">The process instance object</param>
+        /// <returns>A list of Frappe Gantt chart DTOs</returns>
+        private List<GanttDTO> BuildInstanceGantt(ProcessInstance instance)
         {
             var result = new List<GanttDTO>();
 
@@ -474,6 +542,11 @@ namespace VendorProcessManagerV1.Controllers
             return result; 
         }
 
+        /// <summary>
+        /// Calculates a progress percentage for gantt chart DTOs.
+        /// </summary>
+        /// <param name="task">The process task</param>
+        /// <returns>A percentage based on the status of the task.</returns>
         private int GetProgress(ProcessTask task)
         {
             if (task.CompletedDate.HasValue)
@@ -484,6 +557,11 @@ namespace VendorProcessManagerV1.Controllers
             return 0;
         }
        
+        /// <summary>
+        /// Sets the CSS value for the task based on the completion status.
+        /// </summary>
+        /// <param name="task">The process task.</param>
+        /// <returns>The CSS value depending on the completion status.</returns>
         private string GetCssClass(ProcessTask task) 
         {
             if (task.CompletedDate.HasValue) return "task-complete"; 

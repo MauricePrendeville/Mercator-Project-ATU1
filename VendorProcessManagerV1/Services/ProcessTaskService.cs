@@ -8,11 +8,19 @@ using VendorProcessManagerV1.Models;
 
 namespace VendorProcessManagerV1.Services
 {
+    /// <summary>
+    /// Service class for operations on process tasks such as starting and completing. 
+    /// </summary>
     public class ProcessTaskService : IProcessTaskService
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<AppUser> _userManager;
 
+        /// <summary>
+        /// Constructor method for the service class. 
+        /// </summary>
+        /// <param name="context">Bridge to the database</param>
+        /// <param name="userManager">Bridge to the user details in the database</param>
         public ProcessTaskService(ApplicationDbContext context,
             UserManager<AppUser> userManager)
         {
@@ -24,7 +32,7 @@ namespace VendorProcessManagerV1.Services
         /// Checks to see if the Task can be started be checking preceeding task 
         /// is completed or skipped.
         /// </summary>
-        /// <param name="taskId"></param>
+        /// <param name="taskId"> The identifier for the task</param>
         /// <returns></returns>
         public async Task<bool> CanStartTaskAsync(Guid taskId)
         {
@@ -75,10 +83,10 @@ namespace VendorProcessManagerV1.Services
         /// Sets Task to Completed. Selects next task in process by checking for transition. 
         /// Sets next selected task to In Progress. 
         /// </summary>
-        /// <param name="taskId"></param>
-        /// <param name="selectedTransitionId"></param>
-        /// <param name="completedById"></param>
-        /// <returns></returns>
+        /// <param name="taskId">The identifier for the task.</param>
+        /// <param name="selectedTransitionId">Teh selected transition.</param>
+        /// <param name="completedById">The identifier for the user.</param>
+        /// <returns>Completed task result of true if successful, otherwise false.</returns>
         public async Task<CompleteTaskResult> CompleteTaskAsync(
             Guid taskId, 
             Guid? selectedTransitionId, 
@@ -210,9 +218,9 @@ namespace VendorProcessManagerV1.Services
         /// <summary>
         /// Checks the User's Team to see if they can approve the task
         /// </summary>
-        /// <param name="taskId"></param>
-        /// <param name="userId"></param>
-        /// <returns></returns>
+        /// <param name="taskId">The identifier for the task.</param>
+        /// <param name="userId">The identifier for the user.</param>
+        /// <returns>True is user can approve task. False if otherwise.</returns>
         public async Task<bool> CanApproveTaskAsync(Guid taskId, string userId)
         {
             var task = await _context.ProcessTasks
@@ -251,11 +259,11 @@ namespace VendorProcessManagerV1.Services
         /// checks to see if user has permission to Approve task. User must 
         /// be member of Approver Team before setting task to approved. 
         /// </summary>
-        /// <param name="taskId"></param>
-        /// <param name="userId"></param>
-        /// <param name="decision"></param>
-        /// <param name="notes"></param>
-        /// <returns></returns>
+        /// <param name="taskId"> The identifier for the task.</param>
+        /// <param name="userId"> The identifier for the user.</param>
+        /// <param name="decision"> The approval decision.</param>
+        /// <param name="notes"> Approval notes.</param>
+        /// <returns> True if approval is possible, otherwise False</returns>
         public async Task<ApproveTaskResult> ApproveTaskAsync(
             Guid taskId, 
             string userId, 
@@ -302,9 +310,9 @@ namespace VendorProcessManagerV1.Services
         /// <summary>
         /// Sets unselected task option in process to Skipped
         /// </summary>
-        /// <param name="completedTask"></param>
-        /// <param name="selectedTransition"></param>
-        /// <param name="allTransitions"></param>
+        /// <param name="completedTask"> The completed task object.</param>
+        /// <param name="selectedTransition"> The selected transition object.</param>
+        /// <param name="allTransitions"> The list of all possible transitions.</param>
         /// <returns></returns>
         private async Task DeactivateUnselectedBranchesAsync(
             ProcessTask completedTask, 
@@ -335,7 +343,7 @@ namespace VendorProcessManagerV1.Services
         /// <summary>
         /// Sets process instance status to Completed and actual end date to now. 
         /// </summary>
-        /// <param name="instance"></param>
+        /// <param name="instance">The instance to be completed.</param>
         /// <returns></returns>
         private async Task CompleteInstanceAsync(ProcessInstance instance)
         {

@@ -5,15 +5,28 @@ using VendorProcessManagerV1.Models;
 
 namespace VendorProcessManagerV1.Services
 {
+    /// <summary>
+    /// A service class to count active process instances that are associated with a 
+    /// logged in user. 
+    /// </summary>
     public class NotificationService : INotificationService
     {
         private readonly ApplicationDbContext _context; 
         
+        /// <summary>
+        /// Constructor method for the class
+        /// </summary>
+        /// <param name="context"> Used to access the database</param>
         public NotificationService(ApplicationDbContext context)
         {
             _context = context; 
         }
         
+        /// <summary>
+        /// Counts the tasks that are pending approval by the logged in user's team.
+        /// </summary>
+        /// <param name="userId"> The logged in user identifier. </param>
+        /// <returns></returns>
         public async Task<int> GetPendingApprovalCountAsync (string userId)
         {
 
@@ -32,6 +45,13 @@ namespace VendorProcessManagerV1.Services
                     t.ApproverTeam == user.Team &&
                     t.ProcessInstance.Status == ProcessInstanceStatus.InProgress);
         }
+        
+        /// <summary>
+        /// Get the list of pending approvals given the logged in user's team.
+        /// </summary>
+        /// <param name="userId"> The logged in user Id</param>
+        /// <returns>Teh list of tasks that are pending approval if there are 
+        /// any. Otherwise, an empty list.</returns>
         public async Task<List<PendingApprovalItem>> GetPendingApprovalsAsync(
             string userId)
         {

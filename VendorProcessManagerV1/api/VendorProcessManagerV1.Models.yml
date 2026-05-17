@@ -1,0 +1,155 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.Models
+  commentId: N:VendorProcessManagerV1.Models
+  id: VendorProcessManagerV1.Models
+  children:
+  - VendorProcessManagerV1.Models.AppUser
+  - VendorProcessManagerV1.Models.ApproveStatus
+  - VendorProcessManagerV1.Models.AuditLog
+  - VendorProcessManagerV1.Models.ErrorViewModel
+  - VendorProcessManagerV1.Models.Notification
+  - VendorProcessManagerV1.Models.ProcessInstance
+  - VendorProcessManagerV1.Models.ProcessInstanceStatus
+  - VendorProcessManagerV1.Models.ProcessTask
+  - VendorProcessManagerV1.Models.ProcessTaskStatus
+  - VendorProcessManagerV1.Models.ProcessTaskTransition
+  - VendorProcessManagerV1.Models.ProcessTemplate
+  - VendorProcessManagerV1.Models.ProcessTemplateTask
+  - VendorProcessManagerV1.Models.ProcessTemplateTransition
+  - VendorProcessManagerV1.Models.TemplateDependency
+  - VendorProcessManagerV1.Models.VendorCandidate
+  langs:
+  - csharp
+  - vb
+  name: VendorProcessManagerV1.Models
+  nameWithType: VendorProcessManagerV1.Models
+  fullName: VendorProcessManagerV1.Models
+  type: Namespace
+  assemblies:
+  - VendorProcessManagerV1
+references:
+- uid: VendorProcessManagerV1.Models.AppUser
+  commentId: T:VendorProcessManagerV1.Models.AppUser
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.AppUser.html
+  name: AppUser
+  nameWithType: AppUser
+  fullName: VendorProcessManagerV1.Models.AppUser
+- uid: VendorProcessManagerV1.Models.AuditLog
+  commentId: T:VendorProcessManagerV1.Models.AuditLog
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.AuditLog.html
+  name: AuditLog
+  nameWithType: AuditLog
+  fullName: VendorProcessManagerV1.Models.AuditLog
+- uid: VendorProcessManagerV1.Models.ErrorViewModel
+  commentId: T:VendorProcessManagerV1.Models.ErrorViewModel
+  href: VendorProcessManagerV1.Models.ErrorViewModel.html
+  name: ErrorViewModel
+  nameWithType: ErrorViewModel
+  fullName: VendorProcessManagerV1.Models.ErrorViewModel
+- uid: VendorProcessManagerV1.Models.Notification
+  commentId: T:VendorProcessManagerV1.Models.Notification
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.Notification.html
+  name: Notification
+  nameWithType: Notification
+  fullName: VendorProcessManagerV1.Models.Notification
+- uid: VendorProcessManagerV1.Models.ProcessInstance
+  commentId: T:VendorProcessManagerV1.Models.ProcessInstance
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.ProcessInstance.html
+  name: ProcessInstance
+  nameWithType: ProcessInstance
+  fullName: VendorProcessManagerV1.Models.ProcessInstance
+- uid: VendorProcessManagerV1.Models.ProcessInstanceStatus
+  commentId: T:VendorProcessManagerV1.Models.ProcessInstanceStatus
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.ProcessInstanceStatus.html
+  name: ProcessInstanceStatus
+  nameWithType: ProcessInstanceStatus
+  fullName: VendorProcessManagerV1.Models.ProcessInstanceStatus
+- uid: VendorProcessManagerV1.Models.ProcessTask
+  commentId: T:VendorProcessManagerV1.Models.ProcessTask
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.ProcessTask.html
+  name: ProcessTask
+  nameWithType: ProcessTask
+  fullName: VendorProcessManagerV1.Models.ProcessTask
+- uid: VendorProcessManagerV1.Models.ProcessTaskStatus
+  commentId: T:VendorProcessManagerV1.Models.ProcessTaskStatus
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.ProcessTaskStatus.html
+  name: ProcessTaskStatus
+  nameWithType: ProcessTaskStatus
+  fullName: VendorProcessManagerV1.Models.ProcessTaskStatus
+- uid: VendorProcessManagerV1.Models.ApproveStatus
+  commentId: T:VendorProcessManagerV1.Models.ApproveStatus
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.ApproveStatus.html
+  name: ApproveStatus
+  nameWithType: ApproveStatus
+  fullName: VendorProcessManagerV1.Models.ApproveStatus
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition
+  commentId: T:VendorProcessManagerV1.Models.ProcessTaskTransition
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.ProcessTaskTransition.html
+  name: ProcessTaskTransition
+  nameWithType: ProcessTaskTransition
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition
+- uid: VendorProcessManagerV1.Models.ProcessTemplate
+  commentId: T:VendorProcessManagerV1.Models.ProcessTemplate
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.ProcessTemplate.html
+  name: ProcessTemplate
+  nameWithType: ProcessTemplate
+  fullName: VendorProcessManagerV1.Models.ProcessTemplate
+- uid: VendorProcessManagerV1.Models.ProcessTemplateTask
+  commentId: T:VendorProcessManagerV1.Models.ProcessTemplateTask
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.ProcessTemplateTask.html
+  name: ProcessTemplateTask
+  nameWithType: ProcessTemplateTask
+  fullName: VendorProcessManagerV1.Models.ProcessTemplateTask
+- uid: VendorProcessManagerV1.Models.ProcessTemplateTransition
+  commentId: T:VendorProcessManagerV1.Models.ProcessTemplateTransition
+  href: VendorProcessManagerV1.Models.ProcessTemplateTransition.html
+  name: ProcessTemplateTransition
+  nameWithType: ProcessTemplateTransition
+  fullName: VendorProcessManagerV1.Models.ProcessTemplateTransition
+- uid: VendorProcessManagerV1.Models.TemplateDependency
+  commentId: T:VendorProcessManagerV1.Models.TemplateDependency
+  href: VendorProcessManagerV1.Models.TemplateDependency.html
+  name: TemplateDependency
+  nameWithType: TemplateDependency
+  fullName: VendorProcessManagerV1.Models.TemplateDependency
+- uid: VendorProcessManagerV1.Models.VendorCandidate
+  commentId: T:VendorProcessManagerV1.Models.VendorCandidate
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.VendorCandidate.html
+  name: VendorCandidate
+  nameWithType: VendorCandidate
+  fullName: VendorProcessManagerV1.Models.VendorCandidate
+- uid: VendorProcessManagerV1.Models
+  commentId: N:VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.html
+  name: VendorProcessManagerV1.Models
+  nameWithType: VendorProcessManagerV1.Models
+  fullName: VendorProcessManagerV1.Models
+  spec.csharp:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Models
+    name: Models
+    href: VendorProcessManagerV1.Models.html
+  spec.vb:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Models
+    name: Models
+    href: VendorProcessManagerV1.Models.html

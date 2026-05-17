@@ -1,0 +1,224 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.Services.IProcessInstanceService
+  commentId: T:VendorProcessManagerV1.Services.IProcessInstanceService
+  id: IProcessInstanceService
+  parent: VendorProcessManagerV1.Services
+  children:
+  - VendorProcessManagerV1.Services.IProcessInstanceService.StartInstanceAsync(System.Guid,System.String,System.Guid,System.String)
+  langs:
+  - csharp
+  - vb
+  name: IProcessInstanceService
+  nameWithType: IProcessInstanceService
+  fullName: VendorProcessManagerV1.Services.IProcessInstanceService
+  type: Interface
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/IProcessInstanceService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: IProcessInstanceService
+    path: Services/IProcessInstanceService.cs
+    startLine: 7
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: public interface IProcessInstanceService
+    content.vb: Public Interface IProcessInstanceService
+  derivedClasses:
+  - VendorProcessManagerV1.Services.ProcessInstanceService
+- uid: VendorProcessManagerV1.Services.IProcessInstanceService.StartInstanceAsync(System.Guid,System.String,System.Guid,System.String)
+  commentId: M:VendorProcessManagerV1.Services.IProcessInstanceService.StartInstanceAsync(System.Guid,System.String,System.Guid,System.String)
+  id: StartInstanceAsync(System.Guid,System.String,System.Guid,System.String)
+  parent: VendorProcessManagerV1.Services.IProcessInstanceService
+  langs:
+  - csharp
+  - vb
+  name: StartInstanceAsync(Guid, string, Guid, string)
+  nameWithType: IProcessInstanceService.StartInstanceAsync(Guid, string, Guid, string)
+  fullName: VendorProcessManagerV1.Services.IProcessInstanceService.StartInstanceAsync(System.Guid, string, System.Guid, string)
+  type: Method
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/IProcessInstanceService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: StartInstanceAsync
+    path: Services/IProcessInstanceService.cs
+    startLine: 9
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: Task<ProcessInstance> StartInstanceAsync(Guid templateId, string instanceName, Guid vendorCandidateId, string initiatedById)
+    parameters:
+    - id: templateId
+      type: System.Guid
+    - id: instanceName
+      type: System.String
+    - id: vendorCandidateId
+      type: System.Guid
+    - id: initiatedById
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{VendorProcessManagerV1.Models.ProcessInstance}
+    content.vb: Function StartInstanceAsync(templateId As Guid, instanceName As String, vendorCandidateId As Guid, initiatedById As String) As Task(Of ProcessInstance)
+  overload: VendorProcessManagerV1.Services.IProcessInstanceService.StartInstanceAsync*
+  nameWithType.vb: IProcessInstanceService.StartInstanceAsync(Guid, String, Guid, String)
+  fullName.vb: VendorProcessManagerV1.Services.IProcessInstanceService.StartInstanceAsync(System.Guid, String, System.Guid, String)
+  name.vb: StartInstanceAsync(Guid, String, Guid, String)
+references:
+- uid: VendorProcessManagerV1.Services
+  commentId: N:VendorProcessManagerV1.Services
+  href: VendorProcessManagerV1.html
+  name: VendorProcessManagerV1.Services
+  nameWithType: VendorProcessManagerV1.Services
+  fullName: VendorProcessManagerV1.Services
+  spec.csharp:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Services
+    name: Services
+    href: VendorProcessManagerV1.Services.html
+  spec.vb:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Services
+    name: Services
+    href: VendorProcessManagerV1.Services.html
+- uid: VendorProcessManagerV1.Services.IProcessInstanceService.StartInstanceAsync*
+  commentId: Overload:VendorProcessManagerV1.Services.IProcessInstanceService.StartInstanceAsync
+  href: VendorProcessManagerV1.Services.IProcessInstanceService.html#VendorProcessManagerV1_Services_IProcessInstanceService_StartInstanceAsync_System_Guid_System_String_System_Guid_System_String_
+  name: StartInstanceAsync
+  nameWithType: IProcessInstanceService.StartInstanceAsync
+  fullName: VendorProcessManagerV1.Services.IProcessInstanceService.StartInstanceAsync
+- uid: System.Guid
+  commentId: T:System.Guid
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.guid
+  name: Guid
+  nameWithType: Guid
+  fullName: System.Guid
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Threading.Tasks.Task{VendorProcessManagerV1.Models.ProcessInstance}
+  commentId: T:System.Threading.Tasks.Task{VendorProcessManagerV1.Models.ProcessInstance}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<ProcessInstance>
+  nameWithType: Task<ProcessInstance>
+  fullName: System.Threading.Tasks.Task<VendorProcessManagerV1.Models.ProcessInstance>
+  nameWithType.vb: Task(Of ProcessInstance)
+  fullName.vb: System.Threading.Tasks.Task(Of VendorProcessManagerV1.Models.ProcessInstance)
+  name.vb: Task(Of ProcessInstance)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: VendorProcessManagerV1.Models.ProcessInstance
+    name: ProcessInstance
+    href: VendorProcessManagerV1.Models.ProcessInstance.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: VendorProcessManagerV1.Models.ProcessInstance
+    name: ProcessInstance
+    href: VendorProcessManagerV1.Models.ProcessInstance.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks

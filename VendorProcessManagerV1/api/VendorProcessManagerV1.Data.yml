@@ -1,0 +1,46 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.Data
+  commentId: N:VendorProcessManagerV1.Data
+  id: VendorProcessManagerV1.Data
+  children:
+  - VendorProcessManagerV1.Data.ApplicationDbContext
+  langs:
+  - csharp
+  - vb
+  name: VendorProcessManagerV1.Data
+  nameWithType: VendorProcessManagerV1.Data
+  fullName: VendorProcessManagerV1.Data
+  type: Namespace
+  assemblies:
+  - VendorProcessManagerV1
+references:
+- uid: VendorProcessManagerV1.Data.ApplicationDbContext
+  commentId: T:VendorProcessManagerV1.Data.ApplicationDbContext
+  parent: VendorProcessManagerV1.Data
+  href: VendorProcessManagerV1.Data.ApplicationDbContext.html
+  name: ApplicationDbContext
+  nameWithType: ApplicationDbContext
+  fullName: VendorProcessManagerV1.Data.ApplicationDbContext
+- uid: VendorProcessManagerV1.Data
+  commentId: N:VendorProcessManagerV1.Data
+  href: VendorProcessManagerV1.html
+  name: VendorProcessManagerV1.Data
+  nameWithType: VendorProcessManagerV1.Data
+  fullName: VendorProcessManagerV1.Data
+  spec.csharp:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Data
+    name: Data
+    href: VendorProcessManagerV1.Data.html
+  spec.vb:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Data
+    name: Data
+    href: VendorProcessManagerV1.Data.html
