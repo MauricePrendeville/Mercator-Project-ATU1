@@ -10,23 +10,57 @@
 
 <form asp-action="Index" method="get" class="row g-2 align-items-center mb-3">
     <input type="hidden" name="sortOrder" value="@ViewData["CurrentSort"]" />
-        
+    
     <div class="col-auto">
-        <label class="col-form-label fw-bold">Filter by Approver Team:</label>
-    </div>
-
-    <div class="col-auto">
+        <label class="col-form-label fw-bold small">Approver Team:</label>
         <select asp-for="TeamFilter"
                 asp-items="Model.TeamList"
                 class="form-select">
-            <option value="">--AllTeams--</option>
+            <option value="">--All Teams--</option>
             </select>
     </div>
+    
     <div class="col-auto">
+        <label class="col-form-label fw-bold small">Vendor</label>
+        <select asp-for="VendorFilter"
+                asp-items="Model.VendorList"
+                class="form-select">
+            <option value="">--All Vendors--</option>
+        </select>
+    </div>
+    
+    <div class="col-auto">
+        <label class="col-form-label fw-bold small">Status</label>
+        <select asp-for="StatusFilter"
+                asp-items="Model.StatusList"
+                class="form-select">
+            <option value="">--All Status--</option>
+        </select>
+    </div>
+    
+    <div class="col-auto">
+        <label class="col-form-label fw-bold small">Template</label>
+        <select asp-for="TemplateFilter"
+                asp-items="Model.TemplateList"
+                class="form-select">
+            <option value="">--All Templates--</option>
+        </select>
+    </div>
+    
+    <div class="col-auto">
+        <label class="col-form-label fw-bold small">Initiated By</label>
+        <select asp-for="InitiatorFilter"
+                asp-items="Model.InitiatorList"
+                class="form-select">
+            <option value="">--All Initiators--</option>
+        </select>
+    </div>
+    
+    
+    <div class="col-md-12 text-center">
         <button type="submit" class="btn btn-primary">Filter</button>
    
         <a asp-action="Index"
-           asp-route-sortOrder="@Model.TeamFilter"
            class="btn btn-outline-secondary ms-2">Clear</a>
     </div>
 

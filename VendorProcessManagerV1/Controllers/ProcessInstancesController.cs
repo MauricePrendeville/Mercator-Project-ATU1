@@ -58,12 +58,56 @@ namespace VendorProcessManagerV1.Controllers
                 .OrderBy(t => t)
                 .ToListAsync();
 
+            vm.TeamList = new SelectList(teams, vm.TeamFilter);
+
             vm.TeamList = teams.Select(t => new SelectListItem
             {
                 Value = t, 
                 Text = t,
                 Selected = t == vm.TeamFilter
             });
+
+            var templateNames = await _context.ProcessTemplates
+                .Where(t => !string.IsNullOrEmpty(t.Name))
+                .Select(t => t.Name)
+                .Distinct()
+                .OrderBy(t => t)
+                .ToListAsync();
+
+            vm.TemplateList = new SelectList(templateNames, vm.TemplateFilter);
+
+            var vendors = await _context.VendorCandidates
+               .Where(v => !string.IsNullOrEmpty(v.Name))
+               .Select(v => new { v.Id, v.Name })
+               .OrderBy(v => v.Name)
+               .ToListAsync();
+
+            vm.VendorList = new SelectList(vendors, "Name", "Name", vm.VendorFilter);
+
+            vm.StatusList = new SelectList(
+                Enum.GetValues(typeof(ProcessInstanceStatus))
+                .Cast<ProcessInstanceStatus>()
+                .Select(s => new
+                {
+                    Value = s.ToString(),
+                    Text = s.ToString()
+                }),
+            "Value", "Text", vm.StatusFilter);
+
+            var initiators = await _context.ProcessInstances
+                .Include(i => i.InitiatedBy)
+                .Where(i => i.InitiatedBy != null)
+                .Select(i => new
+                {
+                    Value = i.InitiatedById,
+                    Text = i.InitiatedBy.FirstName + " " + i.InitiatedBy.LastName
+                })
+                .Distinct()
+                .OrderBy(i => i.Text)
+                .ToListAsync();
+
+            vm.InitiatorList = new SelectList(
+                initiators, "Value", "Text", vm.InitiatorFilter);
 
             var instances = _context.ProcessInstances
                 .Include(i => i.ProcessTemplate)
@@ -79,6 +123,38 @@ namespace VendorProcessManagerV1.Controllers
                     .Where(i => i.Tasks.Any(t => t.ApproverTeam ==
                     vm.TeamFilter));
             }
+
+            if (!string.IsNullOrEmpty(vm.TemplateFilter))
+            {
+                instances = instances
+                    .Where(i => i.ProcessTemplate.Name == vm.TemplateFilter);
+            }
+
+            if (!string.IsNullOrEmpty(vm.VendorFilter))
+            {
+                instances = instances
+                    .Where(i => i.VendorCandidate.Name == vm.VendorFilter);
+            }
+
+            if (!string.IsNullOrEmpty(vm.StatusFilter) && 
+                Enum.TryParse<ProcessInstanceStatus>(
+                    vm.StatusFilter, out var statusEnum))
+            {
+                instances = instances
+                    .Where(i => i.Status == statusEnum);
+            }
+
+            if (!string.IsNullOrEmpty(vm.InitiatorFilter))
+            {
+                instances = instances
+                    .Where(i => i.InitiatedById == vm.InitiatorFilter);
+            }
+
+
+
+
+
+
 
             instances = vm.SortOrder switch
             {

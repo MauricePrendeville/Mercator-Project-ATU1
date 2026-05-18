@@ -31,9 +31,85 @@ namespace VendorProcessManagerV1.Controllers
         }
 
         // GET: ProcessTemplates
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(ProcessTemplateIndexViewModel vm)
         {
-            return View(await _context.ProcessTemplates.ToListAsync());
+            vm.SortOrder ??= "templatename_asc";
+
+            vm.TemplateNameSort = vm.SortOrder == "templatename_asc" ? "templatename_desc" : 
+                "templatename_asc";
+            vm.DescriptionSort = vm.SortOrder == "description_asc" ? "description_desc" : "description_asc";
+            vm.CategorySort = vm.SortOrder == "category_asc" ? "category_desc" : "category_asc";
+            vm.CreatorSort = vm.SortOrder == "creator_asc" ? "creator_desc" : "creator_asc";
+            vm.ActiveSort = vm.SortOrder == "active_asc" ? "active_desc" : "active_asc";
+            
+
+            var templateNames = await _context.ProcessTemplates
+                .Where(t => !string.IsNullOrEmpty(t.Name))
+                .Select(t => t.Name)
+                .Distinct()
+                .OrderBy(t => t)
+                .ToListAsync();
+
+            vm.TemplateList = new SelectList(templateNames, vm.SelectedTemplateName);
+
+            var categories = await _context.ProcessTemplates
+                .Where(t => !string.IsNullOrEmpty(t.Category))
+                .Select(t => t.Category)
+                .Distinct()
+                .OrderBy(t => t)
+                .ToListAsync();
+
+            vm.CategoryList = new SelectList(categories, vm.CategoryFilter);
+
+            vm.ActiveList = new SelectList(new[]
+            {
+                new {Value = "true", Text = "Active" },
+                new {Value = "false", Text ="Inactive" }
+                }, "Value", "Text", vm.ActiveFilter);
+
+                        
+            var templates = _context.ProcessTemplates
+                .Include(t => t.Creator)
+                .AsQueryable();
+
+
+            if (!string.IsNullOrEmpty(vm.SelectedTemplateName))
+            {
+                templates = templates
+                    .Where(t => t.Name == vm.SelectedTemplateName);
+            }
+
+            if (!string.IsNullOrEmpty(vm.CategoryFilter))
+            {
+                templates = templates
+                    .Where(t => t.Category == vm.CategoryFilter);
+            }
+
+            if (!string.IsNullOrEmpty(vm.ActiveFilter))
+            {
+                var isActive = vm.ActiveFilter == "true";
+                templates = templates
+                    .Where(t => t.IsActive == isActive);
+            }
+
+            templates = vm.SortOrder switch
+            {
+                "templatename_asc" => templates.OrderBy(t => t.Name),
+                "templatename_desc" => templates.OrderByDescending(t => t.Name),
+                "description_asc" => templates.OrderBy(t => t.Description),
+                "description_desc" => templates.OrderByDescending(t => t.Description),
+                "category_asc" => templates.OrderBy(t => t.Category),
+                "category_desc" => templates.OrderByDescending(t => t.Category),
+                "creator_asc" => templates.OrderBy(p => p.Creator.LastName),
+                "creator_desc" => templates.OrderByDescending(p => p.Creator.LastName),
+                "active_asc" => templates.OrderBy(t => t.IsActive),
+                "active_desc" => templates.OrderByDescending(t => t.IsActive),
+                _ => templates.OrderBy(t => t.Name)
+            };
+
+            vm.Templates = await templates.ToListAsync();
+
+            return View(vm);            
         }
 
         // GET: ProcessTemplates/Details/5

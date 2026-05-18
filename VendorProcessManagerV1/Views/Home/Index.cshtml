@@ -3,6 +3,41 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Mercator VPM</h1>
 </div>
+
+
+<table style="text-align: center;">
+    <tr>
+        <td style="vertical-align: middle; text-align: center;">
+            <div>
+                <a asp-action="Index"
+                       asp-controller="ProcessInstances"
+                       class="bi bi-rocket-takeoff" style="font-size: 4rem;"></a>    
+             </div>
+             <div>Process Instances</div>
+        </td>
+        <td style="vertical-align: middle; text-align:center;">
+<div>
+    <a asp-action="Index"
+           asp-controller="ProcessTemplates"
+           class="bi bi-diagram-3" style="font-size: 4rem;"></a>
+           </div>
+    <div>Process Templates</div>
+        </td>
+        <td style="vertical-align: middle; text-align: center;">
+<div>
+    <a asp-action="Index"
+           asp-controller="VendorCandidates"
+           class="bi bi-shop" style="font-size: 4rem;"></a></div>
+   <div>Vendor Candidates</div>
+        </td>
+        <td style="align: center; vertical-align: middle; text-align: center;">
+<div>
+    <a asp-action="Index"
+           asp-controller="AppUsers"
+           class="bi bi-person-fill" style="font-size: 4rem;"></a></div>
+<div>Users</div>
+        </td>
+    </tr>
+</table>
