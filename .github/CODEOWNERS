@@ -1,0 +1,6 @@
+# .github/CODEOWNERS
+# Owners
+* @MauricePrendeville, @MP-Review
+
+#workflow changes
+.github/workflows/ @MauricePrendeville, @MP-Review
