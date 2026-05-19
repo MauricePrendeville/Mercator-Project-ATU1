@@ -6,14 +6,8 @@ on:
   pull_request:
     branches: [ "master" ]
   schedule:
-    - cron: '25 12 * * 4'
-
-permissions: 
-  contents: read
-  pull-requests: write
-  security-events: write
-  actions: read
-  
+    - cron: '25 12 * * 4'  
+    
 jobs: 
   #------------Build workflow-----------
   build:
@@ -71,6 +65,11 @@ jobs:
   sonar:
     needs: test
     runs-on: ubuntu-latest
+    permissions: 
+      contents: read
+      pull-requests: write
+      security-events: write
+      actions: read
     steps:
       - uses: actions/checkout@v6
         with: 
@@ -111,6 +110,13 @@ jobs:
         id: sbom
         env: 
           GITHUB_TOKEN: ${{ github.token }}
+      - name: Verify SBOM against know vulnerabilities
+        uses: anchore/grype-action@v1
+        with:
+          sbom: ${{ steps.sbom.outputs.fileName }}
+          fail-build: true
+          severity-cutoff: critical
+          
       - uses: actions/upload-artifact@v4
         with: 
           path: ${{steps.sbom.outputs.fileName }}
@@ -149,6 +155,7 @@ jobs:
         with:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
+          queries: security-extended
       
       - name: Run manual build steps
         if: matrix.build-mode == 'manual'
