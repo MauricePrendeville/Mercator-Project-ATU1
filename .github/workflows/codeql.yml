@@ -63,7 +63,7 @@ jobs:
           dotnet-version: 8.0.x
           
       - name: Download coverage artifact file
-        uses: actions/download-artifact@v8
+        uses: actions/download-artifact@v7.0.1
         with: 
           name: coverage-results
           path: ./coverage
