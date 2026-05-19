@@ -44,7 +44,7 @@ jobs:
         run: dotnet test --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
       - name: Upload coverage artifact file      
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7
         with:
           name: coverage-results
           path: ./coverage       
@@ -63,7 +63,7 @@ jobs:
           dotnet-version: 8.0.x
           
       - name: Download coverage artifact file
-        uses: actions/download-artifact@v8.0.1
+        uses: actions/download-artifact@v7        
         with: 
           name: coverage-results
           path: ./coverage
