@@ -7,7 +7,9 @@ on:
     branches: [ "master" ]
   schedule:
     - cron: '25 12 * * 4'  
-    
+permissions: 
+  contents: read      
+       
 jobs: 
   #------------Build workflow-----------
   build:
@@ -102,7 +104,11 @@ jobs:
   #------------SBOM flow---------
   sbom: 
     runs-on: ubuntu-latest
-        
+    permissions: 
+      contents: read      
+      security-events: write
+      actions: read
+      
     steps:
       - uses: actions/checkout@v6
         
@@ -138,11 +144,8 @@ jobs:
     needs: [build, test]      
     runs-on: ${{ (matrix.language == 'swift' && 'macos-latest') || 'ubuntu-latest' }}
     permissions:
-    # required for all workflows
       security-events: write
-    # required to fetch internal or private CodeQL packs
       packages: read
-    # only required for workflows in private repositories
       actions: read
       contents: read
     strategy:
