@@ -7,37 +7,82 @@
 </div>
 
 
-<table style="text-align: center;">
+<table class="mx-auto">
     <tr>
-        <td style="vertical-align: middle; text-align: center;">
-            <div>
-                <a asp-action="Index"
-                       asp-controller="ProcessInstances"
-                       class="bi bi-rocket-takeoff" style="font-size: 4rem;"></a>    
-             </div>
-             <div>Process Instances</div>
+        <td class="text-center p-4">
+            <a asp-action="Index" asp-controller="ProcessInstances">
+                <div class="bi bi-rocket-takeoff" style="font-size: 4rem;"></div>
+                <div class="fs-4">Process Instances</div>
+            </a>
         </td>
-        <td style="vertical-align: middle; text-align:center;">
-<div>
-    <a asp-action="Index"
-           asp-controller="ProcessTemplates"
-           class="bi bi-diagram-3" style="font-size: 4rem;"></a>
-           </div>
-    <div>Process Templates</div>
+
+        <td class="text-center p-4">
+            <a asp-action="Index" asp-controller="ProcessTemplates">
+                <div class="bi bi-diagram-3" style="font-size: 4rem;"></div>
+                <div class ="fs-4">Process Templates</div>
+            </a>
         </td>
-        <td style="vertical-align: middle; text-align: center;">
-<div>
-    <a asp-action="Index"
-           asp-controller="VendorCandidates"
-           class="bi bi-shop" style="font-size: 4rem;"></a></div>
-   <div>Vendor Candidates</div>
+        
+        <td class="text-center p-4">
+            <a asp-action="Index" asp-controller="VendorCandidates">
+                <div class="bi bi-shop" style="font-size: 4rem;"></div>
+                <div class="fs-4">Vendor Candidates</div>
+            </a>
         </td>
-        <td style="align: center; vertical-align: middle; text-align: center;">
-<div>
-    <a asp-action="Index"
-           asp-controller="AppUsers"
-           class="bi bi-person-fill" style="font-size: 4rem;"></a></div>
-<div>Users</div>
+
+        <td class="text-center p-4">
+            <a asp-action="Index" asp-controller="AppUsers">
+                <div class="bi bi-person-fill" style="font-size: 4rem;"></div>
+                <div class="fs-4">Users</div>
+            </a>
         </td>
     </tr>
 </table>
+
+<div class="mermaid text-center">
+    flowchart TD
+
+    START([Start]) --> Tef744463
+    Tef744463["1.Register as User"]
+    Tef744463 --> T82a62a5d
+    T82a62a5d["2.Add Vendor Candidate"]
+    T82a62a5d -->|"New Template required"| Tab91b588
+    T82a62a5d -->|"Use existing Template"| T9c0d779d
+    T9c0d779d["3.Use Existing Process<br />Template"]
+    T9c0d779d -->|"Select existing Template"| T0a19b107
+    Tab91b588["4.Create New Process<br />Template"]
+    Tab91b588 --> T0c390acc
+    T0c390acc["5.Add Tasks to Process<br />Template"]
+    T0c390acc --> T644a102b
+    T644a102b["6.Add Transitions to<br />Process Template<br />Tasks"]
+    T644a102b --> T0a19b107
+    T0a19b107["7.Start Process Instance"]
+    T0a19b107 -->|"Work through Tasks"| Te2d3f141
+    Te2d3f141["8.Work through Process<br />Instance Tasks"]
+    Te2d3f141 -->|"Check Approval tasks"| T8eaf1916
+    T8eaf1916["9.Get Approval from<br />Approver Teams"]
+    T8eaf1916 --> COMPLETE([Complete])
+</div>
+
+    @section Scripts {
+    
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+
+    <script>
+            
+        const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+       
+        mermaid.initialize({
+            startOnLoad: false,
+            theme: 'base',
+            flowchart: { curve: 'basis'}
+        });
+
+       
+
+        mermaid.run({ querySelector: '.mermaid'});
+                
+    </script>
+        
+        @* <script>mermaid.initialize({ startOnLoad: true});</script> *@
+    }
