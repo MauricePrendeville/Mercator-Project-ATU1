@@ -42,7 +42,7 @@ jobs:
         run: dotnet restore      
       - name: Test with coverage
         run: | 
-          dotnet test \
+          dotnet test VendorProcessManager-Tests/VPM_UnitTests.csproj \
           --verbosity normal \
           --collect:"XPlat Code Coverage" \
           --results-directory ./coverage \
