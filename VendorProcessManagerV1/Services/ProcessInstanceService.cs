@@ -4,15 +4,32 @@ using VendorProcessManagerV1.Models;
 
 namespace VendorProcessManagerV1.Services
 {
+    /// <summary>
+    /// A service class that can start a new process instance based on a template.
+    /// </summary>
     public class ProcessInstanceService : IProcessInstanceService
     {
         private readonly ApplicationDbContext _context; 
 
+        /// <summary>
+        /// Constructor class for the service. 
+        /// </summary>
+        /// <param name="context"> Used to access the database.</param>
         public ProcessInstanceService(ApplicationDbContext context)
         {
             _context = context; 
         }
 
+        /// <summary>
+        /// Method to start a new process instance. 
+        /// </summary>
+        /// <param name="templateId"> The identifier for the template.</param>
+        /// <param name="instanceName"> The name of the process instance</param>
+        /// <param name="vendorCandidateId"> The identifier for the vendor candidate</param>
+        /// <param name="initiatedById"> User that starts the instance.</param>
+        /// <returns>A new process instance if successful. Otherwise an exception message.</returns>
+        /// <exception cref="ArgumentException"></exception>
+        /// <exception cref="InvalidOperationException"></exception>
         public async Task<ProcessInstance> StartInstanceAsync(
             Guid templateId, 
             string instanceName,
@@ -39,7 +56,7 @@ namespace VendorProcessManagerV1.Services
                 InitiatedById = initiatedById, 
                 VendorCandidateId = vendorCandidateId,
                 CreatedDate = DateTime.Now, 
-                Status = ProcessInstanceStatus.NotStarted
+                Status = ProcessInstanceStatus.InProgress
             };
 
             var sortedTasks = template.Tasks.OrderBy(t => t.SortOrder).ToList();
@@ -65,7 +82,10 @@ namespace VendorProcessManagerV1.Services
                     StartedDate = null,
                     CompletedDate = null, 
                     CreatorId = initiatedById, 
-                    OwnerId = initiatedById
+                    OwnerId = initiatedById, 
+                    ApproveStatus = templateTask.ApprovalRequired
+                                    ? ApproveStatus.Pending 
+                                    : ApproveStatus.NotRequired
                 };
 
                 instance.Tasks.Add(instanceTask); 

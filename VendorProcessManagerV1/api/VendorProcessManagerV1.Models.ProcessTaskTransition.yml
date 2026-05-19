@@ -1,0 +1,616 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition
+  commentId: T:VendorProcessManagerV1.Models.ProcessTaskTransition
+  id: ProcessTaskTransition
+  parent: VendorProcessManagerV1.Models
+  children:
+  - VendorProcessManagerV1.Models.ProcessTaskTransition.ActionDate
+  - VendorProcessManagerV1.Models.ProcessTaskTransition.ActionUserId
+  - VendorProcessManagerV1.Models.ProcessTaskTransition.ActionValue
+  - VendorProcessManagerV1.Models.ProcessTaskTransition.FromProcessStepId
+  - VendorProcessManagerV1.Models.ProcessTaskTransition.Id
+  - VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessInstanceId
+  - VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessTemplateTrasitionId
+  - VendorProcessManagerV1.Models.ProcessTaskTransition.ToProcessStepId
+  langs:
+  - csharp
+  - vb
+  name: ProcessTaskTransition
+  nameWithType: ProcessTaskTransition
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition
+  type: Class
+  source:
+    remote:
+      path: VendorProcessManagerV1/Models/ProcessTaskTransition.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ProcessTaskTransition
+    path: Models/ProcessTaskTransition.cs
+    startLine: 2
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Models
+  syntax:
+    content: public class ProcessTaskTransition
+    content.vb: Public Class ProcessTaskTransition
+  inheritance:
+  - System.Object
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.Id
+  commentId: P:VendorProcessManagerV1.Models.ProcessTaskTransition.Id
+  id: Id
+  parent: VendorProcessManagerV1.Models.ProcessTaskTransition
+  langs:
+  - csharp
+  - vb
+  name: Id
+  nameWithType: ProcessTaskTransition.Id
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.Id
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/Models/ProcessTaskTransition.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: Id
+    path: Models/ProcessTaskTransition.cs
+    startLine: 4
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Models
+  syntax:
+    content: public Guid Id { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property Id As Guid
+  overload: VendorProcessManagerV1.Models.ProcessTaskTransition.Id*
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessInstanceId
+  commentId: P:VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessInstanceId
+  id: ProcessInstanceId
+  parent: VendorProcessManagerV1.Models.ProcessTaskTransition
+  langs:
+  - csharp
+  - vb
+  name: ProcessInstanceId
+  nameWithType: ProcessTaskTransition.ProcessInstanceId
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessInstanceId
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/Models/ProcessTaskTransition.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ProcessInstanceId
+    path: Models/ProcessTaskTransition.cs
+    startLine: 5
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Models
+  syntax:
+    content: public Guid ProcessInstanceId { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property ProcessInstanceId As Guid
+  overload: VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessInstanceId*
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessTemplateTrasitionId
+  commentId: P:VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessTemplateTrasitionId
+  id: ProcessTemplateTrasitionId
+  parent: VendorProcessManagerV1.Models.ProcessTaskTransition
+  langs:
+  - csharp
+  - vb
+  name: ProcessTemplateTrasitionId
+  nameWithType: ProcessTaskTransition.ProcessTemplateTrasitionId
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessTemplateTrasitionId
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/Models/ProcessTaskTransition.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ProcessTemplateTrasitionId
+    path: Models/ProcessTaskTransition.cs
+    startLine: 6
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Models
+  syntax:
+    content: public Guid ProcessTemplateTrasitionId { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property ProcessTemplateTrasitionId As Guid
+  overload: VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessTemplateTrasitionId*
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.FromProcessStepId
+  commentId: P:VendorProcessManagerV1.Models.ProcessTaskTransition.FromProcessStepId
+  id: FromProcessStepId
+  parent: VendorProcessManagerV1.Models.ProcessTaskTransition
+  langs:
+  - csharp
+  - vb
+  name: FromProcessStepId
+  nameWithType: ProcessTaskTransition.FromProcessStepId
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.FromProcessStepId
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/Models/ProcessTaskTransition.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: FromProcessStepId
+    path: Models/ProcessTaskTransition.cs
+    startLine: 7
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Models
+  syntax:
+    content: public Guid FromProcessStepId { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property FromProcessStepId As Guid
+  overload: VendorProcessManagerV1.Models.ProcessTaskTransition.FromProcessStepId*
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ToProcessStepId
+  commentId: P:VendorProcessManagerV1.Models.ProcessTaskTransition.ToProcessStepId
+  id: ToProcessStepId
+  parent: VendorProcessManagerV1.Models.ProcessTaskTransition
+  langs:
+  - csharp
+  - vb
+  name: ToProcessStepId
+  nameWithType: ProcessTaskTransition.ToProcessStepId
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ToProcessStepId
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/Models/ProcessTaskTransition.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ToProcessStepId
+    path: Models/ProcessTaskTransition.cs
+    startLine: 8
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Models
+  syntax:
+    content: public Guid ToProcessStepId { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property ToProcessStepId As Guid
+  overload: VendorProcessManagerV1.Models.ProcessTaskTransition.ToProcessStepId*
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionUserId
+  commentId: P:VendorProcessManagerV1.Models.ProcessTaskTransition.ActionUserId
+  id: ActionUserId
+  parent: VendorProcessManagerV1.Models.ProcessTaskTransition
+  langs:
+  - csharp
+  - vb
+  name: ActionUserId
+  nameWithType: ProcessTaskTransition.ActionUserId
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionUserId
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/Models/ProcessTaskTransition.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ActionUserId
+    path: Models/ProcessTaskTransition.cs
+    startLine: 9
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Models
+  syntax:
+    content: public Guid ActionUserId { get; set; }
+    parameters: []
+    return:
+      type: System.Guid
+    content.vb: Public Property ActionUserId As Guid
+  overload: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionUserId*
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionDate
+  commentId: P:VendorProcessManagerV1.Models.ProcessTaskTransition.ActionDate
+  id: ActionDate
+  parent: VendorProcessManagerV1.Models.ProcessTaskTransition
+  langs:
+  - csharp
+  - vb
+  name: ActionDate
+  nameWithType: ProcessTaskTransition.ActionDate
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionDate
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/Models/ProcessTaskTransition.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ActionDate
+    path: Models/ProcessTaskTransition.cs
+    startLine: 10
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Models
+  syntax:
+    content: public DateTime ActionDate { get; set; }
+    parameters: []
+    return:
+      type: System.DateTime
+    content.vb: Public Property ActionDate As Date
+  overload: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionDate*
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionValue
+  commentId: P:VendorProcessManagerV1.Models.ProcessTaskTransition.ActionValue
+  id: ActionValue
+  parent: VendorProcessManagerV1.Models.ProcessTaskTransition
+  langs:
+  - csharp
+  - vb
+  name: ActionValue
+  nameWithType: ProcessTaskTransition.ActionValue
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionValue
+  type: Property
+  source:
+    remote:
+      path: VendorProcessManagerV1/Models/ProcessTaskTransition.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ActionValue
+    path: Models/ProcessTaskTransition.cs
+    startLine: 11
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Models
+  syntax:
+    content: public string ActionValue { get; set; }
+    parameters: []
+    return:
+      type: System.String
+    content.vb: Public Property ActionValue As String
+  overload: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionValue*
+references:
+- uid: VendorProcessManagerV1.Models
+  commentId: N:VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.html
+  name: VendorProcessManagerV1.Models
+  nameWithType: VendorProcessManagerV1.Models
+  fullName: VendorProcessManagerV1.Models
+  spec.csharp:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Models
+    name: Models
+    href: VendorProcessManagerV1.Models.html
+  spec.vb:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Models
+    name: Models
+    href: VendorProcessManagerV1.Models.html
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object
+  name: object
+  nameWithType: object
+  fullName: object
+  nameWithType.vb: Object
+  fullName.vb: Object
+  name.vb: Object
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  name: Equals(object)
+  nameWithType: object.Equals(object)
+  fullName: object.Equals(object)
+  nameWithType.vb: Object.Equals(Object)
+  fullName.vb: Object.Equals(Object)
+  name.vb: Equals(Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  name: Equals(object, object)
+  nameWithType: object.Equals(object, object)
+  fullName: object.Equals(object, object)
+  nameWithType.vb: Object.Equals(Object, Object)
+  fullName.vb: Object.Equals(Object, Object)
+  name.vb: Equals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.equals#system-object-equals(system-object-system-object)
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  name: GetHashCode()
+  nameWithType: object.GetHashCode()
+  fullName: object.GetHashCode()
+  nameWithType.vb: Object.GetHashCode()
+  fullName.vb: Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gethashcode
+  - name: (
+  - name: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  name: GetType()
+  nameWithType: object.GetType()
+  fullName: object.GetType()
+  nameWithType.vb: Object.GetType()
+  fullName.vb: Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.gettype
+  - name: (
+  - name: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  name: MemberwiseClone()
+  nameWithType: object.MemberwiseClone()
+  fullName: object.MemberwiseClone()
+  nameWithType.vb: Object.MemberwiseClone()
+  fullName.vb: Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.memberwiseclone
+  - name: (
+  - name: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  name: ReferenceEquals(object, object)
+  nameWithType: object.ReferenceEquals(object, object)
+  fullName: object.ReferenceEquals(object, object)
+  nameWithType.vb: Object.ReferenceEquals(Object, Object)
+  fullName.vb: Object.ReferenceEquals(Object, Object)
+  name.vb: ReferenceEquals(Object, Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.referenceequals
+  - name: (
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: ','
+  - name: " "
+  - uid: System.Object
+    name: Object
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object
+  - name: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  name: ToString()
+  nameWithType: object.ToString()
+  fullName: object.ToString()
+  nameWithType.vb: Object.ToString()
+  fullName.vb: Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.object.tostring
+  - name: (
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.Id*
+  commentId: Overload:VendorProcessManagerV1.Models.ProcessTaskTransition.Id
+  href: VendorProcessManagerV1.Models.ProcessTaskTransition.html#VendorProcessManagerV1_Models_ProcessTaskTransition_Id
+  name: Id
+  nameWithType: ProcessTaskTransition.Id
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.Id
+- uid: System.Guid
+  commentId: T:System.Guid
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.guid
+  name: Guid
+  nameWithType: Guid
+  fullName: System.Guid
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessInstanceId*
+  commentId: Overload:VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessInstanceId
+  href: VendorProcessManagerV1.Models.ProcessTaskTransition.html#VendorProcessManagerV1_Models_ProcessTaskTransition_ProcessInstanceId
+  name: ProcessInstanceId
+  nameWithType: ProcessTaskTransition.ProcessInstanceId
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessInstanceId
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessTemplateTrasitionId*
+  commentId: Overload:VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessTemplateTrasitionId
+  href: VendorProcessManagerV1.Models.ProcessTaskTransition.html#VendorProcessManagerV1_Models_ProcessTaskTransition_ProcessTemplateTrasitionId
+  name: ProcessTemplateTrasitionId
+  nameWithType: ProcessTaskTransition.ProcessTemplateTrasitionId
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ProcessTemplateTrasitionId
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.FromProcessStepId*
+  commentId: Overload:VendorProcessManagerV1.Models.ProcessTaskTransition.FromProcessStepId
+  href: VendorProcessManagerV1.Models.ProcessTaskTransition.html#VendorProcessManagerV1_Models_ProcessTaskTransition_FromProcessStepId
+  name: FromProcessStepId
+  nameWithType: ProcessTaskTransition.FromProcessStepId
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.FromProcessStepId
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ToProcessStepId*
+  commentId: Overload:VendorProcessManagerV1.Models.ProcessTaskTransition.ToProcessStepId
+  href: VendorProcessManagerV1.Models.ProcessTaskTransition.html#VendorProcessManagerV1_Models_ProcessTaskTransition_ToProcessStepId
+  name: ToProcessStepId
+  nameWithType: ProcessTaskTransition.ToProcessStepId
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ToProcessStepId
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionUserId*
+  commentId: Overload:VendorProcessManagerV1.Models.ProcessTaskTransition.ActionUserId
+  href: VendorProcessManagerV1.Models.ProcessTaskTransition.html#VendorProcessManagerV1_Models_ProcessTaskTransition_ActionUserId
+  name: ActionUserId
+  nameWithType: ProcessTaskTransition.ActionUserId
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionUserId
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionDate*
+  commentId: Overload:VendorProcessManagerV1.Models.ProcessTaskTransition.ActionDate
+  href: VendorProcessManagerV1.Models.ProcessTaskTransition.html#VendorProcessManagerV1_Models_ProcessTaskTransition_ActionDate
+  name: ActionDate
+  nameWithType: ProcessTaskTransition.ActionDate
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionDate
+- uid: System.DateTime
+  commentId: T:System.DateTime
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.datetime
+  name: DateTime
+  nameWithType: DateTime
+  fullName: System.DateTime
+  nameWithType.vb: Date
+  fullName.vb: Date
+  name.vb: Date
+- uid: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionValue*
+  commentId: Overload:VendorProcessManagerV1.Models.ProcessTaskTransition.ActionValue
+  href: VendorProcessManagerV1.Models.ProcessTaskTransition.html#VendorProcessManagerV1_Models_ProcessTaskTransition_ActionValue
+  name: ActionValue
+  nameWithType: ProcessTaskTransition.ActionValue
+  fullName: VendorProcessManagerV1.Models.ProcessTaskTransition.ActionValue
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String

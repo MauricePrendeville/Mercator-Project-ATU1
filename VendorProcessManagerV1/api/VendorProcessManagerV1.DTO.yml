@@ -1,0 +1,23 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.DTO
+  commentId: N:VendorProcessManagerV1.DTO
+  id: VendorProcessManagerV1.DTO
+  children:
+  - VendorProcessManagerV1.DTO.GanttDTO
+  langs:
+  - csharp
+  - vb
+  name: VendorProcessManagerV1.DTO
+  nameWithType: VendorProcessManagerV1.DTO
+  fullName: VendorProcessManagerV1.DTO
+  type: Namespace
+  assemblies:
+  - VendorProcessManagerV1
+references:
+- uid: VendorProcessManagerV1.DTO.GanttDTO
+  commentId: T:VendorProcessManagerV1.DTO.GanttDTO
+  href: VendorProcessManagerV1.DTO.GanttDTO.html
+  name: GanttDTO
+  nameWithType: GanttDTO
+  fullName: VendorProcessManagerV1.DTO.GanttDTO

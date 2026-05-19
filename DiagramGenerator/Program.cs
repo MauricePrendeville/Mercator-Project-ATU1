@@ -21,7 +21,11 @@ var domainTypes = new List<Type>
     typeof(AuditLog),
     typeof(ProcessTemplateTask),
     typeof(ProcessTemplateTransition),
-    typeof(ProcessTaskTransition)
+    typeof(ProcessTaskTransition), 
+    typeof(ProcessTemplate), 
+    typeof(VendorCandidate),
+    typeof(AppUser), 
+    typeof(TemplateDependency)
 };
 
 var generator = new DiagramGenerator(

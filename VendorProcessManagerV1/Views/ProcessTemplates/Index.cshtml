@@ -1,4 +1,5 @@
-﻿@model IEnumerable<VendorProcessManagerV1.Models.ProcessTemplate>
+﻿@using Microsoft.AspNetCore.Mvc.Rendering
+@model VendorProcessManagerV1.ViewModels.ProcessTemplateIndexViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -7,38 +8,139 @@
 
 <h2>Process Templates</h2>
 
+<form asp-action="Index" method="get" class="row g-2 align-items-center mb-3">
+        <input type="hidden" name="SortOrder" value="@ViewData["CurrentSort"]" />
+        
+        <div class="col-auto">
+            <label class="col-form-label fw-bold">Template:</label>
+        </div>
+        <div class="col-auto">
+            <select asp-for="SelectedTemplateName"
+                    asp-items="Model.TemplateList"
+                    class="form-select">
+                <option value="">--AllTemplates--</option>
+            </select>
+        </div>
+        
+    <div class="col-auto">
+        <label class="col-form-label fw-bold">Category:</label>
+    </div>
+    <div class="col-auto">
+        <select asp-for="CategoryFilter"
+                asp-items="Model.CategoryList"
+                class="form-select">
+            <option value="">--All Categories--</option>
+        </select>
+    </div>
+
+    <div class="col-auto">
+        <label class="col-form-label fw-bold">Status:</label>
+    </div>
+    <div class="col-auto">
+        <select asp-for="ActiveFilter"
+                asp-items="Model.ActiveList"
+                class="form-select">
+            <option value="">--All--</option>
+        </select>
+    </div>
+
+    <div class="col-md-12 text-center">
+            <button type="submit" class="btn btn-primary">Filter</button>
+   
+            <a asp-action="Index"
+              class="btn btn-outline-secondary ms-2">Clear</a>
+        </div>
+
+        
+    </form>
+
+
+
+
+
+
 <p>
-    <a asp-action="Create">Create New</a>
+    <div>
+        <a asp-action="Create"  
+               class="btn btn-success mb-3">
+            Create Template
+        </a>        
+    </div>   
 </p>
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
+            <th>                          
+
+            <a asp-action="Index" asp-route-sortOrder="@Model.TemplateNameSort"
+                   asp-route-selectedTemplateName="@Model.SelectedTemplateName">
+                Template Name
+                @if (@Model.SortOrder == "templatename_asc")
+                {
+                    <span><i class="bi bi-arrow-up-square"></i></span>
+                }
+                else if (@Model.SortOrder == "templatename_desc")
+                {
+                    <span><i class="bi bi-arrow-down-square"></i></span>
+                }
+            </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                <a asp-action="Index" asp-route-sortOrder="@Model.DescriptionSort"
+                       asp-route-selectedTemplateName="@Model.SelectedTemplateName">
+                    Description
+                    @if (@Model.SortOrder == "description_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "description_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                <a asp-action="Index" asp-route-sortOrder="@Model.CategorySort"
+                       asp-route-selectedTemplateName="@Model.SelectedTemplateName">
+                    Category
+                    @if (@Model.SortOrder == "category_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "category_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Creator)
+                <a asp-action="Index" asp-route-sortOrder="@Model.CreatorSort"
+                       asp-route-selectedTemplateName="@Model.SelectedTemplateName">
+                    Creator
+                    @if (@Model.SortOrder == "creator_asc")
+                    {
+                        <span><i class="bi bi-arrow-up-square"></i></span>
+                    }
+                    else if (@Model.SortOrder == "creator_desc")
+                    {
+                        <span><i class="bi bi-arrow-down-square"></i></span>
+                    }
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
+                CreateDate
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsActive)
+                IsActive
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Version)
+                Version
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Templates) {
         <tr>
             <td>
                 <a asp-action="Details" asp-route-id="@item.Id" title="Details">
@@ -51,7 +153,8 @@
                 @Html.DisplayFor(modelItem => item.Category)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Creator)
+                    @item.Creator?.FirstName
+                    @item.Creator?.LastName
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreateDate)
@@ -62,7 +165,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Version)
             </td>
-            <td width="130px">
+            <td width="170px">
+                <a asp-controller="ProcessInstances"  asp-action="StartInstance" asp-route-id="@item.Id" 
+                    title="Start Instance"><i class="bi bi-rocket-takeoff"></i></a> |
                 <a asp-action="Edit" asp-route-id="@item.Id" title="Edit"><i class="bi bi-pencil-fill"></i></a> |
                 <a asp-action="Details" asp-route-id="@item.Id" title="Details"><i class="bi bi-card-checklist"></i></a> |
                 <a asp-action="Delete" asp-route-id="@item.Id" title="Delete"><i class="bi bi-trash3-fill"></i></a>

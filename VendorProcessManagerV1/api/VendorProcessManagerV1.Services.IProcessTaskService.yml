@@ -1,0 +1,580 @@
+### YamlMime:ManagedReference
+items:
+- uid: VendorProcessManagerV1.Services.IProcessTaskService
+  commentId: T:VendorProcessManagerV1.Services.IProcessTaskService
+  id: IProcessTaskService
+  parent: VendorProcessManagerV1.Services
+  children:
+  - VendorProcessManagerV1.Services.IProcessTaskService.ApproveTaskAsync(System.Guid,System.String,VendorProcessManagerV1.Models.ApproveStatus,System.String)
+  - VendorProcessManagerV1.Services.IProcessTaskService.CanApproveTaskAsync(System.Guid,System.String)
+  - VendorProcessManagerV1.Services.IProcessTaskService.CanStartTaskAsync(System.Guid)
+  - VendorProcessManagerV1.Services.IProcessTaskService.CompleteTaskAsync(System.Guid,System.Nullable{System.Guid},System.String)
+  - VendorProcessManagerV1.Services.IProcessTaskService.GetAvailableTransitionsAsync(System.Guid)
+  langs:
+  - csharp
+  - vb
+  name: IProcessTaskService
+  nameWithType: IProcessTaskService
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService
+  type: Interface
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/IProcessTaskService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: IProcessTaskService
+    path: Services/IProcessTaskService.cs
+    startLine: 4
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: public interface IProcessTaskService
+    content.vb: Public Interface IProcessTaskService
+  derivedClasses:
+  - VendorProcessManagerV1.Services.ProcessTaskService
+- uid: VendorProcessManagerV1.Services.IProcessTaskService.CompleteTaskAsync(System.Guid,System.Nullable{System.Guid},System.String)
+  commentId: M:VendorProcessManagerV1.Services.IProcessTaskService.CompleteTaskAsync(System.Guid,System.Nullable{System.Guid},System.String)
+  id: CompleteTaskAsync(System.Guid,System.Nullable{System.Guid},System.String)
+  parent: VendorProcessManagerV1.Services.IProcessTaskService
+  langs:
+  - csharp
+  - vb
+  name: CompleteTaskAsync(Guid, Guid?, string)
+  nameWithType: IProcessTaskService.CompleteTaskAsync(Guid, Guid?, string)
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService.CompleteTaskAsync(System.Guid, System.Guid?, string)
+  type: Method
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/IProcessTaskService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: CompleteTaskAsync
+    path: Services/IProcessTaskService.cs
+    startLine: 6
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: Task<CompleteTaskResult> CompleteTaskAsync(Guid taskId, Guid? selectedTransitionId, string completedById)
+    parameters:
+    - id: taskId
+      type: System.Guid
+    - id: selectedTransitionId
+      type: System.Nullable{System.Guid}
+    - id: completedById
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{VendorProcessManagerV1.Services.CompleteTaskResult}
+    content.vb: Function CompleteTaskAsync(taskId As Guid, selectedTransitionId As Guid?, completedById As String) As Task(Of CompleteTaskResult)
+  overload: VendorProcessManagerV1.Services.IProcessTaskService.CompleteTaskAsync*
+  nameWithType.vb: IProcessTaskService.CompleteTaskAsync(Guid, Guid?, String)
+  fullName.vb: VendorProcessManagerV1.Services.IProcessTaskService.CompleteTaskAsync(System.Guid, System.Guid?, String)
+  name.vb: CompleteTaskAsync(Guid, Guid?, String)
+- uid: VendorProcessManagerV1.Services.IProcessTaskService.GetAvailableTransitionsAsync(System.Guid)
+  commentId: M:VendorProcessManagerV1.Services.IProcessTaskService.GetAvailableTransitionsAsync(System.Guid)
+  id: GetAvailableTransitionsAsync(System.Guid)
+  parent: VendorProcessManagerV1.Services.IProcessTaskService
+  langs:
+  - csharp
+  - vb
+  name: GetAvailableTransitionsAsync(Guid)
+  nameWithType: IProcessTaskService.GetAvailableTransitionsAsync(Guid)
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService.GetAvailableTransitionsAsync(System.Guid)
+  type: Method
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/IProcessTaskService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: GetAvailableTransitionsAsync
+    path: Services/IProcessTaskService.cs
+    startLine: 11
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: Task<List<ProcessTemplateTransition>> GetAvailableTransitionsAsync(Guid taskId)
+    parameters:
+    - id: taskId
+      type: System.Guid
+    return:
+      type: System.Threading.Tasks.Task{System.Collections.Generic.List{VendorProcessManagerV1.Models.ProcessTemplateTransition}}
+    content.vb: Function GetAvailableTransitionsAsync(taskId As Guid) As Task(Of List(Of ProcessTemplateTransition))
+  overload: VendorProcessManagerV1.Services.IProcessTaskService.GetAvailableTransitionsAsync*
+- uid: VendorProcessManagerV1.Services.IProcessTaskService.CanStartTaskAsync(System.Guid)
+  commentId: M:VendorProcessManagerV1.Services.IProcessTaskService.CanStartTaskAsync(System.Guid)
+  id: CanStartTaskAsync(System.Guid)
+  parent: VendorProcessManagerV1.Services.IProcessTaskService
+  langs:
+  - csharp
+  - vb
+  name: CanStartTaskAsync(Guid)
+  nameWithType: IProcessTaskService.CanStartTaskAsync(Guid)
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService.CanStartTaskAsync(System.Guid)
+  type: Method
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/IProcessTaskService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: CanStartTaskAsync
+    path: Services/IProcessTaskService.cs
+    startLine: 14
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: Task<bool> CanStartTaskAsync(Guid taskId)
+    parameters:
+    - id: taskId
+      type: System.Guid
+    return:
+      type: System.Threading.Tasks.Task{System.Boolean}
+    content.vb: Function CanStartTaskAsync(taskId As Guid) As Task(Of Boolean)
+  overload: VendorProcessManagerV1.Services.IProcessTaskService.CanStartTaskAsync*
+- uid: VendorProcessManagerV1.Services.IProcessTaskService.CanApproveTaskAsync(System.Guid,System.String)
+  commentId: M:VendorProcessManagerV1.Services.IProcessTaskService.CanApproveTaskAsync(System.Guid,System.String)
+  id: CanApproveTaskAsync(System.Guid,System.String)
+  parent: VendorProcessManagerV1.Services.IProcessTaskService
+  langs:
+  - csharp
+  - vb
+  name: CanApproveTaskAsync(Guid, string)
+  nameWithType: IProcessTaskService.CanApproveTaskAsync(Guid, string)
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService.CanApproveTaskAsync(System.Guid, string)
+  type: Method
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/IProcessTaskService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: CanApproveTaskAsync
+    path: Services/IProcessTaskService.cs
+    startLine: 16
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: Task<bool> CanApproveTaskAsync(Guid taskId, string userId)
+    parameters:
+    - id: taskId
+      type: System.Guid
+    - id: userId
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{System.Boolean}
+    content.vb: Function CanApproveTaskAsync(taskId As Guid, userId As String) As Task(Of Boolean)
+  overload: VendorProcessManagerV1.Services.IProcessTaskService.CanApproveTaskAsync*
+  nameWithType.vb: IProcessTaskService.CanApproveTaskAsync(Guid, String)
+  fullName.vb: VendorProcessManagerV1.Services.IProcessTaskService.CanApproveTaskAsync(System.Guid, String)
+  name.vb: CanApproveTaskAsync(Guid, String)
+- uid: VendorProcessManagerV1.Services.IProcessTaskService.ApproveTaskAsync(System.Guid,System.String,VendorProcessManagerV1.Models.ApproveStatus,System.String)
+  commentId: M:VendorProcessManagerV1.Services.IProcessTaskService.ApproveTaskAsync(System.Guid,System.String,VendorProcessManagerV1.Models.ApproveStatus,System.String)
+  id: ApproveTaskAsync(System.Guid,System.String,VendorProcessManagerV1.Models.ApproveStatus,System.String)
+  parent: VendorProcessManagerV1.Services.IProcessTaskService
+  langs:
+  - csharp
+  - vb
+  name: ApproveTaskAsync(Guid, string, ApproveStatus, string?)
+  nameWithType: IProcessTaskService.ApproveTaskAsync(Guid, string, ApproveStatus, string?)
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService.ApproveTaskAsync(System.Guid, string, VendorProcessManagerV1.Models.ApproveStatus, string?)
+  type: Method
+  source:
+    remote:
+      path: VendorProcessManagerV1/Services/IProcessTaskService.cs
+      branch: Filters-and-search
+      repo: https://github.com/MauricePrendeville/Mercator-Project-ATU1.git
+    id: ApproveTaskAsync
+    path: Services/IProcessTaskService.cs
+    startLine: 18
+  assemblies:
+  - VendorProcessManagerV1
+  namespace: VendorProcessManagerV1.Services
+  syntax:
+    content: Task<ApproveTaskResult> ApproveTaskAsync(Guid taskId, string userId, ApproveStatus decision, string? notes)
+    parameters:
+    - id: taskId
+      type: System.Guid
+    - id: userId
+      type: System.String
+    - id: decision
+      type: VendorProcessManagerV1.Models.ApproveStatus
+    - id: notes
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{VendorProcessManagerV1.Services.ApproveTaskResult}
+    content.vb: Function ApproveTaskAsync(taskId As Guid, userId As String, decision As ApproveStatus, notes As String) As Task(Of ApproveTaskResult)
+  overload: VendorProcessManagerV1.Services.IProcessTaskService.ApproveTaskAsync*
+  nameWithType.vb: IProcessTaskService.ApproveTaskAsync(Guid, String, ApproveStatus, String)
+  fullName.vb: VendorProcessManagerV1.Services.IProcessTaskService.ApproveTaskAsync(System.Guid, String, VendorProcessManagerV1.Models.ApproveStatus, String)
+  name.vb: ApproveTaskAsync(Guid, String, ApproveStatus, String)
+references:
+- uid: VendorProcessManagerV1.Services
+  commentId: N:VendorProcessManagerV1.Services
+  href: VendorProcessManagerV1.html
+  name: VendorProcessManagerV1.Services
+  nameWithType: VendorProcessManagerV1.Services
+  fullName: VendorProcessManagerV1.Services
+  spec.csharp:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Services
+    name: Services
+    href: VendorProcessManagerV1.Services.html
+  spec.vb:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Services
+    name: Services
+    href: VendorProcessManagerV1.Services.html
+- uid: VendorProcessManagerV1.Services.IProcessTaskService.CompleteTaskAsync*
+  commentId: Overload:VendorProcessManagerV1.Services.IProcessTaskService.CompleteTaskAsync
+  href: VendorProcessManagerV1.Services.IProcessTaskService.html#VendorProcessManagerV1_Services_IProcessTaskService_CompleteTaskAsync_System_Guid_System_Nullable_System_Guid__System_String_
+  name: CompleteTaskAsync
+  nameWithType: IProcessTaskService.CompleteTaskAsync
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService.CompleteTaskAsync
+- uid: System.Guid
+  commentId: T:System.Guid
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.guid
+  name: Guid
+  nameWithType: Guid
+  fullName: System.Guid
+- uid: System.Nullable{System.Guid}
+  commentId: T:System.Nullable{System.Guid}
+  parent: System
+  definition: System.Nullable`1
+  href: https://learn.microsoft.com/dotnet/api/system.guid
+  name: Guid?
+  nameWithType: Guid?
+  fullName: System.Guid?
+  spec.csharp:
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '?'
+  spec.vb:
+  - uid: System.Guid
+    name: Guid
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.guid
+  - name: '?'
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.string
+  name: string
+  nameWithType: string
+  fullName: string
+  nameWithType.vb: String
+  fullName.vb: String
+  name.vb: String
+- uid: System.Threading.Tasks.Task{VendorProcessManagerV1.Services.CompleteTaskResult}
+  commentId: T:System.Threading.Tasks.Task{VendorProcessManagerV1.Services.CompleteTaskResult}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<CompleteTaskResult>
+  nameWithType: Task<CompleteTaskResult>
+  fullName: System.Threading.Tasks.Task<VendorProcessManagerV1.Services.CompleteTaskResult>
+  nameWithType.vb: Task(Of CompleteTaskResult)
+  fullName.vb: System.Threading.Tasks.Task(Of VendorProcessManagerV1.Services.CompleteTaskResult)
+  name.vb: Task(Of CompleteTaskResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: VendorProcessManagerV1.Services.CompleteTaskResult
+    name: CompleteTaskResult
+    href: VendorProcessManagerV1.Services.CompleteTaskResult.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: VendorProcessManagerV1.Services.CompleteTaskResult
+    name: CompleteTaskResult
+    href: VendorProcessManagerV1.Services.CompleteTaskResult.html
+  - name: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: System.Nullable`1
+  commentId: T:System.Nullable`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  name: Nullable<T>
+  nameWithType: Nullable<T>
+  fullName: System.Nullable<T>
+  nameWithType.vb: Nullable(Of T)
+  fullName.vb: System.Nullable(Of T)
+  name.vb: Nullable(Of T)
+  spec.csharp:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: <
+  - name: T
+  - name: '>'
+  spec.vb:
+  - uid: System.Nullable`1
+    name: Nullable
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.nullable-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: T
+  - name: )
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - name: TResult
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - name: TResult
+  - name: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  href: https://learn.microsoft.com/dotnet/api/system
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks
+  spec.csharp:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+  spec.vb:
+  - uid: System
+    name: System
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system
+  - name: .
+  - uid: System.Threading
+    name: Threading
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading
+  - name: .
+  - uid: System.Threading.Tasks
+    name: Tasks
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks
+- uid: VendorProcessManagerV1.Services.IProcessTaskService.GetAvailableTransitionsAsync*
+  commentId: Overload:VendorProcessManagerV1.Services.IProcessTaskService.GetAvailableTransitionsAsync
+  href: VendorProcessManagerV1.Services.IProcessTaskService.html#VendorProcessManagerV1_Services_IProcessTaskService_GetAvailableTransitionsAsync_System_Guid_
+  name: GetAvailableTransitionsAsync
+  nameWithType: IProcessTaskService.GetAvailableTransitionsAsync
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService.GetAvailableTransitionsAsync
+- uid: System.Threading.Tasks.Task{System.Collections.Generic.List{VendorProcessManagerV1.Models.ProcessTemplateTransition}}
+  commentId: T:System.Threading.Tasks.Task{System.Collections.Generic.List{VendorProcessManagerV1.Models.ProcessTemplateTransition}}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<List<ProcessTemplateTransition>>
+  nameWithType: Task<List<ProcessTemplateTransition>>
+  fullName: System.Threading.Tasks.Task<System.Collections.Generic.List<VendorProcessManagerV1.Models.ProcessTemplateTransition>>
+  nameWithType.vb: Task(Of List(Of ProcessTemplateTransition))
+  fullName.vb: System.Threading.Tasks.Task(Of System.Collections.Generic.List(Of VendorProcessManagerV1.Models.ProcessTemplateTransition))
+  name.vb: Task(Of List(Of ProcessTemplateTransition))
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: <
+  - uid: VendorProcessManagerV1.Models.ProcessTemplateTransition
+    name: ProcessTemplateTransition
+    href: VendorProcessManagerV1.Models.ProcessTemplateTransition.html
+  - name: '>'
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Collections.Generic.List`1
+    name: List
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.collections.generic.list-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: VendorProcessManagerV1.Models.ProcessTemplateTransition
+    name: ProcessTemplateTransition
+    href: VendorProcessManagerV1.Models.ProcessTemplateTransition.html
+  - name: )
+  - name: )
+- uid: VendorProcessManagerV1.Services.IProcessTaskService.CanStartTaskAsync*
+  commentId: Overload:VendorProcessManagerV1.Services.IProcessTaskService.CanStartTaskAsync
+  href: VendorProcessManagerV1.Services.IProcessTaskService.html#VendorProcessManagerV1_Services_IProcessTaskService_CanStartTaskAsync_System_Guid_
+  name: CanStartTaskAsync
+  nameWithType: IProcessTaskService.CanStartTaskAsync
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService.CanStartTaskAsync
+- uid: System.Threading.Tasks.Task{System.Boolean}
+  commentId: T:System.Threading.Tasks.Task{System.Boolean}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<bool>
+  nameWithType: Task<bool>
+  fullName: System.Threading.Tasks.Task<bool>
+  nameWithType.vb: Task(Of Boolean)
+  fullName.vb: System.Threading.Tasks.Task(Of Boolean)
+  name.vb: Task(Of Boolean)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: System.Boolean
+    name: bool
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: System.Boolean
+    name: Boolean
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.boolean
+  - name: )
+- uid: VendorProcessManagerV1.Services.IProcessTaskService.CanApproveTaskAsync*
+  commentId: Overload:VendorProcessManagerV1.Services.IProcessTaskService.CanApproveTaskAsync
+  href: VendorProcessManagerV1.Services.IProcessTaskService.html#VendorProcessManagerV1_Services_IProcessTaskService_CanApproveTaskAsync_System_Guid_System_String_
+  name: CanApproveTaskAsync
+  nameWithType: IProcessTaskService.CanApproveTaskAsync
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService.CanApproveTaskAsync
+- uid: VendorProcessManagerV1.Services.IProcessTaskService.ApproveTaskAsync*
+  commentId: Overload:VendorProcessManagerV1.Services.IProcessTaskService.ApproveTaskAsync
+  href: VendorProcessManagerV1.Services.IProcessTaskService.html#VendorProcessManagerV1_Services_IProcessTaskService_ApproveTaskAsync_System_Guid_System_String_VendorProcessManagerV1_Models_ApproveStatus_System_String_
+  name: ApproveTaskAsync
+  nameWithType: IProcessTaskService.ApproveTaskAsync
+  fullName: VendorProcessManagerV1.Services.IProcessTaskService.ApproveTaskAsync
+- uid: VendorProcessManagerV1.Models.ApproveStatus
+  commentId: T:VendorProcessManagerV1.Models.ApproveStatus
+  parent: VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.Models.ApproveStatus.html
+  name: ApproveStatus
+  nameWithType: ApproveStatus
+  fullName: VendorProcessManagerV1.Models.ApproveStatus
+- uid: System.Threading.Tasks.Task{VendorProcessManagerV1.Services.ApproveTaskResult}
+  commentId: T:System.Threading.Tasks.Task{VendorProcessManagerV1.Services.ApproveTaskResult}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  name: Task<ApproveTaskResult>
+  nameWithType: Task<ApproveTaskResult>
+  fullName: System.Threading.Tasks.Task<VendorProcessManagerV1.Services.ApproveTaskResult>
+  nameWithType.vb: Task(Of ApproveTaskResult)
+  fullName.vb: System.Threading.Tasks.Task(Of VendorProcessManagerV1.Services.ApproveTaskResult)
+  name.vb: Task(Of ApproveTaskResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: <
+  - uid: VendorProcessManagerV1.Services.ApproveTaskResult
+    name: ApproveTaskResult
+    href: VendorProcessManagerV1.Services.ApproveTaskResult.html
+  - name: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    isExternal: true
+    href: https://learn.microsoft.com/dotnet/api/system.threading.tasks.task-1
+  - name: (
+  - name: Of
+  - name: " "
+  - uid: VendorProcessManagerV1.Services.ApproveTaskResult
+    name: ApproveTaskResult
+    href: VendorProcessManagerV1.Services.ApproveTaskResult.html
+  - name: )
+- uid: VendorProcessManagerV1.Models
+  commentId: N:VendorProcessManagerV1.Models
+  href: VendorProcessManagerV1.html
+  name: VendorProcessManagerV1.Models
+  nameWithType: VendorProcessManagerV1.Models
+  fullName: VendorProcessManagerV1.Models
+  spec.csharp:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Models
+    name: Models
+    href: VendorProcessManagerV1.Models.html
+  spec.vb:
+  - uid: VendorProcessManagerV1
+    name: VendorProcessManagerV1
+    href: VendorProcessManagerV1.html
+  - name: .
+  - uid: VendorProcessManagerV1.Models
+    name: Models
+    href: VendorProcessManagerV1.Models.html
