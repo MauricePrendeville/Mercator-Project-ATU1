@@ -41,14 +41,32 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore      
       - name: Test with coverage
-        run: dotnet test --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+        run: | 
+          dotnet test \
+          --verbosity normal \
+          --collect:"XPlat Code Coverage" \
+          --results-directory ./coverage \
+          --logger "trx;LogFileName=results.trx"
+      
+      - name: Check coverage output
+        run: 
+          echo "Coverage directory contents:"
+          find ./coverage -type f
 
       - name: Upload coverage artifact file      
         uses: actions/upload-artifact@v7
+        if: always()
         with:
           name: coverage-results
-          path: ./coverage       
+          path: ./coverage/**/*       
 
+      - name: Upload test reults      
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: test-results
+          path: "**/*.trx"
+          
   #------------Sonar Cloud-----------
   sonar:
     needs: test
@@ -68,6 +86,9 @@ jobs:
           name: coverage-results
           path: ./coverage
          
+      - name: List downloaded files
+        run: find ./coverage -type f || echo "No files downloaded"
+        
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@v3
         env: 
