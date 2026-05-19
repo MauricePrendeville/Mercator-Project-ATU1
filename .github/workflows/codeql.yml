@@ -41,11 +41,9 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore      
       - name: Test with coverage
-        run: dotnet test --verbosity normal \
-          --collect:"XPlat Code Coverage" \ 
-          --results-directory ./coverage
+        run: dotnet test --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
-      - name: Upload coverage file      
+      - name: Upload coverage artifact file      
         uses: actions/upload-artifact@v7.0.1
         with:
           name: coverage-results
@@ -64,7 +62,7 @@ jobs:
         with: 
           dotnet-version: 8.0.x
           
-      - name: Download coverage file
+      - name: Download coverage artifact file
         uses: actions/download-artifact@v8
         with: 
           name: coverage-results
